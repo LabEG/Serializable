@@ -9,6 +9,7 @@ export class Friend extends Serializable {
   @jsonProperty(String)
   public name: string;
 
+  public test: string = '123';
 }
 
 export class User extends Serializable {
