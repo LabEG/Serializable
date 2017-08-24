@@ -58,8 +58,8 @@ export class User extends Serializable {
   @jsonProperty(String)
   public about: string = "";
 
-  @jsonProperty(String)
-  public registered: string = "";
+  @jsonProperty(Date, null)
+  public registered: Date | null = null;
 
   @jsonProperty(Number)
   public latitude: number = 0;

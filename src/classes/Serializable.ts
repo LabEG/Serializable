@@ -11,7 +11,7 @@ export class Serializable {
             Array.isArray(json) ||
             typeof json !== 'object'
         ) {
-            throw new Error(`${this.constructor.name}.fromJSON: json is not object: ${json}`);
+            this.onCriticalException(`${this.constructor.name}.fromJSON: json is not object: ${json}`);
         }
 
         for (const prop in json) {
@@ -63,8 +63,20 @@ export class Serializable {
 
                     // Date
                     if (acceptedTypes[type] === Date && (typeof jsonValue === 'string' || jsonValue instanceof String || jsonValue instanceof Date)) {
-                        console.log('11111111111111111111111111111 to date', jsonValue);
-                        Reflect.set(this, prop, new Date(jsonValue));
+
+                        let unicodeTime: number = 0;
+                        if (typeof jsonValue === 'string') {
+                            unicodeTime = Date.parse(jsonValue);
+                        } else if (jsonValue instanceof String) {
+                            unicodeTime = Date.parse(String(jsonValue));
+                        } else if (jsonValue instanceof Date) {
+                            unicodeTime = jsonValue.getTime();
+                        }
+                        if (isNaN(unicodeTime) || typeof unicodeTime !== 'number') { // preserve invalid time
+                            this.onCriticalException(`${this.constructor.name}.fromJSON: json.${prop} is invalid date: ${jsonValue}`);
+                        }
+                        console.log('11111111111111111111111111111 to date', new Date(unicodeTime));
+                        Reflect.set(this, prop, new Date(unicodeTime));
                         break;
                     }
 
@@ -99,6 +111,10 @@ export class Serializable {
 
     protected onWrongType(propertyKey: string, wrongValue: Object | null): void {
         console.error(`${this.constructor.name}.fromJSON: json.${propertyKey} is invalid: `, wrongValue);
+    }
+
+    protected onCriticalException(message: string): void {
+        throw new Error(message);
     }
 
 }
