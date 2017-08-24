@@ -1,5 +1,5 @@
 {
-  "name": "serializable",
+  "name": "ts-serializable",
   "version": "0.0.1",
   "description": "Serialization and deserializtion for classes",
   "main": "index.js",
