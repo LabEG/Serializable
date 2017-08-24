@@ -1,0 +1,21 @@
+{
+  "name": "serializable",
+  "version": "0.0.1",
+  "description": "Serialization and deserializtion for classes",
+  "main": "index.js",
+  "dependencies": {
+    "reflect-metadata": "^0.1.10"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "reinstall": "rm -rvf npm-shrinkwrap.json && rm -rvf node_modules && npm install && npm dedupe && npm prune && npm shrinkwrap",
+    "fullupdate": "ncu -a && npm run reinstall",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "serializatio",
+    "deserialization"
+  ],
+  "author": "LabEG",
+  "license": "ISC"
+}

@@ -1,0 +1,13 @@
+{
+  "name": "serializable",
+  "version": "0.0.1",
+  "lockfileVersion": 1,
+  "requires": true,
+  "dependencies": {
+    "reflect-metadata": {
+      "version": "0.1.10",
+      "resolved": "https://registry.npmjs.org/reflect-metadata/-/reflect-metadata-0.1.10.tgz",
+      "integrity": "sha1-tPg3BEFqytiZiMmxVjXUfgO5NEo="
+    }
+  }
+}
