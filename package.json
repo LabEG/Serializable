@@ -12,10 +12,14 @@
     "fullupdate": "ncu -a && npm run reinstall",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+      "type": "git",
+      "url": " git@github.com:LabEG/Serializable.git"
+  },
   "keywords": [
     "serializatio",
     "deserialization"
   ],
   "author": "LabEG",
-  "license": "ISC"
+  "license": "MIT"
 }
