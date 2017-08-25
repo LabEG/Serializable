@@ -43,12 +43,16 @@ export class User extends Serializable {
     }
 }
 
-# Without Serialazable
+/**
+* Without Serializable
+*/
 const user: User = JSON.parse(json);
 user.getFullName(); // runtime exception: Uncaught TypeError: user.getFullName is not a function
 user.getAge(); // runtime exception: Uncaught TypeError: user.getAge is not a function
 
-# With Serialazable
+/**
+* With Serializable
+*/
 const user: User = new User().fromJSON(json);
 user.getFullName(); // work fine and return string
 user.getAge(); // work fine and return number
