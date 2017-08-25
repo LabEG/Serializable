@@ -17,7 +17,8 @@
 
     console.log('new User(): \n', new User().fromJSON(json[0]));
 
-    const user = User.fromJSON(json[0]);
+    let user = User.fromJSON(json[0]);
+    user = user instanceof User ? user : user;
 
     console.log('User.fromJSON(): \n', user);
 
