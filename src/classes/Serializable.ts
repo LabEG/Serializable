@@ -1,13 +1,33 @@
 
 import { AcceptedTypes } from './../models/AcceptedType';
 
+/**
+ * //todo: write jsdoc
+ * 
+ * @export
+ * @class Serializable
+ */
 export class Serializable {
 
-    // for next project
+    /**
+     * //todo: write jsdoc
+     * 
+     * @static
+     * @param {object} json 
+     * @returns {Object} 
+     * @memberof Serializable
+     */
     public static fromJSON(json: object): Object {
         return new this().fromJSON(json);
     }
 
+    /**
+     * //todo: write jsdoc
+     * 
+     * @param {object} json 
+     * @returns {this} 
+     * @memberof Serializable
+     */
     public fromJSON(json: object): this {
 
         if (
@@ -44,14 +64,40 @@ export class Serializable {
         return this;
     }
 
+    /**
+     * //todo: write jsdoc
+     * 
+     * @returns {object} 
+     * @memberof Serializable
+     */
     public toJSON(): object {
         return Object.assign({}, this);
     }
 
+    /**
+     * //todo: write jsdoc
+     * 
+     * @protected
+     * @param {string} prop 
+     * @param {string} message 
+     * @param {(Object | null | void)} jsonValue 
+     * @memberof Serializable
+     */
     protected onWrongType(prop: string, message: string, jsonValue: Object | null | void): void {
         console.error(`${this.constructor.name}.fromJSON: json.${prop} ${message}:`, jsonValue);
     }
 
+    /**
+     * //todo: write jsdoc
+     * 
+     * @private
+     * @param {object} object 
+     * @param {string} prop 
+     * @param {AcceptedTypes[]} acceptedTypes 
+     * @param {(Object | null | void)} jsonValue 
+     * @returns {(Object | null | void)} 
+     * @memberof Serializable
+     */
     private deserializeProperty(
         object: object,
         prop: string,
