@@ -50,5 +50,5 @@ export declare class Serializable {
      * @returns {(Object | null | void)}
      * @memberof Serializable
      */
-    private deserializeProperty(object, prop, acceptedTypes, jsonValue);
+    private deserializeProperty(prop, acceptedTypes, jsonValue);
 }

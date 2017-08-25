@@ -3,7 +3,7 @@ import { AcceptedTypes } from './../models/AcceptedType';
 
 /**
  * //todo: write jsdoc
- * 
+ *
  * @export
  * @class Serializable
  */
@@ -11,10 +11,10 @@ export class Serializable {
 
     /**
      * //todo: write jsdoc
-     * 
+     *
      * @static
-     * @param {object} json 
-     * @returns {Object} 
+     * @param {object} json
+     * @returns {Object}
      * @memberof Serializable
      */
     public static fromJSON(json: object): Object {
@@ -23,9 +23,9 @@ export class Serializable {
 
     /**
      * //todo: write jsdoc
-     * 
-     * @param {object} json 
-     * @returns {this} 
+     *
+     * @param {object} json
+     * @returns {this}
      * @memberof Serializable
      */
     public fromJSON(json: object): this {
@@ -36,6 +36,7 @@ export class Serializable {
             typeof json !== 'object'
         ) {
             this.onWrongType('', 'is not object', json);
+
             return this;
         }
 
@@ -55,7 +56,7 @@ export class Serializable {
                 Reflect.set(
                     this,
                     prop,
-                    this.deserializeProperty(this, prop, acceptedTypes, jsonValue)
+                    this.deserializeProperty(prop, acceptedTypes, jsonValue)
                 );
 
             }
@@ -66,21 +67,22 @@ export class Serializable {
 
     /**
      * //todo: write jsdoc
-     * 
-     * @returns {object} 
+     *
+     * @returns {object}
      * @memberof Serializable
      */
     public toJSON(): object {
+
         return Object.assign({}, this);
     }
 
     /**
      * //todo: write jsdoc
-     * 
+     *
      * @protected
-     * @param {string} prop 
-     * @param {string} message 
-     * @param {(Object | null | void)} jsonValue 
+     * @param {string} prop
+     * @param {string} message
+     * @param {(Object | null | void)} jsonValue
      * @memberof Serializable
      */
     protected onWrongType(prop: string, message: string, jsonValue: Object | null | void): void {
@@ -89,17 +91,16 @@ export class Serializable {
 
     /**
      * //todo: write jsdoc
-     * 
+     *
      * @private
-     * @param {object} object 
-     * @param {string} prop 
-     * @param {AcceptedTypes[]} acceptedTypes 
-     * @param {(Object | null | void)} jsonValue 
-     * @returns {(Object | null | void)} 
+     * @param {object} object
+     * @param {string} prop
+     * @param {AcceptedTypes[]} acceptedTypes
+     * @param {(Object | null | void)} jsonValue
+     * @returns {(Object | null | void)}
      * @memberof Serializable
      */
     private deserializeProperty(
-        object: object,
         prop: string,
         acceptedTypes: AcceptedTypes[],
         jsonValue: Object | null | void
@@ -156,7 +157,8 @@ export class Serializable {
                 (typeof jsonValue === 'string' || jsonValue instanceof String || jsonValue instanceof Date)
             ) {
 
-                let unicodeTime: number = new Date("0000-01-01T00:00:00.000").getTime(); // 0 year, 0 month, 0 days, 0 hours, 0 minutes, 0 seconds
+                // 0 year, 0 month, 0 days, 0 hours, 0 minutes, 0 seconds
+                let unicodeTime: number = new Date('0000-01-01T00:00:00.000').getTime();
                 if (typeof jsonValue === 'string') {
                     unicodeTime = Date.parse(jsonValue);
                 } else if (jsonValue instanceof String) {
@@ -180,7 +182,7 @@ export class Serializable {
                 }
 
                 return jsonValue.map((arrayValue: Object | void | null) => {
-                    return this.deserializeProperty(this, prop, acceptedType, arrayValue);
+                    return this.deserializeProperty(prop, acceptedType, arrayValue);
                 });
 
             } else if ( // Serializable
@@ -189,6 +191,7 @@ export class Serializable {
                 typeof jsonValue === 'object' && !Array.isArray(jsonValue)
             ) {
                 const typeConstructor: new () => Serializable = acceptedType as new () => Serializable;
+
                 return new typeConstructor().fromJSON(jsonValue);
             }
 
@@ -196,6 +199,7 @@ export class Serializable {
 
         // process wrong type and return default value
         this.onWrongType(prop, `is invalid`, jsonValue);
+
         return Reflect.get(this, prop);
 
     }

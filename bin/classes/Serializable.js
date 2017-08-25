@@ -48,7 +48,7 @@
                 if (json.hasOwnProperty(prop) && this.hasOwnProperty(prop)) {
                     var acceptedTypes = Reflect.getMetadata('ts-serializable:jsonTypes', this.constructor.prototype, prop);
                     var jsonValue = Reflect.get(json, prop);
-                    Reflect.set(this, prop, this.deserializeProperty(this, prop, acceptedTypes, jsonValue));
+                    Reflect.set(this, prop, this.deserializeProperty(prop, acceptedTypes, jsonValue));
                 }
             }
             return this;
@@ -85,7 +85,7 @@
          * @returns {(Object | null | void)}
          * @memberof Serializable
          */
-        Serializable.prototype.deserializeProperty = function (object, prop, acceptedTypes, jsonValue) {
+        Serializable.prototype.deserializeProperty = function (prop, acceptedTypes, jsonValue) {
             var _this = this;
             var _loop_1 = function (type) {
                 var acceptedType = acceptedTypes[type];
@@ -115,7 +115,8 @@
                 }
                 else if (acceptedType === Date &&
                     (typeof jsonValue === 'string' || jsonValue instanceof String || jsonValue instanceof Date)) {
-                    var unicodeTime = new Date("0000-01-01T00:00:00.000").getTime(); // 0 year, 0 month, 0 days, 0 hours, 0 minutes, 0 seconds
+                    // 0 year, 0 month, 0 days, 0 hours, 0 minutes, 0 seconds
+                    var unicodeTime = new Date('0000-01-01T00:00:00.000').getTime();
                     if (typeof jsonValue === 'string') {
                         unicodeTime = Date.parse(jsonValue);
                     }
@@ -136,7 +137,7 @@
                         this_1.onWrongType(prop, 'invalid type', jsonValue);
                     }
                     return { value: jsonValue.map(function (arrayValue) {
-                            return _this.deserializeProperty(_this, prop, acceptedType, arrayValue);
+                            return _this.deserializeProperty(prop, acceptedType, arrayValue);
                         }) };
                 }
                 else if (jsonValue !== null &&

@@ -66,7 +66,7 @@
         "await-promise": true,
         "ban": false,
         "curly": true,
-        "forin": true,
+        "forin": false,
         "import-blacklist": [
             true,
             "jquery",
@@ -113,7 +113,7 @@
         "no-var-keyword": true,
         "no-void-expression": false,
         "prefer-conditional-expression": false,
-        "prefer-object-spread": true,
+        "prefer-object-spread": false,
         "radix": true,
         "restrict-plus-operands": false,
         "strict-boolean-expressions": false,
@@ -132,8 +132,8 @@
         * These rules make code maintenance easier:
         */
         "cyclomatic-complexity": [
-            true,
-            10
+            false,
+            50
         ],
         "deprecation": true,
         "eofline": true,
@@ -251,9 +251,10 @@
             "always"
         ],
         "space-before-function-paren": [
-            true,
+            false,
             "never"
         ],
+        "space-within-parens": false,
         "switch-final-break": [true, "always"],
         "type-literal-delimiter": true,
         "variable-name": [
