@@ -12,7 +12,7 @@ import { jsonProperty, Serializable } from "ts-serializable";
 export class User extends Serializable {
 
     // accepted types from jsons, if property in json will not by found or 
-    // haved invalid type, will return default value
+    // haved invalid type, then will return default value
     @jsonProperty(Number, null)
     public id: number | null = null; // default value must be setted necessarily
   
@@ -42,7 +42,7 @@ const user: User = JSON.parse(json);
 user.getFullName(); // runtime exception: Uncaught TypeError: user.getFullName is not a function
 user.getAge(); // runtime exception: Uncaught TypeError: user.getAge is not a function
 
-#With Serialazable
+# With Serialazable
 const user: User = new User().fromJSON(json);
 user.getFullName(); // work fine and return string
 user.getAge(); // work fine and return number
