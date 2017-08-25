@@ -3,6 +3,11 @@ Serializable
 
 Small library for deserialization and serialization for javascript and typescript
 
+Description:
+------
+- For working this library needed Metadata Reflection API. If your platform (browser/nodejs) don't support it you must use polifyll. Example: [reflect-metadata](https://www.npmjs.com/package/reflect-metadata)
+- By default library don't crash on wrong types in json and return default value on wrong property. If you need more secure behavior you must override method `onWrongType` on `Serializable` object and drop exception in this method, by your logic want.
+
 Usage:
 ------
 
@@ -46,7 +51,7 @@ export class User extends Serializable {
 /**
 * Without Serializable
 */
-const user: User = JSON.parse(json);
+const user: Object = JSON.parse(json);
 user.getFullName(); // runtime exception: Uncaught TypeError: user.getFullName is not a function
 user.getAge(); // runtime exception: Uncaught TypeError: user.getAge is not a function
 
