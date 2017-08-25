@@ -23,7 +23,7 @@
          *
          * @static
          * @param {object} json
-         * @returns {Object}
+         * @returns {object}
          * @memberof Serializable
          */
         Serializable.fromJSON = function (json) {
@@ -143,7 +143,7 @@
                 else if (acceptedType !== null &&
                     acceptedType !== void 0 &&
                     !Array.isArray(acceptedType) &&
-                    acceptedType.prototype.fromJSON instanceof Function &&
+                    acceptedType.prototype instanceof Serializable &&
                     jsonValue !== null &&
                     jsonValue !== void 0 &&
                     typeof jsonValue === 'object' && !Array.isArray(jsonValue)) {

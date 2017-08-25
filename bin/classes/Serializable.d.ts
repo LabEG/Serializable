@@ -10,10 +10,10 @@ export declare class Serializable {
      *
      * @static
      * @param {object} json
-     * @returns {Object}
+     * @returns {object}
      * @memberof Serializable
      */
-    static fromJSON(json: object): Object;
+    static fromJSON(json: object): object;
     /**
      * //todo: write jsdoc
      *
