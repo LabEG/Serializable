@@ -3,7 +3,7 @@ Serializable
 
 Small library for deserialization and serialization for javascript and typescript
 
-####Usage:
+#Usage:
 
 ```
 import { jsonProperty, Serializable } from "ts-serializable";
@@ -45,8 +45,12 @@ user.getFullName(); // work fine and return string
 user.getAge(); // work fine and return number
 ```
 
-####Bonus:
+##Bonus:
+
 Deep copy
 ```
 const newUser: User = new User().fromJSON(oldUser);
 ```
+
+
+###Test:
