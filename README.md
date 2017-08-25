@@ -28,6 +28,12 @@ export class User extends Serializable {
     @jsonProperty(Date)
     public birthDate: Date = new Date(); // default value must be setted necessarily
     
+    @jsonProperty([String]])
+    public birthDate: string[] = []; // default value must be setted necessarily
+    
+    @jsonProperty(OtherClassConstructor, null)
+    public birthDate: OtherClassConstructor | null = null; // default value must be setted necessarily
+    
     public getFullName(): string {
         return `${this.firstName} ${this.familyName} ${this.lastName}`;
     }
