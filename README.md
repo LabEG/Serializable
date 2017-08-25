@@ -11,7 +11,9 @@ import { jsonProperty, Serializable } from "ts-serializable";
 
 export class User extends Serializable {
 
-    @jsonProperty(Number, null) // accepted types from jsons, if property in json will not by found or haved invalid type, will return default value
+    // accepted types from jsons, if property in json will not by found or 
+    // haved invalid type, will return default value
+    @jsonProperty(Number, null)
     public id: number | null = null; // default value must be setted necessarily
   
     @jsonProperty(String)
