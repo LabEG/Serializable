@@ -16,31 +16,36 @@ import { jsonProperty, Serializable } from "ts-serializable";
 
 export class User extends Serializable {
 
-    // accepted types from jsons, if property in json will not by found or 
-    // haved invalid type, then will return default value
+    // @jsonProperty parrameters is accepted types for json
+    // properties, if property in json will not by found or
+    // will have invalid type, then will return default value
     @jsonProperty(Number, null)
-    public id: number | null = null; // default value must be setted necessarily
+    public id: number | null = null; // default value necessarily
   
     @jsonProperty(String)
-    public firstName: string = ''; // default value must be setted necessarily
+    public firstName: string = ''; // default value necessarily
   
     @jsonProperty(String)
-    public familyName: string = ''; // default value must be setted necessarily
+    public familyName: string = ''; // default value necessarily
   
     @jsonProperty(String, void 0)
-    public lastName?: string = void 0; // default value must be setted necessarily
+    public lastName?: string = void 0; // default value necessarily
     
     @jsonProperty(Date)
-    public birthDate: Date = new Date(); // default value must be setted necessarily
+    public birthDate: Date = new Date(); // default value necessarily
     
     @jsonProperty([String]])
-    public birthDate: string[] = []; // default value must be setted necessarily
+    public tags: string[] = []; // default value necessarily
     
     @jsonProperty(OtherClassConstructor, null)
-    public birthDate: OtherClassConstructor | null = null; // default value must be setted necessarily
+    public other: OtherClassConstructor | null = null; // default value necessarily
     
     public getFullName(): string {
-        return `${this.firstName} ${this.familyName} ${this.lastName}`;
+        return [
+            this.firstName,
+            this.familyName,
+            this.lastName
+        ].join(' ');
     }
 
     public getAge(): number {
@@ -52,8 +57,10 @@ export class User extends Serializable {
 * Without Serializable
 */
 const user: Object = JSON.parse(json);
-user.getFullName(); // runtime exception: Uncaught TypeError: user.getFullName is not a function
-user.getAge(); // runtime exception: Uncaught TypeError: user.getAge is not a function
+user.getFullName();
+// runtime exception: Uncaught TypeError: user.getFullName is not a function
+user.getAge();
+// runtime exception: Uncaught TypeError: user.getAge is not a function
 
 /**
 * With Serializable
@@ -62,9 +69,10 @@ const user: User = new User().fromJSON(json);
 user.getFullName(); // work fine and return string
 user.getAge(); // work fine and return number
 
-//or
+// or
 const user: Object = User.fromJSON(json);
-user = user instanceof User ? user : user; // this line in typescript only, typescript limitation
+// next line in typescript only, typescript limitation
+user = user instanceof User ? user : user;
 user.getFullName(); // work fine and return string
 user.getAge(); // work fine and return number
 ```
@@ -73,6 +81,6 @@ Bonus:
 ------
 
 Deep copy
-```
+```typescript
 const newUser: User = new User().fromJSON(oldUser);
 ```
