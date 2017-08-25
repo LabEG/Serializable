@@ -14,10 +14,10 @@ export class Serializable {
      *
      * @static
      * @param {object} json
-     * @returns {Object}
+     * @returns {object}
      * @memberof Serializable
      */
-    public static fromJSON(json: object): Object {
+    public static fromJSON(json: object): object {
         return new this().fromJSON(json);
     }
 
@@ -189,7 +189,7 @@ export class Serializable {
                 acceptedType !== null &&
                 acceptedType !== void 0 &&
                 !Array.isArray(acceptedType) &&
-                acceptedType.prototype.fromJSON instanceof Function &&
+                acceptedType.prototype instanceof Serializable &&
                 jsonValue !== null &&
                 jsonValue !== void 0 &&
                 typeof jsonValue === 'object' &&  !Array.isArray(jsonValue)
@@ -198,11 +198,14 @@ export class Serializable {
                 const typeConstructor: new () => Serializable = acceptedType as new () => Serializable;
 
                 return new typeConstructor().fromJSON(jsonValue);
+
             } else if ( // instance any other class, not Serializable, for parse from other classes instance
                 acceptedType instanceof Function &&
                 jsonValue instanceof acceptedType
             ) {
+
                 return jsonValue;
+
             }
 
         }

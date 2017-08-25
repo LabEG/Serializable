@@ -56,7 +56,7 @@ export class User extends Serializable {
 /**
 * Without Serializable
 */
-const user: Object = JSON.parse(json);
+const user: object = JSON.parse(json);
 user.getFullName();
 // runtime exception: Uncaught TypeError: user.getFullName is not a function
 user.getAge();
