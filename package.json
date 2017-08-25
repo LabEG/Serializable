@@ -4,9 +4,11 @@
   "description": "Serialization and deserializtion for classes",
   "main": "index.js",
   "dependencies": {
+
+  },
+  "devDependencies": {
     "reflect-metadata": "^0.1.10"
   },
-  "devDependencies": {},
   "scripts": {
     "reinstall": "rm -rvf npm-shrinkwrap.json && rm -rvf node_modules && npm install && npm dedupe && npm prune && npm shrinkwrap",
     "fullupdate": "ncu -a && npm run reinstall",

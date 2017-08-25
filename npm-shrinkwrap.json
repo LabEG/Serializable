@@ -1,13 +1,12 @@
 {
-  "name": "serializable",
-  "version": "0.0.1",
-  "lockfileVersion": 1,
-  "requires": true,
+  "name": "ts-serializable",
+  "version": "0.0.3",
   "dependencies": {
     "reflect-metadata": {
       "version": "0.1.10",
+      "from": "reflect-metadata@>=0.1.10 <0.2.0",
       "resolved": "https://registry.npmjs.org/reflect-metadata/-/reflect-metadata-0.1.10.tgz",
-      "integrity": "sha1-tPg3BEFqytiZiMmxVjXUfgO5NEo="
+      "dev": true
     }
   }
 }

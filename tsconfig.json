@@ -2,24 +2,17 @@
     "compilerOptions": {
         "target": "ES5",
         "module": "UMD",
-        "declaration": true,
-        "diagnostics": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "lib": [
-            "ES2017",
+            "ESNext",
             "DOM",
             "DOM.Iterable",
             "ScriptHost"
         ],
         "noImplicitReturns": true,
         "noUnusedLocals": true,
-        "outDir": "bin/",
         "pretty": true,
         "strict": true
-    },
-    "include": [
-        "./src/**/*",
-        "./samples/**/*"
-    ]
+    }
 }
