@@ -4,6 +4,10 @@ import { AcceptedTypes } from './../models/AcceptedType';
 export class Serializable {
 
     // for next project
+    public static fromJSON(json: object): Object {
+        return new this().fromJSON(json);
+    }
+
     public fromJSON(json: object): this {
 
         if (

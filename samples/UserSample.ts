@@ -15,6 +15,10 @@
     const { User } = await import('./models/User');
     const json: any = await import('./jsons/json-generator.json');
 
-    console.log('User: \n', new User().fromJSON(json[0]));
+    console.log('new User(): \n', new User().fromJSON(json[0]));
+
+    const user = User.fromJSON(json[0]);
+
+    console.log('User.fromJSON(): \n', user);
 
 })()

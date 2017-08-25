@@ -56,6 +56,11 @@ user.getAge(); // runtime exception: Uncaught TypeError: user.getAge is not a fu
 const user: User = new User().fromJSON(json);
 user.getFullName(); // work fine and return string
 user.getAge(); // work fine and return number
+
+//or
+const user = User.fromJSON(json);
+user.getFullName(); // work fine and return string
+user.getAge(); // work fine and return number
 ```
 
 Bonus:
