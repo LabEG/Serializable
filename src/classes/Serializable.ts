@@ -11,7 +11,8 @@ export class Serializable {
             Array.isArray(json) ||
             typeof json !== 'object'
         ) {
-            this.onCriticalException(`${this.constructor.name}.fromJSON: json is not object: ${json}`);
+            this.onWrongType('', 'is not object', json);
+            return this;
         }
 
         for (const prop in json) {
@@ -25,7 +26,7 @@ export class Serializable {
                     prop
                 );
 
-                const jsonValue: AcceptedTypes = Reflect.get(json, prop);
+                const jsonValue: Object | null | void = Reflect.get(json, prop);
 
                 Reflect.set(
                     this,
@@ -43,8 +44,8 @@ export class Serializable {
         return Object.assign({}, this);
     }
 
-    protected onWrongType(message: string): void {
-        console.error(message);
+    protected onWrongType(prop: string, message: string, jsonValue: Object | null | void): void {
+        console.error(`${this.constructor.name}.fromJSON: json.${prop} ${message}:`, jsonValue);
     }
 
     private deserializeProperty(
@@ -105,7 +106,7 @@ export class Serializable {
                 (typeof jsonValue === 'string' || jsonValue instanceof String || jsonValue instanceof Date)
             ) {
 
-                let unicodeTime: number = 0;
+                let unicodeTime: number = new Date("0000-01-01T00:00:00.000").getTime(); // 0 year, 0 month, 0 days, 0 hours, 0 minutes, 0 seconds
                 if (typeof jsonValue === 'string') {
                     unicodeTime = Date.parse(jsonValue);
                 } else if (jsonValue instanceof String) {
@@ -114,7 +115,7 @@ export class Serializable {
                     unicodeTime = jsonValue.getTime();
                 }
                 if (isNaN(unicodeTime) || typeof unicodeTime !== 'number') { // preserve invalid time
-                    this.onWrongType(`${this.constructor.name}.fromJSON: json.${prop} is invalid date: ${jsonValue}`);
+                    this.onWrongType(prop, 'is invalid date', jsonValue);
                 }
 
                 return new Date(unicodeTime);
@@ -124,31 +125,28 @@ export class Serializable {
                 && Array.isArray(jsonValue)
             ) {
 
-                const arrayType: AcceptedTypes = (acceptedType as Array<AcceptedTypes>)[0];
-
-                if (arrayType === void 0) {
-                    this.onWrongType(`${this.constructor.name}.fromJSON: json.${prop} invalid type: ${JSON.stringify(acceptedType)}`);
+                if (acceptedType[0] === void 0) {
+                    this.onWrongType(prop, 'invalid type', jsonValue);
                 }
 
-                return jsonValue.map((arrayValue: AcceptedTypes) => {
-
+                return jsonValue.map((arrayValue: Object | void | null) => {
+                    return this.deserializeProperty(this, prop, acceptedType, arrayValue);
                 });
 
             } else if ( // Serializable
+                jsonValue !== null &&
+                jsonValue !== void 0 &&
                 typeof jsonValue === 'object' && !Array.isArray(jsonValue)
             ) {
-                // acceptedType.constructor.prototype instanceof Serializable
-
                 const typeConstructor: new () => Serializable = acceptedType as new () => Serializable;
-                return new typeConstructor().fromJSON(jsonValue as any);
-
-            } else { // process wrong type
-
-                this.onWrongType(`${this.constructor.name}.fromJSON: json.${prop} is invalid: ` + jsonValue);
-
+                return new typeConstructor().fromJSON(jsonValue);
             }
 
         }
+
+        // process wrong type and return default value
+        this.onWrongType(prop, `is invalid`, jsonValue);
+        return Reflect.get(this, prop);
 
     }
 }

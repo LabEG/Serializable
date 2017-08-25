@@ -4,10 +4,10 @@ import { Serializable } from "./../../src/classes/Serializable";
 export class Friend extends Serializable {
 
   @jsonProperty(Number)
-  public id: number;
+  public id: number = 0;
 
   @jsonProperty(String)
-  public name: string;
+  public name: string = '';
 
   constructor(text?: number){
     super();
@@ -17,7 +17,7 @@ export class Friend extends Serializable {
 
 export class User extends Serializable {
 
-  @jsonProperty(String, void 0, null)
+  @jsonProperty(String)
   public _id?: string = "";
 
   @jsonProperty(Number)
