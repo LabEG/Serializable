@@ -140,11 +140,19 @@
                             return _this.deserializeProperty(prop, acceptedType, arrayValue);
                         }) };
                 }
-                else if (jsonValue !== null &&
+                else if (acceptedType !== null &&
+                    acceptedType !== void 0 &&
+                    !Array.isArray(acceptedType) &&
+                    acceptedType.prototype.fromJSON instanceof Function &&
+                    jsonValue !== null &&
                     jsonValue !== void 0 &&
                     typeof jsonValue === 'object' && !Array.isArray(jsonValue)) {
                     var typeConstructor = acceptedType;
                     return { value: new typeConstructor().fromJSON(jsonValue) };
+                }
+                else if (acceptedType instanceof Function &&
+                    jsonValue instanceof acceptedType) {
+                    return { value: jsonValue };
                 }
             };
             var this_1 = this;

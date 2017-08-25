@@ -1,5 +1,5 @@
-import { jsonProperty } from "./../../src/decorators/JsonProperty";
-import { Serializable } from "./../../src/classes/Serializable";
+import { jsonProperty } from './../../src/decorators/JsonProperty';
+import { Serializable } from './../../src/classes/Serializable';
 
 export class Friend extends Serializable {
 
@@ -8,59 +8,54 @@ export class Friend extends Serializable {
 
   @jsonProperty(String)
   public name: string = '';
-
-  constructor(text?: number){
-    super();
-  }
-
 }
 
 export class User extends Serializable {
 
   @jsonProperty(String)
-  public _id?: string = "";
+  public _id?: string = '';
 
   @jsonProperty(Number)
   public index: number = 0;
 
   @jsonProperty(String)
-  public guid: string = "";
+  public guid: string = '';
 
   @jsonProperty(Boolean)
   public isActive: boolean = false;
 
   @jsonProperty(String)
-  public balance: string = "";
+  public balance: string = '';
 
   @jsonProperty(String)
-  public picture: string = "";
+  public picture: string = '';
 
   @jsonProperty(Number)
   public age: number = 0;
 
   @jsonProperty(String)
-  public eyeColor: string = "";
+  public eyeColor: string = '';
 
   @jsonProperty(String)
-  public name: string = "";
+  public name: string = '';
 
   @jsonProperty(String)
-  public gender: string = "";
+  public gender: string = '';
 
   @jsonProperty(String)
-  public company: string = "";
+  public company: string = '';
 
   @jsonProperty(String)
-  public email: string = "";
+  public email: string = '';
 
   @jsonProperty(String)
-  public phone: string = "";
+  public phone: string = '';
 
   @jsonProperty(String)
-  public address: string = "";
+  public address: string = '';
 
   @jsonProperty(String)
-  public about: string = "";
+  public about: string = '';
 
   @jsonProperty(Date, null)
   public registered: Date | null = null;
@@ -78,9 +73,9 @@ export class User extends Serializable {
   public friends: Friend[] = [];
 
   @jsonProperty(String)
-  public greeting: string = "";
+  public greeting: string = '';
 
   @jsonProperty(String)
-  public favoriteFruit: string = "";
+  public favoriteFruit: string = '';
 
 }

@@ -186,13 +186,23 @@ export class Serializable {
                 });
 
             } else if ( // Serializable
+                acceptedType !== null &&
+                acceptedType !== void 0 &&
+                !Array.isArray(acceptedType) &&
+                acceptedType.prototype.fromJSON instanceof Function &&
                 jsonValue !== null &&
                 jsonValue !== void 0 &&
-                typeof jsonValue === 'object' && !Array.isArray(jsonValue)
+                typeof jsonValue === 'object' &&  !Array.isArray(jsonValue)
             ) {
+
                 const typeConstructor: new () => Serializable = acceptedType as new () => Serializable;
 
                 return new typeConstructor().fromJSON(jsonValue);
+            } else if ( // instance any other class, not Serializable, for parse from other classes instance
+                acceptedType instanceof Function &&
+                jsonValue instanceof acceptedType
+            ) {
+                return jsonValue;
             }
 
         }
