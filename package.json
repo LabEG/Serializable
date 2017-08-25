@@ -1,6 +1,6 @@
 {
   "name": "ts-serializable",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Serialization and deserializtion for classes",
   "main": "index.js",
   "dependencies": {
