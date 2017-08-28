@@ -15,5 +15,10 @@
         "noUnusedParameters": true,
         "pretty": true,
         "strict": true
-    }
+    },
+    "include": [
+        "./node_modules/reflect-metadata/Reflect.d.ts",
+        "./src/**/*",
+        "./samples/**/*"
+    ]
 }
