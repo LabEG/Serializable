@@ -19,6 +19,6 @@
     "include": [
         "./node_modules/reflect-metadata/Reflect.d.ts",
         "./src/**/*",
-        "./samples/**/*"
+        "./tests/**/*"
     ]
 }

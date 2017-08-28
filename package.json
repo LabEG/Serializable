@@ -1,23 +1,28 @@
 {
   "name": "ts-serializable",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Serialization and deserializtion for classes",
   "main": "./bin/index.js",
-  "typings" : "./bin/index.d.ts",
-  "dependencies": {
-
-  },
+  "typings": "./bin/index.d.ts",
+  "dependencies": {},
   "devDependencies": {
-    "reflect-metadata": "^0.1.10"
+    "reflect-metadata": "^0.1.10",
+    "@types/mocha": "^2.2.42",
+    "@types/chai": "^4.0.4",
+    "mocha": "^3.5.0",
+    "chai": "^4.1.1",
+    "ts-node": "^3.3.0",
+    "typescript": "^2.4.2"
   },
   "scripts": {
     "reinstall": "rm -rvf npm-shrinkwrap.json && rm -rvf node_modules && npm install && npm dedupe && npm prune && npm shrinkwrap",
     "fullupdate": "ncu -a && npm run reinstall",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/mocha --reporter spec --compilers ts:ts-node/register,tsx:ts-node/register tests/*.ts",
+    "build": "./node_modules/.bin/tsc --project tsconfigbuild.json"
   },
   "repository": {
-      "type": "git",
-      "url": " git@github.com:LabEG/Serializable.git"
+    "type": "git",
+    "url": " git@github.com:LabEG/Serializable.git"
   },
   "keywords": [
     "serializatio",
