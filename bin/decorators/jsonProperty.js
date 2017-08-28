@@ -1,4 +1,3 @@
-/// <reference path="./../../node_modules/reflect-metadata/Reflect.d.ts" />
 (function (factory) {
     if (typeof module === "object" && typeof module.exports === "object") {
         var v = factory(require, exports);

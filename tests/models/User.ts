@@ -66,7 +66,7 @@ export class User extends Serializable {
   @jsonProperty(Number)
   public longitude: number = 0;
 
-  @jsonProperty(String)
+  @jsonProperty([String])
   public tags: string[] = [];
 
   @jsonProperty([Friend])

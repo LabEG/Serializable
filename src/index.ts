@@ -1,6 +1,4 @@
 
-import { jsonProperty as  jsonPropertyImport} from './decorators/jsonProperty';
-import { Serializable as  SerializableImport} from './classes/Serializable';
+export { jsonProperty } from './decorators/jsonProperty';
+export { Serializable } from './classes/Serializable';
 
-export const Serializable = SerializableImport;
-export const jsonProperty = jsonPropertyImport;
