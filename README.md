@@ -10,6 +10,7 @@ Description:
 
 Usage:
 ------
+This example writed on typescript, but if remove typing, then him will work and on javascript.
 
 ```typescript
 import { jsonProperty, Serializable } from "ts-serializable";
@@ -34,7 +35,7 @@ export class User extends Serializable {
     @jsonProperty(Date)
     public birthDate: Date = new Date(); // default value necessarily
     
-    @jsonProperty([String]])
+    @jsonProperty([String])
     public tags: string[] = []; // default value necessarily
     
     @jsonProperty(OtherClassConstructor, null)
@@ -79,7 +80,6 @@ user.getAge(); // work fine and return number
 
 Bonus:
 ------
-
 Deep copy
 ```typescript
 const newUser: User = new User().fromJSON(oldUser);
