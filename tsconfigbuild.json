@@ -6,6 +6,7 @@
         "outDir": "bin/"
     },
     "include": [
+        "./node_modules/reflect-metadata/Reflect.d.ts",
         "./src/**/*"
     ]
 }
