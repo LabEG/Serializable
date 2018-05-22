@@ -15,7 +15,7 @@
      * @export
      * @class Serializable
      */
-    var Serializable = (function () {
+    var Serializable = /** @class */ (function () {
         function Serializable() {
         }
         /**
@@ -89,31 +89,38 @@
             var _this = this;
             var _loop_1 = function (type) {
                 var acceptedType = acceptedTypes[type];
-                if (acceptedType === null &&
+                if ( // null
+                acceptedType === null &&
                     jsonValue === null) {
                     return { value: null };
                 }
-                else if (acceptedType === void 0 &&
+                else if ( // void, for classes only, json don't have void type
+                acceptedType === void 0 &&
                     jsonValue === void 0) {
                     return { value: void 0 };
                 }
-                else if (acceptedType === Boolean &&
+                else if ( // boolean, Boolean
+                acceptedType === Boolean &&
                     (typeof jsonValue === 'boolean' || jsonValue instanceof Boolean)) {
                     return { value: Boolean(jsonValue) };
                 }
-                else if (acceptedType === Number &&
+                else if ( // number, Number
+                acceptedType === Number &&
                     (typeof jsonValue === 'number' || jsonValue instanceof Number)) {
                     return { value: Number(jsonValue) };
                 }
-                else if (acceptedType === String &&
+                else if ( // string, String
+                acceptedType === String &&
                     (typeof jsonValue === 'string' || jsonValue instanceof String)) {
                     return { value: String(jsonValue) };
                 }
-                else if (acceptedType === Object &&
+                else if ( // object, Object
+                acceptedType === Object &&
                     (typeof jsonValue === 'object')) {
                     return { value: Object(jsonValue) };
                 }
-                else if (acceptedType === Date &&
+                else if ( // Date
+                acceptedType === Date &&
                     (typeof jsonValue === 'string' || jsonValue instanceof String || jsonValue instanceof Date)) {
                     // 0 year, 0 month, 0 days, 0 hours, 0 minutes, 0 seconds
                     var unicodeTime = new Date('0000-01-01T00:00:00.000').getTime();
@@ -126,12 +133,13 @@
                     else if (jsonValue instanceof Date) {
                         unicodeTime = jsonValue.getTime();
                     }
-                    if (isNaN(unicodeTime) || typeof unicodeTime !== 'number') {
+                    if (isNaN(unicodeTime) || typeof unicodeTime !== 'number') { // preserve invalid time
                         this_1.onWrongType(prop, 'is invalid date', jsonValue);
                     }
                     return { value: new Date(unicodeTime) };
                 }
-                else if (Array.isArray(acceptedType)
+                else if ( // Array
+                Array.isArray(acceptedType)
                     && Array.isArray(jsonValue)) {
                     if (acceptedType[0] === void 0) {
                         this_1.onWrongType(prop, 'invalid type', jsonValue);
@@ -140,7 +148,8 @@
                             return _this.deserializeProperty(prop, acceptedType, arrayValue);
                         }) };
                 }
-                else if (acceptedType !== null &&
+                else if ( // Serializable
+                acceptedType !== null &&
                     acceptedType !== void 0 &&
                     !Array.isArray(acceptedType) &&
                     acceptedType.prototype instanceof Serializable &&
@@ -150,7 +159,8 @@
                     var typeConstructor = acceptedType;
                     return { value: new typeConstructor().fromJSON(jsonValue) };
                 }
-                else if (acceptedType instanceof Function &&
+                else if ( // instance any other class, not Serializable, for parse from other classes instance
+                acceptedType instanceof Function &&
                     jsonValue instanceof acceptedType) {
                     return { value: jsonValue };
                 }
