@@ -1,5 +1,6 @@
 import { jsonProperty } from './../../src/decorators/JsonProperty';
 import { Serializable } from './../../src/classes/Serializable';
+import {jsonIgnore} from "../../src/decorators/JsonIgnore";
 
 export class Friend extends Serializable {
 
@@ -77,5 +78,8 @@ export class User extends Serializable {
 
   @jsonProperty(String)
   public favoriteFruit: string = '';
+
+    @jsonIgnore()
+    public isExpanded: boolean = false;
 
 }

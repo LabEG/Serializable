@@ -1,6 +1,6 @@
 {
   "name": "ts-serializable",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Serialization and deserializtion for classes",
   "main": "./bin/index.js",
   "typings": "./bin/index.d.ts",
@@ -17,7 +17,7 @@
   "scripts": {
     "reinstall": "rm -rvf npm-shrinkwrap.json && rm -rvf node_modules && npm install && npm dedupe && npm prune && npm shrinkwrap",
     "fullupdate": "ncu -a && npm run reinstall",
-    "test": "./node_modules/.bin/mocha --reporter spec --compilers ts:ts-node/register,tsx:ts-node/register tests/*.ts",
+    "test": "./node_modules/.bin/mocha --reporter spec --require ts-node/register tests/*.ts",
     "build": "./node_modules/.bin/tsc --project tsconfigbuild.json"
   },
   "repository": {

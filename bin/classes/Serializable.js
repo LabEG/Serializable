@@ -42,7 +42,9 @@ var Serializable = /** @class */ (function () {
         }
         for (var prop in json) {
             // json.hasOwnProperty(prop) - preserve for deserialization for other classes with methods
-            if (json.hasOwnProperty(prop) && this.hasOwnProperty(prop)) {
+            if (json.hasOwnProperty(prop) &&
+                this.hasOwnProperty(prop) &&
+                Reflect.hasMetadata('ts-serializable:jsonTypes', this.constructor.prototype)) {
                 var acceptedTypes = Reflect.getMetadata('ts-serializable:jsonTypes', this.constructor.prototype, prop);
                 var jsonValue = Reflect.get(json, prop);
                 Reflect.set(this, prop, this.deserializeProperty(prop, acceptedTypes, jsonValue));
@@ -57,7 +59,17 @@ var Serializable = /** @class */ (function () {
      * @memberof Serializable
      */
     Serializable.prototype.toJSON = function () {
-        return Object.assign({}, this);
+        var json = Object.assign({}, this);
+        for (var prop in json) {
+            // json.hasOwnProperty(prop) - preserve for deserialization for other classes with methods
+            if (json.hasOwnProperty(prop) && this.hasOwnProperty(prop)) {
+                var isIgnore = Reflect.getMetadata('ts-serializable:jsonIgnore', this.constructor.prototype, prop);
+                if (isIgnore) {
+                    Reflect.set(json, prop, void 0);
+                }
+            }
+        }
+        return json;
     };
     /**
      * Process exceptions from wrong types.

@@ -1,5 +1,4 @@
-
-import { AcceptedTypes } from './../models/AcceptedType';
+import {AcceptedTypes} from './../models/AcceptedType';
 
 /**
  * Class how help you deserialize object to classes.
@@ -49,7 +48,11 @@ export class Serializable {
         for (const prop in json) {
 
             // json.hasOwnProperty(prop) - preserve for deserialization for other classes with methods
-            if (json.hasOwnProperty(prop) && this.hasOwnProperty(prop)) {
+            if (
+                json.hasOwnProperty(prop) &&
+                this.hasOwnProperty(prop) &&
+                Reflect.hasMetadata('ts-serializable:jsonTypes', this.constructor.prototype)
+            ) {
 
                 const acceptedTypes: AcceptedTypes[] = Reflect.getMetadata(
                     'ts-serializable:jsonTypes',
@@ -79,7 +82,28 @@ export class Serializable {
      */
     public toJSON(): object {
 
-        return Object.assign({}, this);
+        const json = Object.assign({}, this);
+
+        for (const prop in json) {
+
+            // json.hasOwnProperty(prop) - preserve for deserialization for other classes with methods
+            if (json.hasOwnProperty(prop) && this.hasOwnProperty(prop)) {
+
+                const isIgnore: boolean | void = Reflect.getMetadata(
+                    'ts-serializable:jsonIgnore',
+                    this.constructor.prototype,
+                    prop
+                );
+
+                if (isIgnore) {
+                    Reflect.set(json, prop, void 0);
+                }
+
+            }
+        }
+
+
+        return json;
     }
 
     /**
@@ -199,7 +223,7 @@ export class Serializable {
                 acceptedType.prototype instanceof Serializable &&
                 jsonValue !== null &&
                 jsonValue !== void 0 &&
-                typeof jsonValue === 'object' &&  !Array.isArray(jsonValue)
+                typeof jsonValue === 'object' && !Array.isArray(jsonValue)
             ) {
 
                 const typeConstructor: new () => Serializable = acceptedType as new () => Serializable;
