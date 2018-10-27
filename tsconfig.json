@@ -12,7 +12,8 @@
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "pretty": true,
-        "strict": true
+        "strict": true,
+        "resolveJsonModule": true
     },
     "include": [
         "./node_modules/reflect-metadata/Reflect.d.ts",

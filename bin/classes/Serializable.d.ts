@@ -1,12 +1,15 @@
 /**
- * //todo: write jsdoc
+ * Class how help you deserialize object to classes.
  *
  * @export
  * @class Serializable
  */
 export declare class Serializable {
     /**
-     * //todo: write jsdoc
+     * Deserialize object from static method.
+     *
+     * Example:
+     * const obj: MyObject = MyObject.fromJSON({...data});
      *
      * @static
      * @param {object} json
@@ -15,7 +18,10 @@ export declare class Serializable {
      */
     static fromJSON(json: object): object;
     /**
-     * //todo: write jsdoc
+     * Fill property of current model by data from json.
+     *
+     * Example:
+     * const obj: MyObject = new MyObject().fromJSON({...data});
      *
      * @param {object} json
      * @returns {this}
@@ -23,14 +29,15 @@ export declare class Serializable {
      */
     fromJSON(json: object): this;
     /**
-     * //todo: write jsdoc
+     * Process serelization for @jsonIgnore decorator
      *
      * @returns {object}
      * @memberof Serializable
      */
     toJSON(): object;
     /**
-     * //todo: write jsdoc
+     * Process exceptions from wrong types.
+     * By default just print warning in console, but can by override for drop exception or logging to backend.
      *
      * @protected
      * @param {string} prop
@@ -50,5 +57,5 @@ export declare class Serializable {
      * @returns {(Object | null | void)}
      * @memberof Serializable
      */
-    private deserializeProperty(prop, acceptedTypes, jsonValue);
+    private deserializeProperty;
 }
