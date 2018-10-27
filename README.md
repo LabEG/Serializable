@@ -76,6 +76,34 @@ user.getFullName(); // work fine and return string
 user.getAge(); // work fine and return number
 ```
 
+View-Models from Backend Models:
+------
+If you need create view-model from backend models you can use same model. 
+Just add VM properties to backend model and mark it as @jsonIgnore() and this 
+property will not be serialized to json.
+
+```typescript
+import { jsonProperty, jsonIgnore, Serializable } from "ts-serializable";
+
+export class User extends Serializable {
+
+    @jsonProperty(String)
+    public firstName: string = ''; // default value necessarily
+  
+    @jsonProperty(String)
+    public familyName: string = ''; // default value necessarily
+
+    @jsonIgnore()
+    public isExpanded: boolean  = false;
+
+}
+
+const user = new User();
+user.isExpanded = true;
+JSON.stringify(user);
+// Result: {"firstName":"","familyName":""}
+```
+
 Bonus:
 ------
 Deep copy

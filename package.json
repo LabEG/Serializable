@@ -1,33 +1,33 @@
 {
-  "name": "ts-serializable",
-  "version": "1.1.0",
-  "description": "Serialization and deserializtion for classes",
-  "main": "./bin/index.js",
-  "typings": "./bin/index.d.ts",
-  "dependencies": {},
-  "devDependencies": {
-    "reflect-metadata": "^0.1.12",
-    "@types/mocha": "^5.2.5",
-    "@types/chai": "^4.1.6",
-    "mocha": "^5.2.0",
-    "chai": "^4.2.0",
-    "ts-node": "^7.0.1",
-    "typescript": "^3.1.3"
-  },
-  "scripts": {
-    "reinstall": "rm -rvf npm-shrinkwrap.json && rm -rvf node_modules && npm install && npm dedupe && npm prune && npm shrinkwrap",
-    "fullupdate": "ncu -a && npm run reinstall",
-    "test": "./node_modules/.bin/mocha --reporter spec --require ts-node/register tests/*.ts",
-    "build": "./node_modules/.bin/tsc --project tsconfigbuild.json"
-  },
-  "repository": {
-    "type": "git",
-    "url": " git@github.com:LabEG/Serializable.git"
-  },
-  "keywords": [
-    "serialization",
-    "deserialization"
-  ],
-  "author": "LabEG",
-  "license": "MIT"
+    "name": "ts-serializable",
+    "version": "1.1.0",
+    "description": "Serialization and deserializtion for classes",
+    "main": "./bin/index.js",
+    "typings": "./bin/index.d.ts",
+    "dependencies": {},
+    "devDependencies": {
+        "reflect-metadata": "^0.1.12",
+        "@types/mocha": "^5.2.5",
+        "@types/chai": "^4.1.6",
+        "mocha": "^5.2.0",
+        "chai": "^4.2.0",
+        "ts-node": "^7.0.1",
+        "typescript": "^3.1.3"
+    },
+    "scripts": {
+        "reinstall": "rm -rvf npm-shrinkwrap.json && rm -rvf node_modules && npm install && npm dedupe && npm prune && npm shrinkwrap",
+        "fullupdate": "ncu -a && npm run reinstall",
+        "test": "./node_modules/.bin/mocha --reporter spec --require ts-node/register tests/*.ts",
+        "build": "./node_modules/.bin/tsc --project tsconfigbuild.json"
+    },
+    "repository": {
+        "type": "git",
+        "url": " git@github.com:LabEG/Serializable.git"
+    },
+    "keywords": [
+        "serialization",
+        "deserialization"
+    ],
+    "author": "LabEG",
+    "license": "MIT"
 }

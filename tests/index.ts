@@ -1,4 +1,3 @@
-
 import('reflect-metadata'); // polyfill
 import {assert} from 'chai';
 
