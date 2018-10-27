@@ -71,9 +71,7 @@ user.getFullName(); // work fine and return string
 user.getAge(); // work fine and return number
 
 // or
-const user: object = User.fromJSON(json);
-// next line in typescript only, typescript limitation
-user = user instanceof User ? user : user;
+const user: object = User.fromJSON(json) as User;
 user.getFullName(); // work fine and return string
 user.getAge(); // work fine and return number
 ```

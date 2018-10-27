@@ -1,3 +1,5 @@
+import {User} from "./models/User";
+
 import('reflect-metadata'); // polyfill
 import { assert } from 'chai';
 
@@ -20,7 +22,7 @@ describe('Serializable', async function () {
             const { User } = await import('./models/User');
             const json: any = await import('./jsons/json-generator.json');
 
-            let user = User.fromJSON(json[0]);
+            let user = User.fromJSON(json[0]) as User;
 
             assert.isTrue(user instanceof User);
 
