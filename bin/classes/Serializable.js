@@ -44,7 +44,7 @@ var Serializable = /** @class */ (function () {
             // json.hasOwnProperty(prop) - preserve for deserialization for other classes with methods
             if (json.hasOwnProperty(prop) &&
                 this.hasOwnProperty(prop) &&
-                Reflect.hasMetadata('ts-serializable:jsonTypes', this.constructor.prototype)) {
+                Reflect.hasMetadata('ts-serializable:jsonTypes', this.constructor.prototype, prop)) {
                 var acceptedTypes = Reflect.getMetadata('ts-serializable:jsonTypes', this.constructor.prototype, prop);
                 var jsonValue = Reflect.get(json, prop);
                 Reflect.set(this, prop, this.deserializeProperty(prop, acceptedTypes, jsonValue));
