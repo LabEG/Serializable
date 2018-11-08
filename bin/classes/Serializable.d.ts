@@ -16,7 +16,9 @@ export declare class Serializable {
      * @returns {object}
      * @memberof Serializable
      */
-    static fromJSON(json: object): object;
+    static fromJSON<T extends Serializable>(this: {
+        new (): T;
+    }, json: object): T;
     /**
      * Fill property of current model by data from json.
      *

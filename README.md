@@ -71,7 +71,7 @@ user.getFullName(); // work fine and return string
 user.getAge(); // work fine and return number
 
 // or
-const user: object = User.fromJSON(json) as User;
+const user: User = User.fromJSON(json);
 user.getFullName(); // work fine and return string
 user.getAge(); // work fine and return number
 ```

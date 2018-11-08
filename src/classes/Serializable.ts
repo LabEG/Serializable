@@ -1,4 +1,4 @@
-import {AcceptedTypes} from './../models/AcceptedType';
+import {AcceptedTypes} from '../models/AcceptedType';
 
 /**
  * Class how help you deserialize object to classes.
@@ -19,7 +19,7 @@ export class Serializable {
      * @returns {object}
      * @memberof Serializable
      */
-    public static fromJSON(json: object): object {
+    public static fromJSON<T extends Serializable>(this: { new(): T }, json: object): T {
         return new this().fromJSON(json);
     }
 

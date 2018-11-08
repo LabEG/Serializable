@@ -22,7 +22,7 @@ describe('Serializable', async function () {
             const {User} = await import('./models/User');
             const json: any = await import('./jsons/json-generator.json');
 
-            let user = User.fromJSON(json[0]) as User;
+            let user: User = User.fromJSON(json[0]);
 
             assert.isTrue(user instanceof User);
 
