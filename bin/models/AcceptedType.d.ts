@@ -1,2 +1,5 @@
 export declare type AcceptedType = null | void | BooleanConstructor | NumberConstructor | StringConstructor | ObjectConstructor | (new (...args: (Object | null | void)[]) => object) | DateConstructor | SymbolConstructor;
-export declare type AcceptedTypes = AcceptedType | Array<AcceptedType> | Array<Array<AcceptedType>> | Array<Array<Array<AcceptedType>>> | Array<Array<Array<Array<AcceptedType>>>> | Array<Array<Array<Array<Array<AcceptedType>>>>> | Array<Array<Array<Array<Array<Array<AcceptedType>>>>>> | Array<Array<Array<Array<Array<Array<Array<AcceptedType>>>>>>> | Array<Array<Array<Array<Array<Array<Array<Array<AcceptedType>>>>>>>> | Array<Array<Array<Array<Array<Array<Array<Array<Array<AcceptedType>>>>>>>>> | Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<AcceptedType>>>>>>>>>>;
+interface RecursiveArray<T> extends Array<T | RecursiveArray<T>> {
+}
+export declare type AcceptedTypes = AcceptedType | RecursiveArray<AcceptedType>;
+export {};
