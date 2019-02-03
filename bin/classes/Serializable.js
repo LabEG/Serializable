@@ -29,24 +29,25 @@ var Serializable = /** @class */ (function () {
      * Example:
      * const obj: MyObject = new MyObject().fromJSON({...data});
      *
-     * @param {object} json
+     * @param {object} ujson
      * @returns {this}
      * @memberof Serializable
      */
     Serializable.prototype.fromJSON = function (json) {
-        if (json === null ||
-            Array.isArray(json) ||
-            typeof json !== 'object') {
-            this.onWrongType('', 'is not object', json);
+        var ujson = json;
+        if (ujson === null ||
+            Array.isArray(ujson) ||
+            typeof ujson !== "object") {
+            this.onWrongType("", "is not object", ujson);
             return this;
         }
-        for (var prop in json) {
+        for (var prop in ujson) {
             // json.hasOwnProperty(prop) - preserve for deserialization for other classes with methods
-            if (json.hasOwnProperty(prop) &&
+            if (ujson.hasOwnProperty(prop) &&
                 this.hasOwnProperty(prop) &&
-                Reflect.hasMetadata('ts-serializable:jsonTypes', this.constructor.prototype, prop)) {
-                var acceptedTypes = Reflect.getMetadata('ts-serializable:jsonTypes', this.constructor.prototype, prop);
-                var jsonValue = Reflect.get(json, prop);
+                Reflect.hasMetadata("ts-serializable:jsonTypes", this.constructor.prototype, prop)) {
+                var acceptedTypes = Reflect.getMetadata("ts-serializable:jsonTypes", this.constructor.prototype, prop);
+                var jsonValue = Reflect.get(ujson, prop);
                 Reflect.set(this, prop, this.deserializeProperty(prop, acceptedTypes, jsonValue));
             }
         }
@@ -63,7 +64,7 @@ var Serializable = /** @class */ (function () {
         for (var prop in json) {
             // json.hasOwnProperty(prop) - preserve for deserialization for other classes with methods
             if (json.hasOwnProperty(prop) && this.hasOwnProperty(prop)) {
-                var isIgnore = Reflect.getMetadata('ts-serializable:jsonIgnore', this.constructor.prototype, prop);
+                var isIgnore = Reflect.getMetadata("ts-serializable:jsonIgnore", this.constructor.prototype, prop);
                 if (isIgnore) {
                     Reflect.set(json, prop, void 0);
                 }
@@ -78,10 +79,11 @@ var Serializable = /** @class */ (function () {
      * @protected
      * @param {string} prop
      * @param {string} message
-     * @param {(Object | null | void)} jsonValue
+     * @param {(unknown)} jsonValue
      * @memberof Serializable
      */
     Serializable.prototype.onWrongType = function (prop, message, jsonValue) {
+        // tslint:disable-next-line:no-console
         console.error(this.constructor.name + ".fromJSON: json." + prop + " " + message + ":", jsonValue);
     };
     /**
@@ -91,50 +93,51 @@ var Serializable = /** @class */ (function () {
      * @param {object} object
      * @param {string} prop
      * @param {AcceptedTypes[]} acceptedTypes
-     * @param {(Object | null | void)} jsonValue
+     * @param {(unknown)} jsonValue
      * @returns {(Object | null | void)}
      * @memberof Serializable
      */
+    // tslint:disable-next-line:cyclomatic-complexity
     Serializable.prototype.deserializeProperty = function (prop, acceptedTypes, jsonValue) {
         var _this = this;
-        var _loop_1 = function (type) {
-            var acceptedType = acceptedTypes[type];
+        var _loop_1 = function (acceptedType) {
             if ( // null
             acceptedType === null &&
                 jsonValue === null) {
                 return { value: null };
             }
-            else if ( // void, for classes only, json don't have void type
+            else if ( // void, for classes deep copy only, json don't have void type
             acceptedType === void 0 &&
                 jsonValue === void 0) {
                 return { value: void 0 };
             }
             else if ( // boolean, Boolean
             acceptedType === Boolean &&
-                (typeof jsonValue === 'boolean' || jsonValue instanceof Boolean)) {
+                (typeof jsonValue === "boolean" || jsonValue instanceof Boolean)) {
                 return { value: Boolean(jsonValue) };
             }
             else if ( // number, Number
             acceptedType === Number &&
-                (typeof jsonValue === 'number' || jsonValue instanceof Number)) {
+                (typeof jsonValue === "number" || jsonValue instanceof Number)) {
                 return { value: Number(jsonValue) };
             }
             else if ( // string, String
             acceptedType === String &&
-                (typeof jsonValue === 'string' || jsonValue instanceof String)) {
+                (typeof jsonValue === "string" || jsonValue instanceof String)) {
                 return { value: String(jsonValue) };
             }
             else if ( // object, Object
             acceptedType === Object &&
-                (typeof jsonValue === 'object')) {
+                (typeof jsonValue === "object")) {
                 return { value: Object(jsonValue) };
             }
             else if ( // Date
             acceptedType === Date &&
-                (typeof jsonValue === 'string' || jsonValue instanceof String || jsonValue instanceof Date)) {
+                (typeof jsonValue === "string" || jsonValue instanceof String || jsonValue instanceof Date)) {
                 // 0 year, 0 month, 0 days, 0 hours, 0 minutes, 0 seconds
-                var unicodeTime = new Date('0000-01-01T00:00:00.000').getTime();
-                if (typeof jsonValue === 'string') {
+                var unicodeTime = new Date("0000-01-01T00:00:00.000").getTime();
+                // tslint:disable-next-line:strict-type-predicates
+                if (typeof jsonValue === "string") {
                     unicodeTime = Date.parse(jsonValue);
                 }
                 else if (jsonValue instanceof String) {
@@ -143,8 +146,8 @@ var Serializable = /** @class */ (function () {
                 else if (jsonValue instanceof Date) {
                     unicodeTime = jsonValue.getTime();
                 }
-                if (isNaN(unicodeTime) || typeof unicodeTime !== 'number') { // preserve invalid time
-                    this_1.onWrongType(prop, 'is invalid date', jsonValue);
+                if (isNaN(unicodeTime)) { // preserve invalid time
+                    this_1.onWrongType(prop, "is invalid date", jsonValue);
                 }
                 return { value: new Date(unicodeTime) };
             }
@@ -152,7 +155,7 @@ var Serializable = /** @class */ (function () {
             Array.isArray(acceptedType)
                 && Array.isArray(jsonValue)) {
                 if (acceptedType[0] === void 0) {
-                    this_1.onWrongType(prop, 'invalid type', jsonValue);
+                    this_1.onWrongType(prop, "invalid type", jsonValue);
                 }
                 return { value: jsonValue.map(function (arrayValue) {
                         return _this.deserializeProperty(prop, acceptedType, arrayValue);
@@ -165,7 +168,7 @@ var Serializable = /** @class */ (function () {
                 acceptedType.prototype instanceof Serializable &&
                 jsonValue !== null &&
                 jsonValue !== void 0 &&
-                typeof jsonValue === 'object' && !Array.isArray(jsonValue)) {
+                typeof jsonValue === "object" && !Array.isArray(jsonValue)) {
                 var typeConstructor = acceptedType;
                 return { value: new typeConstructor().fromJSON(jsonValue) };
             }
@@ -176,8 +179,9 @@ var Serializable = /** @class */ (function () {
             }
         };
         var this_1 = this;
-        for (var type in acceptedTypes) {
-            var state_1 = _loop_1(type);
+        for (var _i = 0, acceptedTypes_1 = acceptedTypes; _i < acceptedTypes_1.length; _i++) {
+            var acceptedType = acceptedTypes_1[_i];
+            var state_1 = _loop_1(acceptedType);
             if (typeof state_1 === "object")
                 return state_1.value;
         }

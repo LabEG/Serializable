@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+// tslint:disable:file-name-casing
 var JsonProperty_1 = require("./decorators/JsonProperty");
 exports.jsonProperty = JsonProperty_1.jsonProperty;
 var JsonIgnore_1 = require("./decorators/JsonIgnore");

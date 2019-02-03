@@ -1,4 +1,4 @@
-import {AcceptedTypes} from '../models/AcceptedType';
+import {AcceptedTypes} from "../models/AcceptedType";
 
 /**
  * Class how help you deserialize object to classes.
@@ -19,7 +19,7 @@ export class Serializable {
      * @returns {object}
      * @memberof Serializable
      */
-    public static fromJSON<T extends Serializable>(this: { new(): T }, json: object): T {
+    public static fromJSON<T extends Serializable>(this: new() => T, json: object): T {
         return new this().fromJSON(json);
     }
 
@@ -29,38 +29,40 @@ export class Serializable {
      * Example:
      * const obj: MyObject = new MyObject().fromJSON({...data});
      *
-     * @param {object} json
+     * @param {object} ujson
      * @returns {this}
      * @memberof Serializable
      */
     public fromJSON(json: object): this {
 
+        const ujson: unknown = json;
+
         if (
-            json === null ||
-            Array.isArray(json) ||
-            typeof json !== 'object'
+            ujson === null ||
+            Array.isArray(ujson) ||
+            typeof ujson !== "object"
         ) {
-            this.onWrongType('', 'is not object', json);
+            this.onWrongType("", "is not object", ujson);
 
             return this;
         }
 
-        for (const prop in json) {
+        for (const prop in ujson) {
 
             // json.hasOwnProperty(prop) - preserve for deserialization for other classes with methods
             if (
-                json.hasOwnProperty(prop) &&
+                ujson.hasOwnProperty(prop) &&
                 this.hasOwnProperty(prop) &&
-                Reflect.hasMetadata('ts-serializable:jsonTypes', this.constructor.prototype, prop)
+                Reflect.hasMetadata("ts-serializable:jsonTypes", this.constructor.prototype, prop)
             ) {
 
                 const acceptedTypes: AcceptedTypes[] = Reflect.getMetadata(
-                    'ts-serializable:jsonTypes',
+                    "ts-serializable:jsonTypes",
                     this.constructor.prototype,
                     prop
                 );
 
-                const jsonValue: Object | null | void = Reflect.get(json, prop);
+                const jsonValue: unknown = Reflect.get(ujson, prop);
 
                 Reflect.set(
                     this,
@@ -82,7 +84,7 @@ export class Serializable {
      */
     public toJSON(): object {
 
-        const json = Object.assign({}, this);
+        const json: object = Object.assign({}, this);
 
         for (const prop in json) {
 
@@ -90,7 +92,7 @@ export class Serializable {
             if (json.hasOwnProperty(prop) && this.hasOwnProperty(prop)) {
 
                 const isIgnore: boolean | void = Reflect.getMetadata(
-                    'ts-serializable:jsonIgnore',
+                    "ts-serializable:jsonIgnore",
                     this.constructor.prototype,
                     prop
                 );
@@ -102,7 +104,6 @@ export class Serializable {
             }
         }
 
-
         return json;
     }
 
@@ -113,10 +114,11 @@ export class Serializable {
      * @protected
      * @param {string} prop
      * @param {string} message
-     * @param {(Object | null | void)} jsonValue
+     * @param {(unknown)} jsonValue
      * @memberof Serializable
      */
-    protected onWrongType(prop: string, message: string, jsonValue: Object | null | void): void {
+    protected onWrongType(prop: string, message: string, jsonValue: unknown): void {
+        // tslint:disable-next-line:no-console
         console.error(`${this.constructor.name}.fromJSON: json.${prop} ${message}:`, jsonValue);
     }
 
@@ -127,19 +129,18 @@ export class Serializable {
      * @param {object} object
      * @param {string} prop
      * @param {AcceptedTypes[]} acceptedTypes
-     * @param {(Object | null | void)} jsonValue
+     * @param {(unknown)} jsonValue
      * @returns {(Object | null | void)}
      * @memberof Serializable
      */
+    // tslint:disable-next-line:cyclomatic-complexity
     private deserializeProperty(
         prop: string,
         acceptedTypes: AcceptedTypes[],
-        jsonValue: Object | null | void
+        jsonValue: unknown
     ): Object | null | void {
 
-        for (const type in acceptedTypes) { // type Symbol is not a property
-
-            const acceptedType: AcceptedTypes = acceptedTypes[type];
+        for (const acceptedType of acceptedTypes) { // type Symbol is not a property
 
             if ( // null
                 acceptedType === null &&
@@ -148,7 +149,7 @@ export class Serializable {
 
                 return null;
 
-            } else if ( // void, for classes only, json don't have void type
+            } else if ( // void, for classes deep copy only, json don't have void type
                 acceptedType === void 0 &&
                 jsonValue === void 0
             ) {
@@ -157,48 +158,49 @@ export class Serializable {
 
             } else if ( // boolean, Boolean
                 acceptedType === Boolean &&
-                (typeof jsonValue === 'boolean' || jsonValue instanceof Boolean)
+                (typeof jsonValue === "boolean" || jsonValue instanceof Boolean)
             ) {
 
                 return Boolean(jsonValue);
 
             } else if ( // number, Number
                 acceptedType === Number &&
-                (typeof jsonValue === 'number' || jsonValue instanceof Number)
+                (typeof jsonValue === "number" || jsonValue instanceof Number)
             ) {
 
                 return Number(jsonValue);
 
             } else if ( // string, String
                 acceptedType === String &&
-                (typeof jsonValue === 'string' || jsonValue instanceof String)
+                (typeof jsonValue === "string" || jsonValue instanceof String)
             ) {
 
                 return String(jsonValue);
 
             } else if ( // object, Object
                 acceptedType === Object &&
-                (typeof jsonValue === 'object')
+                (typeof jsonValue === "object")
             ) {
 
                 return Object(jsonValue);
 
             } else if ( // Date
                 acceptedType === Date &&
-                (typeof jsonValue === 'string' || jsonValue instanceof String || jsonValue instanceof Date)
+                (typeof jsonValue === "string" || jsonValue instanceof String || jsonValue instanceof Date)
             ) {
 
                 // 0 year, 0 month, 0 days, 0 hours, 0 minutes, 0 seconds
-                let unicodeTime: number = new Date('0000-01-01T00:00:00.000').getTime();
-                if (typeof jsonValue === 'string') {
+                let unicodeTime: number = new Date("0000-01-01T00:00:00.000").getTime();
+                // tslint:disable-next-line:strict-type-predicates
+                if (typeof jsonValue === "string") {
                     unicodeTime = Date.parse(jsonValue);
                 } else if (jsonValue instanceof String) {
                     unicodeTime = Date.parse(String(jsonValue));
                 } else if (jsonValue instanceof Date) {
                     unicodeTime = jsonValue.getTime();
                 }
-                if (isNaN(unicodeTime) || typeof unicodeTime !== 'number') { // preserve invalid time
-                    this.onWrongType(prop, 'is invalid date', jsonValue);
+                if (isNaN(unicodeTime)) { // preserve invalid time
+                    this.onWrongType(prop, "is invalid date", jsonValue);
                 }
 
                 return new Date(unicodeTime);
@@ -209,7 +211,7 @@ export class Serializable {
             ) {
 
                 if (acceptedType[0] === void 0) {
-                    this.onWrongType(prop, 'invalid type', jsonValue);
+                    this.onWrongType(prop, "invalid type", jsonValue);
                 }
 
                 return jsonValue.map((arrayValue: Object | void | null) => {
@@ -223,12 +225,12 @@ export class Serializable {
                 acceptedType.prototype instanceof Serializable &&
                 jsonValue !== null &&
                 jsonValue !== void 0 &&
-                typeof jsonValue === 'object' && !Array.isArray(jsonValue)
+                typeof jsonValue === "object" && !Array.isArray(jsonValue)
             ) {
 
                 const typeConstructor: new () => Serializable = acceptedType as new () => Serializable;
 
-                return new typeConstructor().fromJSON(jsonValue);
+                return new typeConstructor().fromJSON(jsonValue as object);
 
             } else if ( // instance any other class, not Serializable, for parse from other classes instance
                 acceptedType instanceof Function &&

@@ -6,7 +6,7 @@ function jsonProperty() {
         args[_i] = arguments[_i];
     }
     return function (target, propertyKey) {
-        Reflect.defineMetadata('ts-serializable:jsonTypes', args, target, propertyKey);
+        Reflect.defineMetadata("ts-serializable:jsonTypes", args, target, propertyKey);
     };
 }
 exports.jsonProperty = jsonProperty;

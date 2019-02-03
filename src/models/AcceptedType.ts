@@ -9,7 +9,7 @@ export type AcceptedType = null |
     DateConstructor |
     SymbolConstructor; // todo: ArrayBufferConstructor, MapConstructor, RegExpConstructor and many others...
 
-interface RecursiveArray<T> extends Array<T | RecursiveArray<T>> {
+interface IRecursiveArray<T> extends Array<T | IRecursiveArray<T>> {
 }
 
-export type AcceptedTypes = AcceptedType | RecursiveArray<AcceptedType>;
+export type AcceptedTypes = AcceptedType | IRecursiveArray<AcceptedType>;

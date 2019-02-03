@@ -16,16 +16,14 @@ export declare class Serializable {
      * @returns {object}
      * @memberof Serializable
      */
-    static fromJSON<T extends Serializable>(this: {
-        new (): T;
-    }, json: object): T;
+    static fromJSON<T extends Serializable>(this: new () => T, json: object): T;
     /**
      * Fill property of current model by data from json.
      *
      * Example:
      * const obj: MyObject = new MyObject().fromJSON({...data});
      *
-     * @param {object} json
+     * @param {object} ujson
      * @returns {this}
      * @memberof Serializable
      */
@@ -44,10 +42,10 @@ export declare class Serializable {
      * @protected
      * @param {string} prop
      * @param {string} message
-     * @param {(Object | null | void)} jsonValue
+     * @param {(unknown)} jsonValue
      * @memberof Serializable
      */
-    protected onWrongType(prop: string, message: string, jsonValue: Object | null | void): void;
+    protected onWrongType(prop: string, message: string, jsonValue: unknown): void;
     /**
      * //todo: write jsdoc
      *
@@ -55,7 +53,7 @@ export declare class Serializable {
      * @param {object} object
      * @param {string} prop
      * @param {AcceptedTypes[]} acceptedTypes
-     * @param {(Object | null | void)} jsonValue
+     * @param {(unknown)} jsonValue
      * @returns {(Object | null | void)}
      * @memberof Serializable
      */
