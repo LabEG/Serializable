@@ -6,23 +6,23 @@
     "typings": "./bin/index.d.ts",
     "dependencies": {},
     "devDependencies": {
-        "@labeg/code-style": "^1.0.5",
+        "@labeg/code-style": "^1.0.9",
         "@types/chai": "^4.1.7",
-        "@types/mocha": "^5.2.5",
+        "@types/mocha": "^5.2.7",
         "chai": "^4.2.0",
-        "mocha": "^5.2.0",
+        "mocha": "^6.2.0",
         "reflect-metadata": "^0.1.13",
-        "ts-node": "^8.0.2",
-        "tslint": "^5.12.1",
-        "typescript": "^3.3.1"
+        "ts-node": "^8.3.0",
+        "tslint": "^5.18.0",
+        "typescript": "^3.5.3"
     },
     "scripts": {
         "reinstall": "rm -rvf npm-shrinkwrap.json && rm -rvf node_modules && npm install && npm dedupe && npm prune && npm shrinkwrap",
-        "fullupdate": "ncu -a && npm run reinstall",
+        "fullupdate": "ncu -u && npm run reinstall",
         "check": "tslint --fix --project ./tsconfig.json ./src/**/*.ts{,x} ",
         "test": "mocha --reporter spec --require ts-node/register tests/*.ts",
         "build": "tsc --project tsconfigbuild.json",
-        "prepublishOnly" : "npm run check && npm run build && npm run test"
+        "prepublishOnly": "npm run check && npm run build && npm run test"
     },
     "repository": {
         "type": "git",
