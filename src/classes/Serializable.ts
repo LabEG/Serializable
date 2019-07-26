@@ -20,6 +20,7 @@ export class Serializable {
      * @memberof Serializable
      */
     public static fromJSON<T extends Serializable>(this: new() => T, json: object): T {
+        // tslint:disable-next-line:static-this
         return new this().fromJSON(json);
     }
 
@@ -142,49 +143,49 @@ export class Serializable {
 
         for (const acceptedType of acceptedTypes) { // type Symbol is not a property
 
-            if ( // null
+            if (// null
                 acceptedType === null &&
                 jsonValue === null
             ) {
 
                 return null;
 
-            } else if ( // void, for classes deep copy only, json don't have void type
+            } else if (// void, for classes deep copy only, json don't have void type
                 acceptedType === void 0 &&
                 jsonValue === void 0
             ) {
 
                 return void 0;
 
-            } else if ( // boolean, Boolean
+            } else if (// boolean, Boolean
                 acceptedType === Boolean &&
                 (typeof jsonValue === "boolean" || jsonValue instanceof Boolean)
             ) {
 
                 return Boolean(jsonValue);
 
-            } else if ( // number, Number
+            } else if (// number, Number
                 acceptedType === Number &&
                 (typeof jsonValue === "number" || jsonValue instanceof Number)
             ) {
 
                 return Number(jsonValue);
 
-            } else if ( // string, String
+            } else if (// string, String
                 acceptedType === String &&
                 (typeof jsonValue === "string" || jsonValue instanceof String)
             ) {
 
                 return String(jsonValue);
 
-            } else if ( // object, Object
+            } else if (// object, Object
                 acceptedType === Object &&
                 (typeof jsonValue === "object")
             ) {
 
                 return Object(jsonValue);
 
-            } else if ( // Date
+            } else if (// Date
                 acceptedType === Date &&
                 (typeof jsonValue === "string" || jsonValue instanceof String || jsonValue instanceof Date)
             ) {
@@ -205,7 +206,7 @@ export class Serializable {
 
                 return new Date(unicodeTime);
 
-            } else if ( // Array
+            } else if (// Array
                 Array.isArray(acceptedType)
                 && Array.isArray(jsonValue)
             ) {
@@ -218,7 +219,7 @@ export class Serializable {
                     return this.deserializeProperty(prop, acceptedType, arrayValue);
                 });
 
-            } else if ( // Serializable
+            } else if (// Serializable
                 acceptedType !== null &&
                 acceptedType !== void 0 &&
                 !Array.isArray(acceptedType) &&
@@ -232,7 +233,7 @@ export class Serializable {
 
                 return new typeConstructor().fromJSON(jsonValue as object);
 
-            } else if ( // instance any other class, not Serializable, for parse from other classes instance
+            } else if (// instance any other class, not Serializable, for parse from other classes instance
                 acceptedType instanceof Function &&
                 jsonValue instanceof acceptedType
             ) {

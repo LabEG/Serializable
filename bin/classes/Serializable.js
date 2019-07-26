@@ -21,6 +21,7 @@ var Serializable = /** @class */ (function () {
      * @memberof Serializable
      */
     Serializable.fromJSON = function (json) {
+        // tslint:disable-next-line:static-this
         return new this().fromJSON(json);
     };
     /**
