@@ -33,11 +33,12 @@
             }
         },
         "@labeg/code-style": {
-            "version": "1.0.9",
-            "resolved": "https://registry.npmjs.org/@labeg/code-style/-/code-style-1.0.9.tgz",
-            "integrity": "sha512-JzGSRpE7KioDr0Bh7FfD9ZtxauOjYHJO5rvppz7MGZkfOX6UDNiCgOCB4ukhH+MIoGKJQWTQDHZNmY8GpJtVBA==",
+            "version": "1.0.10",
+            "resolved": "https://registry.npmjs.org/@labeg/code-style/-/code-style-1.0.10.tgz",
+            "integrity": "sha512-im5O6m2U6tlH3l+zM0R9UtZi30J00UQ5E239yzf8QTKRO5GZl7jZZ575p5v8YK7gXHJbdEOTxIQl+fv0+ig6hg==",
             "dev": true,
             "requires": {
+                "stylelint-config-standard": "^18.3.0",
                 "tslint-eslint-rules": "^5.4.0"
             }
         },
@@ -952,6 +953,21 @@
             "resolved": "https://registry.npmjs.org/strip-json-comments/-/strip-json-comments-2.0.1.tgz",
             "integrity": "sha1-PFMZQukIwml8DsNEhYwobHygpgo=",
             "dev": true
+        },
+        "stylelint-config-recommended": {
+            "version": "2.2.0",
+            "resolved": "https://registry.npmjs.org/stylelint-config-recommended/-/stylelint-config-recommended-2.2.0.tgz",
+            "integrity": "sha512-bZ+d4RiNEfmoR74KZtCKmsABdBJr4iXRiCso+6LtMJPw5rd/KnxUWTxht7TbafrTJK1YRjNgnN0iVZaJfc3xJA==",
+            "dev": true
+        },
+        "stylelint-config-standard": {
+            "version": "18.3.0",
+            "resolved": "https://registry.npmjs.org/stylelint-config-standard/-/stylelint-config-standard-18.3.0.tgz",
+            "integrity": "sha512-Tdc/TFeddjjy64LvjPau9SsfVRexmTFqUhnMBrzz07J4p2dVQtmpncRF/o8yZn8ugA3Ut43E6o1GtjX80TFytw==",
+            "dev": true,
+            "requires": {
+                "stylelint-config-recommended": "^2.2.0"
+            }
         },
         "supports-color": {
             "version": "6.0.0",
