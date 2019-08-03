@@ -33,9 +33,9 @@
             }
         },
         "@labeg/code-style": {
-            "version": "1.0.12",
-            "resolved": "https://registry.npmjs.org/@labeg/code-style/-/code-style-1.0.12.tgz",
-            "integrity": "sha512-NWbngIOjMD4qafbBubFhtfQVIpt/CWqDpyzL39nKJWRnvT/3SfUWp9rfiae2YV0XErXxfuhY4eHsZIyGYTqwpw==",
+            "version": "1.0.13",
+            "resolved": "https://registry.npmjs.org/@labeg/code-style/-/code-style-1.0.13.tgz",
+            "integrity": "sha512-t0DKmRo2HMM7p1OLi25YG5t/gQRp6dAA1SzBSB9R9GW2qv64TE5wHHd6ezMj6A0uT1E5QgxD0m9tzr4V/TNkaA==",
             "dev": true,
             "requires": {
                 "stylelint-config-standard": "^18.3.0",
