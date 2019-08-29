@@ -6,7 +6,7 @@
     "typings": "./bin/index.d.ts",
     "dependencies": {},
     "devDependencies": {
-        "@labeg/code-style": "^1.0.14",
+        "@labeg/code-style": "^1.0.17",
         "@types/chai": "^4.2.0",
         "@types/mocha": "^5.2.7",
         "chai": "^4.2.0",
@@ -14,7 +14,7 @@
         "reflect-metadata": "^0.1.13",
         "ts-node": "^8.3.0",
         "tslint": "^5.19.0",
-        "typescript": "^3.5.3"
+        "typescript": "^3.6.2"
     },
     "scripts": {
         "reinstall": "rm -rvf npm-shrinkwrap.json && rm -rvf node_modules && npm install && npm dedupe && npm prune && npm shrinkwrap",
