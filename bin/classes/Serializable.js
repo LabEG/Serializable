@@ -1,4 +1,16 @@
 "use strict";
+/* eslint-disable @typescript-eslint/no-unsafe-call, no-prototype-builtins */
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Class how help you deserialize object to classes.
@@ -61,7 +73,7 @@ var Serializable = /** @class */ (function () {
      * @memberof Serializable
      */
     Serializable.prototype.toJSON = function () {
-        var json = Object.assign({}, this);
+        var json = __assign({}, this);
         for (var prop in json) {
             // json.hasOwnProperty(prop) - preserve for deserialization for other classes with methods
             if (json.hasOwnProperty(prop) && this.hasOwnProperty(prop)) {
@@ -84,7 +96,7 @@ var Serializable = /** @class */ (function () {
      * @memberof Serializable
      */
     Serializable.prototype.onWrongType = function (prop, message, jsonValue) {
-        // tslint:disable-next-line:no-console
+        // eslint-disable-next-line no-console
         console.error(this.constructor.name + ".fromJSON: json." + prop + " " + message + ":", jsonValue);
     };
     /**
@@ -98,7 +110,7 @@ var Serializable = /** @class */ (function () {
      * @returns {(Object | null | void)}
      * @memberof Serializable
      */
-    // tslint:disable-next-line:cyclomatic-complexity
+    // eslint-disable-next-line complexity
     Serializable.prototype.deserializeProperty = function (prop, acceptedTypes, jsonValue) {
         var _this = this;
         var _loop_1 = function (acceptedType) {
@@ -153,14 +165,12 @@ var Serializable = /** @class */ (function () {
                 return { value: new Date(unicodeTime) };
             }
             else if ( // Array
-            Array.isArray(acceptedType)
-                && Array.isArray(jsonValue)) {
+            Array.isArray(acceptedType) &&
+                Array.isArray(jsonValue)) {
                 if (acceptedType[0] === void 0) {
                     this_1.onWrongType(prop, "invalid type", jsonValue);
                 }
-                return { value: jsonValue.map(function (arrayValue) {
-                        return _this.deserializeProperty(prop, acceptedType, arrayValue);
-                    }) };
+                return { value: jsonValue.map(function (arrayValue) { return _this.deserializeProperty(prop, acceptedType, arrayValue); }) };
             }
             else if ( // Serializable
             acceptedType !== null &&
@@ -170,8 +180,8 @@ var Serializable = /** @class */ (function () {
                 jsonValue !== null &&
                 jsonValue !== void 0 &&
                 typeof jsonValue === "object" && !Array.isArray(jsonValue)) {
-                var typeConstructor = acceptedType;
-                return { value: new typeConstructor().fromJSON(jsonValue) };
+                var TypeConstructor = acceptedType;
+                return { value: new TypeConstructor().fromJSON(jsonValue) };
             }
             else if ( // instance any other class, not Serializable, for parse from other classes instance
             acceptedType instanceof Function &&

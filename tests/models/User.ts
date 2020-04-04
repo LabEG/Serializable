@@ -1,6 +1,6 @@
-import {jsonProperty} from "./../../src/decorators/JsonProperty";
-import {Serializable} from "./../../src/classes/Serializable";
-import {jsonIgnore} from "../../src/decorators/JsonIgnore";
+import { jsonProperty } from "./../../src/decorators/JsonProperty";
+import { Serializable } from "./../../src/classes/Serializable";
+import { jsonIgnore } from "../../src/decorators/JsonIgnore";
 
 export class Friend extends Serializable {
 
@@ -9,6 +9,7 @@ export class Friend extends Serializable {
 
     @jsonProperty(String)
     public name: string = "";
+
 }
 
 export class User extends Serializable {
