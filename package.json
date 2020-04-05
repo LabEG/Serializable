@@ -22,7 +22,7 @@
         "cs:eslint": "eslint --fix -c .eslintrc.js --ext .tsx,.ts,.jsx,.js ./src/ ./tests/",
         "test": "mocha --reporter spec --require ts-node/register tests/*.ts",
         "build": "tsc --project tsconfigbuild.json",
-        "prepublishOnly": "npm run check && npm run build && npm run test"
+        "prepublishOnly": "npm run cs:eslint && npm run build && npm run test"
     },
     "repository": {
         "type": "git",
