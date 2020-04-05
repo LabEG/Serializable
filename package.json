@@ -16,8 +16,8 @@
         "typescript": "^3.8.3"
     },
     "scripts": {
-        "packages:manupdate": "rm -rvf node_modules && npm install",
-        "packages:reinstall": "rm -rvf npm-shrinkwrap.json && rm -rvf node_modules && npm install && npm dedupe && npm prune && npm shrinkwrap",
+        "packages:manupdate": "rm -rf node_modules && npm install",
+        "packages:reinstall": "rm -rf npm-shrinkwrap.json && rm -rf node_modules && npm install && npm dedupe && npm prune && npm shrinkwrap",
         "packages:fullupdate": "ncu -u && npm run packages:reinstall",
         "cs:eslint": "eslint --fix -c .eslintrc.js --ext .tsx,.ts,.jsx,.js ./src/ ./tests/",
         "test": "mocha --reporter spec --require ts-node/register tests/*.ts",
