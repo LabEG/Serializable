@@ -60,9 +60,9 @@ export class Serializable {
                     "ts-serializable:jsonTypes",
                     this.constructor.prototype,
                     prop
-                );
+                ) as [];
 
-                const jsonValue: unknown = Reflect.get(ujson, prop);
+                const jsonValue: unknown = Reflect.get(ujson, prop) as unknown;
 
                 Reflect.set(
                     this,
@@ -91,7 +91,7 @@ export class Serializable {
                     "ts-serializable:jsonIgnore",
                     this.constructor.prototype,
                     prop
-                );
+                ) as boolean | void;
 
                 if (isIgnore) {
                     Reflect.set(json, prop, void 0);
