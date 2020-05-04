@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call, no-prototype-builtins */
 
 import { AcceptedTypes } from "../models/AcceptedType";
+import { SerializationSettings } from "../models/SerializationSettings";
 
 /**
  * Class how help you deserialize object to classes.
@@ -9,6 +10,15 @@ import { AcceptedTypes } from "../models/AcceptedType";
  * @class Serializable
  */
 export class Serializable {
+
+    /**
+     * Global setting for serialization and deserialization
+     *
+     * @static
+     * @type {SerializationSettings}
+     * @memberof Serializable
+     */
+    public static defaultSettings: SerializationSettings = new SerializationSettings();
 
     /**
      * Deserialize object from static method.
@@ -21,9 +31,13 @@ export class Serializable {
      * @returns {object}
      * @memberof Serializable
      */
-    public static fromJSON<T extends Serializable>(this: new() => T, json: object): T {
+    public static fromJSON<T extends Serializable>(
+        this: new () => T,
+        json: object,
+        settings?: Partial<SerializationSettings>
+    ): T {
         // tslint:disable-next-line:static-this
-        return new this().fromJSON(json);
+        return new this().fromJSON(json, settings);
     }
 
     /**
@@ -36,7 +50,7 @@ export class Serializable {
      * @returns {this}
      * @memberof Serializable
      */
-    public fromJSON(json: object): this {
+    public fromJSON(json: object, _settings?: Partial<SerializationSettings>): this {
         const ujson: unknown = json;
 
         if (
