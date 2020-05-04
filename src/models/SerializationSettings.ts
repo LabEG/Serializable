@@ -1,42 +1,10 @@
 import { IContractResolver } from "../contract-resolvers/IContractResolver";
-
-export enum DateFormatHandling {
-    IsoDateFormat,
-    MicrosoftDateFormat // todo: add later
-}
-
-export enum MissingMemberHandling {
-    Ignore,
-    Error // todo: add later
-}
-
-export enum ReferenceLoopHandling {
-    Error, // todo: add later
-    Ignore, // todo: add later
-    Serialize
-}
-
-export enum NullValueHandling {
-    Include,
-    Ignore // todo: add later
-}
-
-export enum DefaultValueHandling {
-    Include,
-    Ignore, // todo: add later
-    Populate, // todo: add later
-    IgnoreAndPopulate // todo: add later
-}
-
-export enum LogLevels {
-    Trace,
-    Debug,
-    Information,
-    Warning,
-    Error,
-    Critical,
-    None
-}
+import { LogLevels } from "../enums/LogLevels";
+import { DefaultValueHandling } from "../enums/DefaultValueHandling";
+import { NullValueHandling } from "../enums/NullValueHandling";
+import { ReferenceLoopHandling } from "../enums/ReferenceLoopHandling";
+import { MissingMemberHandling } from "../enums/MissingMemberHandling";
+import { DateFormatHandling } from "../enums/DateFormatHandling";
 
 // from newtonsoft https://www.newtonsoft.com/json/help/html/SerializationSettings.htm
 export class SerializationSettings {
