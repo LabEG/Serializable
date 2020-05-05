@@ -2,8 +2,10 @@
 
 import { SerializationSettings } from "../models/SerializationSettings";
 
-export const jsonObject = (_settings?: Partial<SerializationSettings>): ClassDecorator => { // todo: add later
-    return (): void => {
-        return void 0;
+export const jsonObject = (settings?: Partial<SerializationSettings>): ClassDecorator => {
+    return (target: object): void => {
+        if (settings) {
+            Reflect.defineMetadata("ts-serializable:jsonObject", settings, target);
+        }
     };
 };

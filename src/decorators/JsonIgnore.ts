@@ -1,7 +1,7 @@
-/* eslint-disable func-style */
+/* eslint-disable arrow-body-style */
 
-export function jsonIgnore(): PropertyDecorator {
-    return function decorator(target: object, propertyKey: string | symbol): void {
+export const jsonIgnore = (): PropertyDecorator => {
+    return (target: object, propertyKey: string | symbol): void => {
         Reflect.defineMetadata("ts-serializable:jsonIgnore", true, target, propertyKey);
     };
-}
+};
