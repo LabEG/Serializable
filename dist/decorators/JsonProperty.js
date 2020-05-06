@@ -1,12 +1,12 @@
 "use strict";
+/* eslint-disable arrow-body-style */
 Object.defineProperty(exports, "__esModule", { value: true });
-function jsonProperty() {
+exports.jsonProperty = function () {
     var args = [];
     for (var _i = 0; _i < arguments.length; _i++) {
         args[_i] = arguments[_i];
     }
-    return function decorator(target, propertyKey) {
+    return function (target, propertyKey) {
         Reflect.defineMetadata("ts-serializable:jsonTypes", args, target, propertyKey);
     };
-}
-exports.jsonProperty = jsonProperty;
+};

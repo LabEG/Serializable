@@ -12,6 +12,7 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var SerializationSettings_1 = require("../models/SerializationSettings");
 /**
  * Class how help you deserialize object to classes.
  *
@@ -32,9 +33,9 @@ var Serializable = /** @class */ (function () {
      * @returns {object}
      * @memberof Serializable
      */
-    Serializable.fromJSON = function (json) {
+    Serializable.fromJSON = function (json, settings) {
         // tslint:disable-next-line:static-this
-        return new this().fromJSON(json);
+        return new this().fromJSON(json, settings);
     };
     /**
      * Fill property of current model by data from json.
@@ -46,7 +47,7 @@ var Serializable = /** @class */ (function () {
      * @returns {this}
      * @memberof Serializable
      */
-    Serializable.prototype.fromJSON = function (json) {
+    Serializable.prototype.fromJSON = function (json, _settings) {
         var ujson = json;
         if (ujson === null ||
             Array.isArray(ujson) ||
@@ -200,6 +201,14 @@ var Serializable = /** @class */ (function () {
         this.onWrongType(prop, "is invalid", jsonValue);
         return Reflect.get(this, prop);
     };
+    /**
+     * Global setting for serialization and deserialization
+     *
+     * @static
+     * @type {SerializationSettings}
+     * @memberof Serializable
+     */
+    Serializable.defaultSettings = new SerializationSettings_1.SerializationSettings();
     return Serializable;
 }());
 exports.Serializable = Serializable;

@@ -3,11 +3,17 @@ import { INamingStrategy } from "./INamingStrategy";
 export class SnackCaseNamingStrategy implements INamingStrategy {
 
     public fromJsonName(name: string): string {
-        throw new Error("Method not implemented.");
+        return name.replace(
+            /_\w/gu,
+            (group: string) => group[1].toUpperCase()
+        );
     }
 
     public toJsonName(name: string): string {
-        throw new Error("Method not implemented.");
+        return name
+            .split(/(?=[A-Z])/u)
+            .join("_")
+            .toLowerCase();
     }
 
 }

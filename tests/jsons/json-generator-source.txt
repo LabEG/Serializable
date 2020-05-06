@@ -1,0 +1,93 @@
+[
+  {
+    'repeat(5, 10)': {
+      id: '{{objectId()}}',
+      index: '{{index()}}',
+      guid: '{{guid()}}',
+      isActive: '{{bool()}}',
+      balance: '{{floating(1000, 4000, 2, "$0,0.00")}}',
+      picture: 'http://placehold.it/32x32',
+      age: '{{integer(20, 40)}}',
+      eyeColor: '{{random("blue", "brown", "green")}}',
+      name: '{{firstName()}} {{surname()}}',
+      company: '{{company().toUpperCase()}}',
+      email(tags) {
+        return `${this.name.first}.${this.name.last}@${this.company}${tags.domainZone()}`.toLowerCase();
+      },
+      phone: '+1 {{phone()}}',
+      address: '{{integer(100, 999)}} {{street()}}, {{city()}}, {{state()}}, {{integer(100, 10000)}}',
+      about: '{{lorem(1, "paragraphs")}}',
+      registered: '{{moment(this.date(new Date(2014, 0, 1), new Date())).format("LLLL")}}',
+      latitude: '{{floating(-90.000001, 90)}}',
+      longitude: '{{floating(-180.000001, 180)}}',
+      tags: [
+        {
+          'repeat(5)': '{{lorem(1, "words")}}'
+        }
+      ],
+      range: range(10),
+      friends: [
+        {
+          'repeat(3)': {
+            id: '{{index()}}',
+            name: '{{firstName()}} {{surname()}}'
+          }
+        }
+      ],
+      greeting(tags) {
+        return `Hello, ${this.name.first}! You have ${tags.integer(5, 10)} unread messages.`;
+      },
+      favoriteFruit(tags) {
+        const fruits = ['apple', 'banana', 'strawberry'];
+        return fruits[tags.integer(0, fruits.length - 1)];
+      }
+    }
+  }
+]
+
+[
+  {
+    'repeat(5, 10)': {
+      id_snake: '{{objectId()}}',
+      index_snake: '{{index()}}',
+      guid_snake: '{{guid()}}',
+      is_active_snake: '{{bool()}}',
+      balance_snake: '{{floating(1000, 4000, 2, "$0,0.00")}}',
+      picture_snake: 'http://placehold.it/32x32',
+      age_snake: '{{integer(20, 40)}}',
+      eye_color_snake: '{{random("blue", "brown", "green")}}',
+      name_snake: '{{firstName()}} {{surname()}}',
+      company_snake: '{{company().toUpperCase()}}',
+      email_snake(tags) {
+        return `${this.name_snake}.${this.name_snake}@${this.company_snake}${tags.domainZone()}`.toLowerCase();
+      },
+      phone_snake: '+1 {{phone()}}',
+      address_snake: '{{integer(100, 999)}} {{street()}}, {{city()}}, {{state()}}, {{integer(100, 10000)}}',
+      about_snake: '{{lorem(1, "paragraphs")}}',
+      registered_snake: '{{moment(this.date(new Date(2014, 0, 1), new Date())).format("LLLL")}}',
+      latitude_snake: '{{floating(-90.000001, 90)}}',
+      longitude_snake: '{{floating(-180.000001, 180)}}',
+      tags_snake: [
+        {
+          'repeat(5)': '{{lorem(1, "words")}}'
+        }
+      ],
+      range_snake: range(10),
+      friends_snake: [
+        {
+          'repeat(3)': {
+            id_snake: '{{index()}}',
+            name_snake: '{{firstName()}} {{surname()}}'
+          }
+        }
+      ],
+      greeting_snake(tags) {
+        return `Hello, ${this.name_snake}! You have ${tags.integer(5, 10)} unread messages.`;
+      },
+      favorite_fruit_snake(tags) {
+        const fruits = ['apple', 'banana', 'strawberry'];
+        return fruits[tags.integer(0, fruits.length - 1)];
+      }
+    }
+  }
+]

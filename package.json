@@ -2,8 +2,8 @@
     "name": "ts-serializable",
     "version": "1.1.24",
     "description": "Serialization and deserializtion for classes",
-    "main": "./bin/index.js",
-    "typings": "./bin/index.d.ts",
+    "main": "./dist/index.js",
+    "typings": "./dist/index.d.ts",
     "dependencies": {},
     "devDependencies": {
         "@labeg/code-style": "^1.0.46",
@@ -20,8 +20,8 @@
         "packages:reinstall": "rm -rf npm-shrinkwrap.json && rm -rf node_modules && npm install && npm dedupe && npm prune && npm shrinkwrap",
         "packages:fullupdate": "ncu -u && npm run packages:reinstall",
         "cs:eslint": "eslint --fix -c .eslintrc.js --ext .tsx,.ts,.jsx,.js ./src/ ./tests/",
-        "test": "mocha --reporter spec --require ts-node/register tests/*.ts",
-        "build": "rm -rf bin/ && tsc --project tsconfigbuild.json",
+        "test": "mocha --reporter spec --require ts-node/register tests/*.test.ts",
+        "build": "rm -rf dist/ && tsc --project tsconfigbuild.json",
         "prepublishOnly": "npm run cs:eslint && npm run build && npm run test"
     },
     "repository": {
