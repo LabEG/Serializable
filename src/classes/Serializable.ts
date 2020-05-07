@@ -51,56 +51,40 @@ export class Serializable {
      * @memberof Serializable
      */
     public fromJSON(json: object, settings?: Partial<SerializationSettings>): this {
-        const ujson: unknown = json;
+        const unknownJson: unknown = json;
 
         if (
-            ujson === null ||
-            Array.isArray(ujson) ||
-            typeof ujson !== "object"
+            unknownJson === null ||
+            Array.isArray(unknownJson) ||
+            typeof unknownJson !== "object"
         ) {
-            this.onWrongType("", "is not object", ujson);
+            this.onWrongType("", "is not object", unknownJson);
 
             return this;
         }
 
         // eslint-disable-next-line guard-for-in
-        for (const tprop in this) {
-            // json.hasOwnProperty(prop) - preserve for deserialization for other classes with methods
-
+        for (const thisProp in this) {
             // naming strategy and jsonName decorator
-            let jprop: string = tprop;
-            if (Reflect.hasMetadata("ts-serializable:jsonName", this.constructor.prototype, tprop)) {
-                jprop = Reflect.getMetadata("ts-serializable:jsonName", this.constructor.prototype, tprop);
-            } else if (settings?.namingStrategy) {
-                jprop = settings.namingStrategy.toJsonName(tprop);
-            } else if (Reflect.hasMetadata("ts-serializable:jsonObject", this.constructor.prototype)) {
-                const objectSettings: Partial<SerializationSettings> = Reflect.getMetadata(
-                    "ts-serializable:jsonObject",
-                    this.constructor.prototype
-                );
-                jprop = objectSettings.namingStrategy?.toJsonName(tprop) ?? tprop;
-            } else if (Serializable.defaultSettings.namingStrategy) {
-                const { namingStrategy } = Serializable.defaultSettings;
-                jprop = namingStrategy?.toJsonName(tprop) ?? tprop;
-            }
+            const jsonProp: string = this.getJsonPropertyName(thisProp, settings);
 
             if (
-                ujson?.hasOwnProperty(jprop) &&
-                this.hasOwnProperty(tprop) &&
-                Reflect.hasMetadata("ts-serializable:jsonTypes", this.constructor.prototype, tprop)
+                unknownJson?.hasOwnProperty(jsonProp) &&
+                this.hasOwnProperty(thisProp) &&
+                Reflect.hasMetadata("ts-serializable:jsonTypes", this.constructor.prototype, thisProp)
             ) {
                 const acceptedTypes: AcceptedTypes[] = Reflect.getMetadata(
                     "ts-serializable:jsonTypes",
                     this.constructor.prototype,
-                    jprop
+                    thisProp
                 ) as [];
 
-                const jsonValue: unknown = Reflect.get(ujson, jprop) as unknown;
+                const jsonValue: unknown = Reflect.get(unknownJson, jsonProp) as unknown;
 
                 Reflect.set(
                     this,
-                    tprop,
-                    this.deserializeProperty(tprop, acceptedTypes, jsonValue, settings)
+                    thisProp,
+                    this.deserializeProperty(thisProp, acceptedTypes, jsonValue, settings)
                 );
             }
         }
@@ -162,7 +146,7 @@ export class Serializable {
      * @memberof Serializable
      */
     // eslint-disable-next-line complexity
-    private deserializeProperty(
+    protected deserializeProperty(
         prop: string,
         acceptedTypes: AcceptedTypes[],
         jsonValue: unknown,
@@ -256,6 +240,31 @@ export class Serializable {
         this.onWrongType(prop, "is invalid", jsonValue);
 
         return Reflect.get(this, prop) as Object | null | void;
+    }
+
+    protected getJsonPropertyName(thisProperty: string, settings?: Partial<SerializationSettings>): string {
+        if (Reflect.hasMetadata("ts-serializable:jsonName", this.constructor.prototype, thisProperty)) {
+            return Reflect.getMetadata("ts-serializable:jsonName", this.constructor.prototype, thisProperty) as string;
+        }
+
+        if (settings?.namingStrategy) {
+            return settings.namingStrategy.toJsonName(thisProperty);
+        }
+
+        if (Reflect.hasMetadata("ts-serializable:jsonObject", this.constructor.prototype)) {
+            const objectSettings: Partial<SerializationSettings> = Reflect.getMetadata(
+                "ts-serializable:jsonObject",
+                this.constructor.prototype
+            );
+            return objectSettings.namingStrategy?.toJsonName(thisProperty) ?? thisProperty;
+        }
+
+        if (Serializable.defaultSettings.namingStrategy) {
+            const { namingStrategy } = Serializable.defaultSettings;
+            return namingStrategy?.toJsonName(thisProperty) ?? thisProperty;
+        }
+
+        return thisProperty;
     }
 
 }
