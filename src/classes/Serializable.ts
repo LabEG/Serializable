@@ -58,8 +58,7 @@ export class Serializable {
             Array.isArray(unknownJson) ||
             typeof unknownJson !== "object"
         ) {
-            this.onWrongType("", "is not object", unknownJson);
-
+            this.onWrongType(String(unknownJson), "is not object", unknownJson);
             return this;
         }
 
@@ -79,13 +78,9 @@ export class Serializable {
                     thisProp
                 ) as [];
 
-                const jsonValue: unknown = Reflect.get(unknownJson, jsonProp) as unknown;
-
-                Reflect.set(
-                    this,
-                    thisProp,
-                    this.deserializeProperty(thisProp, acceptedTypes, jsonValue, settings)
-                );
+                const jsonValue: unknown = Reflect.get(unknownJson, jsonProp);
+                const extractedValue = this.deserializeProperty(thisProp, acceptedTypes, jsonValue, settings);
+                Reflect.set(this, thisProp, extractedValue);
             }
         }
 

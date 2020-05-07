@@ -1,3 +1,4 @@
+import { AcceptedTypes } from "../models/AcceptedType";
 import { SerializationSettings } from "../models/SerializationSettings";
 /**
  * Class how help you deserialize object to classes.
@@ -36,7 +37,7 @@ export declare class Serializable {
      * @returns {this}
      * @memberof Serializable
      */
-    fromJSON(json: object, _settings?: Partial<SerializationSettings>): this;
+    fromJSON(json: object, settings?: Partial<SerializationSettings>): this;
     /**
      * Process serelization for @jsonIgnore decorator
      *
@@ -66,5 +67,6 @@ export declare class Serializable {
      * @returns {(Object | null | void)}
      * @memberof Serializable
      */
-    private deserializeProperty;
+    protected deserializeProperty(prop: string, acceptedTypes: AcceptedTypes[], jsonValue: unknown, settings?: Partial<SerializationSettings>): Object | null | void;
+    protected getJsonPropertyName(thisProperty: string, settings?: Partial<SerializationSettings>): string;
 }

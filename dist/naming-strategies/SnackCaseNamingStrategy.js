@@ -4,10 +4,13 @@ var SnackCaseNamingStrategy = /** @class */ (function () {
     function SnackCaseNamingStrategy() {
     }
     SnackCaseNamingStrategy.prototype.fromJsonName = function (name) {
-        throw new Error("Method not implemented.");
+        return name.replace(/_\w/gu, function (group) { return group[1].toUpperCase(); });
     };
     SnackCaseNamingStrategy.prototype.toJsonName = function (name) {
-        throw new Error("Method not implemented.");
+        return name
+            .split(/(?=[A-Z])/u)
+            .join("_")
+            .toLowerCase();
     };
     return SnackCaseNamingStrategy;
 }());

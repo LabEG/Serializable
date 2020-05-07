@@ -1,4 +1,4 @@
 export enum NullValueHandling {
     Include,
-    Ignore // todo: add later
+    Ignore // not supported yet
 }

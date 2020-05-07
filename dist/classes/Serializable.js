@@ -47,22 +47,25 @@ var Serializable = /** @class */ (function () {
      * @returns {this}
      * @memberof Serializable
      */
-    Serializable.prototype.fromJSON = function (json, _settings) {
-        var ujson = json;
-        if (ujson === null ||
-            Array.isArray(ujson) ||
-            typeof ujson !== "object") {
-            this.onWrongType("", "is not object", ujson);
+    Serializable.prototype.fromJSON = function (json, settings) {
+        var unknownJson = json;
+        if (unknownJson === null ||
+            Array.isArray(unknownJson) ||
+            typeof unknownJson !== "object") {
+            this.onWrongType(String(unknownJson), "is not object", unknownJson);
             return this;
         }
-        for (var prop in ujson) {
-            // json.hasOwnProperty(prop) - preserve for deserialization for other classes with methods
-            if (ujson.hasOwnProperty(prop) &&
-                this.hasOwnProperty(prop) &&
-                Reflect.hasMetadata("ts-serializable:jsonTypes", this.constructor.prototype, prop)) {
-                var acceptedTypes = Reflect.getMetadata("ts-serializable:jsonTypes", this.constructor.prototype, prop);
-                var jsonValue = Reflect.get(ujson, prop);
-                Reflect.set(this, prop, this.deserializeProperty(prop, acceptedTypes, jsonValue));
+        // eslint-disable-next-line guard-for-in
+        for (var thisProp in this) {
+            // naming strategy and jsonName decorator
+            var jsonProp = this.getJsonPropertyName(thisProp, settings);
+            if ((unknownJson === null || unknownJson === void 0 ? void 0 : unknownJson.hasOwnProperty(jsonProp)) &&
+                this.hasOwnProperty(thisProp) &&
+                Reflect.hasMetadata("ts-serializable:jsonTypes", this.constructor.prototype, thisProp)) {
+                var acceptedTypes = Reflect.getMetadata("ts-serializable:jsonTypes", this.constructor.prototype, thisProp);
+                var jsonValue = Reflect.get(unknownJson, jsonProp);
+                var extractedValue = this.deserializeProperty(thisProp, acceptedTypes, jsonValue, settings);
+                Reflect.set(this, thisProp, extractedValue);
             }
         }
         return this;
@@ -112,7 +115,7 @@ var Serializable = /** @class */ (function () {
      * @memberof Serializable
      */
     // eslint-disable-next-line complexity
-    Serializable.prototype.deserializeProperty = function (prop, acceptedTypes, jsonValue) {
+    Serializable.prototype.deserializeProperty = function (prop, acceptedTypes, jsonValue, settings) {
         var _this = this;
         var _loop_1 = function (acceptedType) {
             if ( // null
@@ -171,7 +174,7 @@ var Serializable = /** @class */ (function () {
                 if (acceptedType[0] === void 0) {
                     this_1.onWrongType(prop, "invalid type", jsonValue);
                 }
-                return { value: jsonValue.map(function (arrayValue) { return _this.deserializeProperty(prop, acceptedType, arrayValue); }) };
+                return { value: jsonValue.map(function (arrayValue) { return _this.deserializeProperty(prop, acceptedType, arrayValue, settings); }) };
             }
             else if ( // Serializable
             acceptedType !== null &&
@@ -182,7 +185,7 @@ var Serializable = /** @class */ (function () {
                 jsonValue !== void 0 &&
                 typeof jsonValue === "object" && !Array.isArray(jsonValue)) {
                 var TypeConstructor = acceptedType;
-                return { value: new TypeConstructor().fromJSON(jsonValue) };
+                return { value: new TypeConstructor().fromJSON(jsonValue, settings) };
             }
             else if ( // instance any other class, not Serializable, for parse from other classes instance
             acceptedType instanceof Function &&
@@ -200,6 +203,24 @@ var Serializable = /** @class */ (function () {
         // process wrong type and return default value
         this.onWrongType(prop, "is invalid", jsonValue);
         return Reflect.get(this, prop);
+    };
+    Serializable.prototype.getJsonPropertyName = function (thisProperty, settings) {
+        var _a, _b, _c;
+        if (Reflect.hasMetadata("ts-serializable:jsonName", this.constructor.prototype, thisProperty)) {
+            return Reflect.getMetadata("ts-serializable:jsonName", this.constructor.prototype, thisProperty);
+        }
+        if (settings === null || settings === void 0 ? void 0 : settings.namingStrategy) {
+            return settings.namingStrategy.toJsonName(thisProperty);
+        }
+        if (Reflect.hasMetadata("ts-serializable:jsonObject", this.constructor.prototype)) {
+            var objectSettings = Reflect.getMetadata("ts-serializable:jsonObject", this.constructor.prototype);
+            return (_b = (_a = objectSettings.namingStrategy) === null || _a === void 0 ? void 0 : _a.toJsonName(thisProperty)) !== null && _b !== void 0 ? _b : thisProperty;
+        }
+        if (Serializable.defaultSettings.namingStrategy) {
+            var namingStrategy = Serializable.defaultSettings.namingStrategy;
+            return (_c = namingStrategy === null || namingStrategy === void 0 ? void 0 : namingStrategy.toJsonName(thisProperty)) !== null && _c !== void 0 ? _c : thisProperty;
+        }
+        return thisProperty;
     };
     /**
      * Global setting for serialization and deserialization

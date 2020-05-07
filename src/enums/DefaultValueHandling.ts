@@ -1,6 +1,6 @@
 export enum DefaultValueHandling {
     Include,
-    Ignore,
-    Populate,
-    IgnoreAndPopulate // todo: add later
+    Ignore, // not supported yet
+    Populate, // not supported yet
+    IgnoreAndPopulate // not supported yet
 }

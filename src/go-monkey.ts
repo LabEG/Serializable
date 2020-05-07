@@ -1,2 +1,2 @@
 
-// todo: monkey patching for js object
+// make monkey patching for js object

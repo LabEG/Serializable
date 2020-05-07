@@ -1,14 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var KebabCaseNamingStrategy = /** @class */ (function () {
-    function KebabCaseNamingStrategy() {
+var PascalCaseNamingStrategy = /** @class */ (function () {
+    function PascalCaseNamingStrategy() {
     }
-    KebabCaseNamingStrategy.prototype.fromJsonName = function (name) {
-        throw new Error("Method not implemented.");
+    PascalCaseNamingStrategy.prototype.fromJsonName = function (name) {
+        return name.slice(0, 1).toLowerCase() + name.slice(1, name.length);
     };
-    KebabCaseNamingStrategy.prototype.toJsonName = function (name) {
-        throw new Error("Method not implemented.");
+    PascalCaseNamingStrategy.prototype.toJsonName = function (name) {
+        return name.slice(0, 1).toUpperCase() + name.slice(1, name.length);
     };
-    return KebabCaseNamingStrategy;
+    return PascalCaseNamingStrategy;
 }());
-exports.KebabCaseNamingStrategy = KebabCaseNamingStrategy;
+exports.PascalCaseNamingStrategy = PascalCaseNamingStrategy;

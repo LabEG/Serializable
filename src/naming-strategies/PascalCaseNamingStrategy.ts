@@ -1,13 +1,13 @@
 import { INamingStrategy } from "./INamingStrategy";
 
-export class KebabCaseNamingStrategy implements INamingStrategy {
+export class PascalCaseNamingStrategy implements INamingStrategy {
 
     public fromJsonName(name: string): string {
-        throw new Error("Method not implemented.");
+        return name.slice(0, 1).toLowerCase() + name.slice(1, name.length);
     }
 
     public toJsonName(name: string): string {
-        throw new Error("Method not implemented.");
+        return name.slice(0, 1).toUpperCase() + name.slice(1, name.length);
     }
 
 }

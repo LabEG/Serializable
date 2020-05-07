@@ -4,10 +4,13 @@ var KebabCaseNamingStrategy = /** @class */ (function () {
     function KebabCaseNamingStrategy() {
     }
     KebabCaseNamingStrategy.prototype.fromJsonName = function (name) {
-        throw new Error("Method not implemented.");
+        return name.replace(/-\w/gu, function (group) { return group[1].toUpperCase(); });
     };
     KebabCaseNamingStrategy.prototype.toJsonName = function (name) {
-        throw new Error("Method not implemented.");
+        return name
+            .split(/(?=[A-Z])/u)
+            .join("-")
+            .toLowerCase();
     };
     return KebabCaseNamingStrategy;
 }());
