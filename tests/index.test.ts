@@ -25,7 +25,7 @@ describe("Serializable", () => {
             assert.isTrue(user instanceof User);
         });
 
-        it("user created from other instance of user must be equals", async() => {
+        it("serializable must support deep copy", async() => {
             const { User } = await import("./models/User");
             const json: object[] = await import("./jsons/json-generator.json");
 

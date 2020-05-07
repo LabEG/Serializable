@@ -67,9 +67,11 @@ export class Serializable {
         for (const tprop in this) {
             // json.hasOwnProperty(prop) - preserve for deserialization for other classes with methods
 
-            // naming strategy
+            // naming strategy and jsonName decorator
             let jprop: string = tprop;
-            if (settings?.namingStrategy) {
+            if (Reflect.hasMetadata("ts-serializable:jsonName", this.constructor.prototype, tprop)) {
+                jprop = Reflect.getMetadata("ts-serializable:jsonName", this.constructor.prototype, tprop);
+            } else if (settings?.namingStrategy) {
                 jprop = settings.namingStrategy.toJsonName(tprop);
             } else if (Reflect.hasMetadata("ts-serializable:jsonObject", this.constructor.prototype)) {
                 const objectSettings: Partial<SerializationSettings> = Reflect.getMetadata(
@@ -90,7 +92,7 @@ export class Serializable {
                 const acceptedTypes: AcceptedTypes[] = Reflect.getMetadata(
                     "ts-serializable:jsonTypes",
                     this.constructor.prototype,
-                    tprop
+                    jprop
                 ) as [];
 
                 const jsonValue: unknown = Reflect.get(ujson, jprop) as unknown;
