@@ -64,41 +64,41 @@ export class Serializable {
         }
 
         // eslint-disable-next-line guard-for-in
-        for (const prop in ujson) {
+        for (const tprop in this) {
             // json.hasOwnProperty(prop) - preserve for deserialization for other classes with methods
 
             // naming strategy
-            let cprop = prop;
+            let jprop: string = tprop;
             if (settings?.namingStrategy) {
-                cprop = settings.namingStrategy.fromJsonName(prop);
+                jprop = settings.namingStrategy.toJsonName(tprop);
             } else if (Reflect.hasMetadata("ts-serializable:jsonObject", this.constructor.prototype)) {
                 const objectSettings: Partial<SerializationSettings> = Reflect.getMetadata(
                     "ts-serializable:jsonObject",
                     this.constructor.prototype
                 );
-                cprop = objectSettings.namingStrategy?.fromJsonName(prop) ?? prop;
+                jprop = objectSettings.namingStrategy?.toJsonName(tprop) ?? tprop;
             } else if (Serializable.defaultSettings.namingStrategy) {
                 const { namingStrategy } = Serializable.defaultSettings;
-                cprop = namingStrategy?.fromJsonName(prop) ?? prop;
+                jprop = namingStrategy?.toJsonName(tprop) ?? tprop;
             }
 
             if (
-                ujson.hasOwnProperty(prop) &&
-                this.hasOwnProperty(cprop) &&
-                Reflect.hasMetadata("ts-serializable:jsonTypes", this.constructor.prototype, cprop)
+                ujson?.hasOwnProperty(jprop) &&
+                this.hasOwnProperty(tprop) &&
+                Reflect.hasMetadata("ts-serializable:jsonTypes", this.constructor.prototype, tprop)
             ) {
                 const acceptedTypes: AcceptedTypes[] = Reflect.getMetadata(
                     "ts-serializable:jsonTypes",
                     this.constructor.prototype,
-                    cprop
+                    tprop
                 ) as [];
 
-                const jsonValue: unknown = Reflect.get(ujson, prop) as unknown;
+                const jsonValue: unknown = Reflect.get(ujson, jprop) as unknown;
 
                 Reflect.set(
                     this,
-                    cprop,
-                    this.deserializeProperty(cprop, acceptedTypes, jsonValue, settings)
+                    tprop,
+                    this.deserializeProperty(tprop, acceptedTypes, jsonValue, settings)
                 );
             }
         }
