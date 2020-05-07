@@ -6,8 +6,8 @@ import { SnackCaseNamingStrategy } from "../src/naming-strategies/SnackCaseNamin
 import { FriendSnake } from "./models/UserSnake";
 
 describe("Serializable", () => {
-    describe("json-generator", () => {
-        it.only("method fromJSON must support snack case naming", async() => {
+    describe("naming strategies", () => {
+        it("method fromJSON must support snack case naming", async() => {
             const { UserSnake } = await import("./models/UserSnake");
             const json = await import("./jsons/json-generator-snake.json");
             const [object] = json;

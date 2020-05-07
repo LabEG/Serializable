@@ -82,8 +82,6 @@ export class Serializable {
                 cprop = namingStrategy?.fromJsonName(prop) ?? prop;
             }
 
-            console.log("11111111111111111111111", prop, cprop);
-
             if (
                 ujson.hasOwnProperty(prop) &&
                 this.hasOwnProperty(cprop) &&
@@ -100,7 +98,7 @@ export class Serializable {
                 Reflect.set(
                     this,
                     cprop,
-                    this.deserializeProperty(cprop, acceptedTypes, jsonValue)
+                    this.deserializeProperty(cprop, acceptedTypes, jsonValue, settings)
                 );
             }
         }
@@ -165,7 +163,8 @@ export class Serializable {
     private deserializeProperty(
         prop: string,
         acceptedTypes: AcceptedTypes[],
-        jsonValue: unknown
+        jsonValue: unknown,
+        settings?: Partial<SerializationSettings>
     ): Object | null | void {
         for (const acceptedType of acceptedTypes) { // type Symbol is not a property
             if (// null
@@ -225,7 +224,12 @@ export class Serializable {
                     this.onWrongType(prop, "invalid type", jsonValue);
                 }
 
-                return jsonValue.map((arrayValue: Object | void | null) => this.deserializeProperty(prop, acceptedType, arrayValue));
+                return jsonValue.map((arrayValue: Object | void | null) => this.deserializeProperty(
+                    prop,
+                    acceptedType,
+                    arrayValue,
+                    settings
+                ));
             } else if (// Serializable
                 acceptedType !== null &&
                 acceptedType !== void 0 &&
@@ -237,7 +241,7 @@ export class Serializable {
             ) {
                 const TypeConstructor: new () => Serializable = acceptedType as new () => Serializable;
 
-                return new TypeConstructor().fromJSON(jsonValue as object);
+                return new TypeConstructor().fromJSON(jsonValue as object, settings);
             } else if (// instance any other class, not Serializable, for parse from other classes instance
                 acceptedType instanceof Function &&
                 jsonValue instanceof acceptedType
