@@ -7,7 +7,7 @@ import { SnackCaseNamingStrategy } from "../src";
 
 describe("Serializable", () => {
     describe("naming strategies", () => {
-        it("method fromJSON must support snack case naming by fromJson parameters", async() => {
+        it("deserialize must support snack case naming by fromJson parameters", async() => {
             const { UserSnake } = await import("./models/UserSnake");
             const json = await import("./jsons/json-generator-snake.json");
             const [object] = json;
@@ -44,7 +44,7 @@ describe("Serializable", () => {
             });
         });
 
-        it("method fromJSON must support snack case naming by jsonObject decorator", async() => {
+        it("deserialize must support snack case naming by jsonObject decorator", async() => {
             const { UserSnakeObject } = await import("./models/UserSnake");
             const json = await import("./jsons/json-generator-snake.json");
             const [object] = json;
@@ -78,6 +78,39 @@ describe("Serializable", () => {
             });
         });
 
+        it("serializer must support snack case naming by jsonObject decorator", async() => {
+            const { UserSnakeObject } = await import("./models/UserSnake");
+            const json = await import("./jsons/json-generator-snake.json");
+            const [object] = json;
+
+            const user = new UserSnakeObject().fromJSON(object);
+            const serialized = user.toJSON() as {[key: string]: Object};
+
+            assert.strictEqual(serialized.id_snake, object.id_snake, "id_snake is not equal");
+            assert.strictEqual(serialized.index_snake, object.index_snake, "index_snake is not equal");
+            assert.strictEqual(serialized.guid_snake, object.guid_snake, "guid_snake is not equal");
+            assert.strictEqual(serialized.is_active_snake, object.is_active_snake, "is_active_snake is not equal");
+            assert.strictEqual(serialized.balance_snake, object.balance_snake, "balance_snake is not equal");
+            assert.strictEqual(serialized.picture_snake, object.picture_snake, "picture_snake is not equal");
+            assert.strictEqual(serialized.age_snake, object.age_snake, "age_snake is not equal");
+            assert.strictEqual(serialized.eye_color_snake, object.eye_color_snake, "eye_color_snake is not equal");
+            assert.strictEqual(serialized.name_snake, object.name_snake, "name_snake is not equal");
+            assert.strictEqual(serialized.company_snake, object.company_snake, "company_snake is not equal");
+            assert.strictEqual(serialized.email_snake, object.email_snake, "email_snake is not equal");
+            assert.strictEqual(serialized.phone_snake, object.phone_snake, "phone_snake is not equal");
+            assert.strictEqual(serialized.address_snake, object.address_snake, "address_snake is not equal");
+            assert.strictEqual(serialized.about_snake, object.about_snake, "about_snake is not equal");
+            assert.strictEqual(serialized.latitude_snake, object.latitude_snake, "latitude_snake is not equal");
+            assert.strictEqual(serialized.longitude_snake, object.longitude_snake, "longitude_snake is not equal");
+            assert.deepEqual(serialized.tags_snake, object.tags_snake, "tags_snake is not equal");
+            assert.strictEqual(serialized.greeting_snake, object.greeting_snake, "greeting_snake is not equal");
+            assert.strictEqual(serialized.favorite_fruit_snake, object.favorite_fruit_snake, "favorite_fruit_snake is not equal");
+
+            (serialized.friends_snake as []).forEach((friend: {[key: string]: Object}, index: number) => {
+                assert.strictEqual(friend.id_snake, object.friends_snake[index].id_snake, `friend ${index} id_snake is not equal`);
+                assert.strictEqual(friend.name_snake, object.friends_snake[index].name_snake, `friend ${index} name_snake is not equal`);
+            });
+        });
 
         it("method fromJSON must support snack case naming by jsonName decorator", async() => {
             const { UserNaming } = await import("./models/UserName");

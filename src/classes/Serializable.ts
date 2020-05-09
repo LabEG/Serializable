@@ -93,24 +93,24 @@ export class Serializable {
      * @memberof Serializable
      */
     public toJSON(): object {
-        const json: object = { ...this };
+        const fromJson: object = { ...this };
+        const toJson: object = {};
 
-        for (const prop in json) {
+        for (const prop in fromJson) {
             // json.hasOwnProperty(prop) - preserve for deserialization for other classes with methods
-            if (json.hasOwnProperty(prop) && this.hasOwnProperty(prop)) {
-                const isIgnore: boolean | void = Reflect.getMetadata(
-                    "ts-serializable:jsonIgnore",
-                    this.constructor.prototype,
-                    prop
-                ) as boolean | void;
-
-                if (isIgnore) {
-                    Reflect.set(json, prop, void 0);
+            if (fromJson.hasOwnProperty(prop) && this.hasOwnProperty(prop)) {
+                if (Reflect.getMetadata("ts-serializable:jsonIgnore", this.constructor.prototype, prop) || false) {
+                    // eslint-disable-next-line no-continue
+                    continue;
                 }
+
+                const toProp = this.getJsonPropertyName(prop);
+
+                Reflect.set(toJson, toProp, Reflect.get(fromJson, prop));
             }
         }
 
-        return json;
+        return toJson;
     }
 
     /**
