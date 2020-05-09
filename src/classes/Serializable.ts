@@ -77,7 +77,6 @@ export class Serializable {
                     this.constructor.prototype,
                     thisProp
                 ) as [];
-
                 const jsonValue: unknown = Reflect.get(unknownJson, jsonProp);
                 const extractedValue = this.deserializeProperty(thisProp, acceptedTypes, jsonValue, settings);
                 Reflect.set(this, thisProp, extractedValue);
@@ -88,7 +87,7 @@ export class Serializable {
     }
 
     /**
-     * Process serelization for @jsonIgnore decorator
+     * Process serialization for @jsonIgnore decorator
      *
      * @returns {object}
      * @memberof Serializable
@@ -246,10 +245,10 @@ export class Serializable {
             return settings.namingStrategy.toJsonName(thisProperty);
         }
 
-        if (Reflect.hasMetadata("ts-serializable:jsonObject", this.constructor.prototype)) {
+        if (Reflect.hasMetadata("ts-serializable:jsonObject", this.constructor)) {
             const objectSettings: Partial<SerializationSettings> = Reflect.getMetadata(
                 "ts-serializable:jsonObject",
-                this.constructor.prototype
+                this.constructor
             );
             return objectSettings.namingStrategy?.toJsonName(thisProperty) ?? thisProperty;
         }

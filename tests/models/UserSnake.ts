@@ -1,6 +1,4 @@
-import { jsonProperty } from "../../src/decorators/JsonProperty";
-import { Serializable } from "../../src/classes/Serializable";
-import { jsonIgnore } from "../../src/decorators/JsonIgnore";
+import { jsonObject, SnackCaseNamingStrategy, Serializable, jsonProperty, jsonIgnore } from "../../src";
 
 export class FriendSnake extends Serializable {
 
@@ -82,5 +80,16 @@ export class UserSnake extends Serializable {
 
     @jsonIgnore()
     public isExpandedSnake: boolean = false;
+
+}
+
+@jsonObject({ namingStrategy: new SnackCaseNamingStrategy() })
+export class FriendSnakeObject extends FriendSnake {}
+
+@jsonObject({ namingStrategy: new SnackCaseNamingStrategy() })
+export class UserSnakeObject extends UserSnake {
+
+    @jsonProperty([FriendSnakeObject])
+    public friendsSnake: FriendSnakeObject[] = [];
 
 }
