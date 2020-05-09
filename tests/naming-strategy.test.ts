@@ -84,7 +84,7 @@ describe("Serializable", () => {
             const [object] = json;
 
             const user = new UserSnakeObject().fromJSON(object);
-            const serialized = user.toJSON() as {[key: string]: Object};
+            const serialized = JSON.parse(JSON.stringify(user)) as {[key: string]: Object};
 
             assert.strictEqual(serialized.id_snake, object.id_snake, "id_snake is not equal");
             assert.strictEqual(serialized.index_snake, object.index_snake, "index_snake is not equal");
