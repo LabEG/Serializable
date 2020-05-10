@@ -1,6 +1,6 @@
 {
     "name": "ts-serializable",
-    "version": "1.1.25",
+    "version": "2.0.2",
     "lockfileVersion": 1,
     "requires": true,
     "dependencies": {
@@ -264,9 +264,9 @@
             }
         },
         "@labeg/code-style": {
-            "version": "1.0.48",
-            "resolved": "https://registry.npmjs.org/@labeg/code-style/-/code-style-1.0.48.tgz",
-            "integrity": "sha512-iGGDcRzma7ScHffHe2Ri4jN9O84qqx/g53pcsc31isjlqMxHdjgXu/x4lDsrNN4zq5vOZ6/rnKS+9k35Aizx8A==",
+            "version": "1.0.50",
+            "resolved": "https://registry.npmjs.org/@labeg/code-style/-/code-style-1.0.50.tgz",
+            "integrity": "sha512-xDaJ3KvSrcuJQrd1FVMz/b/23jD7ond0jJg1qjxTGHiu3NlA57Gc5X7eliRQqSR+R2BllDbmUkZmeaLwKBkPSQ==",
             "dev": true,
             "requires": {
                 "@typescript-eslint/eslint-plugin": "^2.31.0",
