@@ -59,6 +59,10 @@ var Serializable = /** @class */ (function () {
         for (var thisProp in this) {
             // naming strategy and jsonName decorator
             var jsonProp = this.getJsonPropertyName(thisProp, settings);
+            // for deep copy
+            if (!(unknownJson === null || unknownJson === void 0 ? void 0 : unknownJson.hasOwnProperty(jsonProp)) && (unknownJson === null || unknownJson === void 0 ? void 0 : unknownJson.hasOwnProperty(thisProp))) {
+                jsonProp = thisProp;
+            }
             if ((unknownJson === null || unknownJson === void 0 ? void 0 : unknownJson.hasOwnProperty(jsonProp)) &&
                 this.hasOwnProperty(thisProp) &&
                 Reflect.hasMetadata("ts-serializable:jsonTypes", this.constructor.prototype, thisProp)) {
@@ -71,23 +75,26 @@ var Serializable = /** @class */ (function () {
         return this;
     };
     /**
-     * Process serelization for @jsonIgnore decorator
+     * Process serialization for @jsonIgnore decorator
      *
      * @returns {object}
      * @memberof Serializable
      */
     Serializable.prototype.toJSON = function () {
-        var json = __assign({}, this);
-        for (var prop in json) {
+        var fromJson = __assign({}, this);
+        var toJson = {};
+        for (var prop in fromJson) {
             // json.hasOwnProperty(prop) - preserve for deserialization for other classes with methods
-            if (json.hasOwnProperty(prop) && this.hasOwnProperty(prop)) {
-                var isIgnore = Reflect.getMetadata("ts-serializable:jsonIgnore", this.constructor.prototype, prop);
-                if (isIgnore) {
-                    Reflect.set(json, prop, void 0);
+            if (fromJson.hasOwnProperty(prop) && this.hasOwnProperty(prop)) {
+                if (Reflect.getMetadata("ts-serializable:jsonIgnore", this.constructor.prototype, prop) || false) {
+                    // eslint-disable-next-line no-continue
+                    continue;
                 }
+                var toProp = this.getJsonPropertyName(prop);
+                Reflect.set(toJson, toProp, Reflect.get(fromJson, prop));
             }
         }
-        return json;
+        return toJson;
     };
     /**
      * Process exceptions from wrong types.
@@ -212,8 +219,8 @@ var Serializable = /** @class */ (function () {
         if (settings === null || settings === void 0 ? void 0 : settings.namingStrategy) {
             return settings.namingStrategy.toJsonName(thisProperty);
         }
-        if (Reflect.hasMetadata("ts-serializable:jsonObject", this.constructor.prototype)) {
-            var objectSettings = Reflect.getMetadata("ts-serializable:jsonObject", this.constructor.prototype);
+        if (Reflect.hasMetadata("ts-serializable:jsonObject", this.constructor)) {
+            var objectSettings = Reflect.getMetadata("ts-serializable:jsonObject", this.constructor);
             return (_b = (_a = objectSettings.namingStrategy) === null || _a === void 0 ? void 0 : _a.toJsonName(thisProperty)) !== null && _b !== void 0 ? _b : thisProperty;
         }
         if (Serializable.defaultSettings.namingStrategy) {

@@ -123,5 +123,16 @@ describe("Serializable", () => {
             assert.strictEqual(user.firstName, json["user::profile::first:name"], "firstName is not equal");
             assert.strictEqual(user.lastName, json["user::profile::last:name"], "lastName is not equal");
         });
+
+        it("serializable must support deep copy with naming strategy", async() => {
+            const { UserSnakeObject } = await import("./models/UserSnake");
+            const json = await import("./jsons/json-generator-snake.json");
+            const [object] = json;
+
+            const user1 = new UserSnakeObject().fromJSON(object);
+            const user2 = new UserSnakeObject().fromJSON(user1);
+
+            assert.deepEqual(user1, user2);
+        });
     });
 });

@@ -65,7 +65,12 @@ export class Serializable {
         // eslint-disable-next-line guard-for-in
         for (const thisProp in this) {
             // naming strategy and jsonName decorator
-            const jsonProp: string = this.getJsonPropertyName(thisProp, settings);
+            let jsonProp: string = this.getJsonPropertyName(thisProp, settings);
+
+            // for deep copy
+            if (!unknownJson?.hasOwnProperty(jsonProp) && unknownJson?.hasOwnProperty(thisProp)) {
+                jsonProp = thisProp;
+            }
 
             if (
                 unknownJson?.hasOwnProperty(jsonProp) &&

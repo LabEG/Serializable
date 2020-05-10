@@ -39,7 +39,7 @@ export declare class Serializable {
      */
     fromJSON(json: object, settings?: Partial<SerializationSettings>): this;
     /**
-     * Process serelization for @jsonIgnore decorator
+     * Process serialization for @jsonIgnore decorator
      *
      * @returns {object}
      * @memberof Serializable
