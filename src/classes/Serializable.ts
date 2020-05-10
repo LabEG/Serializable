@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call, no-prototype-builtins */
 
 import { AcceptedTypes } from "../models/AcceptedType";
+import { SerializationSettings } from "../models/SerializationSettings";
 
 /**
  * Class how help you deserialize object to classes.
@@ -9,6 +10,15 @@ import { AcceptedTypes } from "../models/AcceptedType";
  * @class Serializable
  */
 export class Serializable {
+
+    /**
+     * Global setting for serialization and deserialization
+     *
+     * @static
+     * @type {SerializationSettings}
+     * @memberof Serializable
+     */
+    public static defaultSettings: SerializationSettings = new SerializationSettings();
 
     /**
      * Deserialize object from static method.
@@ -21,9 +31,13 @@ export class Serializable {
      * @returns {object}
      * @memberof Serializable
      */
-    public static fromJSON<T extends Serializable>(this: new() => T, json: object): T {
+    public static fromJSON<T extends Serializable>(
+        this: new () => T,
+        json: object,
+        settings?: Partial<SerializationSettings>
+    ): T {
         // tslint:disable-next-line:static-this
-        return new this().fromJSON(json);
+        return new this().fromJSON(json, settings);
     }
 
     /**
@@ -36,39 +50,41 @@ export class Serializable {
      * @returns {this}
      * @memberof Serializable
      */
-    public fromJSON(json: object): this {
-        const ujson: unknown = json;
+    public fromJSON(json: object, settings?: Partial<SerializationSettings>): this {
+        const unknownJson: unknown = json;
 
         if (
-            ujson === null ||
-            Array.isArray(ujson) ||
-            typeof ujson !== "object"
+            unknownJson === null ||
+            Array.isArray(unknownJson) ||
+            typeof unknownJson !== "object"
         ) {
-            this.onWrongType("", "is not object", ujson);
-
+            this.onWrongType(String(unknownJson), "is not object", unknownJson);
             return this;
         }
 
-        for (const prop in ujson) {
-            // json.hasOwnProperty(prop) - preserve for deserialization for other classes with methods
+        // eslint-disable-next-line guard-for-in
+        for (const thisProp in this) {
+            // naming strategy and jsonName decorator
+            let jsonProp: string = this.getJsonPropertyName(thisProp, settings);
+
+            // for deep copy
+            if (!unknownJson?.hasOwnProperty(jsonProp) && unknownJson?.hasOwnProperty(thisProp)) {
+                jsonProp = thisProp;
+            }
+
             if (
-                ujson.hasOwnProperty(prop) &&
-                this.hasOwnProperty(prop) &&
-                Reflect.hasMetadata("ts-serializable:jsonTypes", this.constructor.prototype, prop)
+                unknownJson?.hasOwnProperty(jsonProp) &&
+                this.hasOwnProperty(thisProp) &&
+                Reflect.hasMetadata("ts-serializable:jsonTypes", this.constructor.prototype, thisProp)
             ) {
                 const acceptedTypes: AcceptedTypes[] = Reflect.getMetadata(
                     "ts-serializable:jsonTypes",
                     this.constructor.prototype,
-                    prop
+                    thisProp
                 ) as [];
-
-                const jsonValue: unknown = Reflect.get(ujson, prop) as unknown;
-
-                Reflect.set(
-                    this,
-                    prop,
-                    this.deserializeProperty(prop, acceptedTypes, jsonValue)
-                );
+                const jsonValue: unknown = Reflect.get(unknownJson, jsonProp);
+                const extractedValue = this.deserializeProperty(thisProp, acceptedTypes, jsonValue, settings);
+                Reflect.set(this, thisProp, extractedValue);
             }
         }
 
@@ -76,30 +92,30 @@ export class Serializable {
     }
 
     /**
-     * Process serelization for @jsonIgnore decorator
+     * Process serialization for @jsonIgnore decorator
      *
      * @returns {object}
      * @memberof Serializable
      */
     public toJSON(): object {
-        const json: object = { ...this };
+        const fromJson: object = { ...this };
+        const toJson: object = {};
 
-        for (const prop in json) {
+        for (const prop in fromJson) {
             // json.hasOwnProperty(prop) - preserve for deserialization for other classes with methods
-            if (json.hasOwnProperty(prop) && this.hasOwnProperty(prop)) {
-                const isIgnore: boolean | void = Reflect.getMetadata(
-                    "ts-serializable:jsonIgnore",
-                    this.constructor.prototype,
-                    prop
-                ) as boolean | void;
-
-                if (isIgnore) {
-                    Reflect.set(json, prop, void 0);
+            if (fromJson.hasOwnProperty(prop) && this.hasOwnProperty(prop)) {
+                if (Reflect.getMetadata("ts-serializable:jsonIgnore", this.constructor.prototype, prop) || false) {
+                    // eslint-disable-next-line no-continue
+                    continue;
                 }
+
+                const toProp = this.getJsonPropertyName(prop);
+
+                Reflect.set(toJson, toProp, Reflect.get(fromJson, prop));
             }
         }
 
-        return json;
+        return toJson;
     }
 
     /**
@@ -129,10 +145,11 @@ export class Serializable {
      * @memberof Serializable
      */
     // eslint-disable-next-line complexity
-    private deserializeProperty(
+    protected deserializeProperty(
         prop: string,
         acceptedTypes: AcceptedTypes[],
-        jsonValue: unknown
+        jsonValue: unknown,
+        settings?: Partial<SerializationSettings>
     ): Object | null | void {
         for (const acceptedType of acceptedTypes) { // type Symbol is not a property
             if (// null
@@ -192,7 +209,12 @@ export class Serializable {
                     this.onWrongType(prop, "invalid type", jsonValue);
                 }
 
-                return jsonValue.map((arrayValue: Object | void | null) => this.deserializeProperty(prop, acceptedType, arrayValue));
+                return jsonValue.map((arrayValue: Object | void | null) => this.deserializeProperty(
+                    prop,
+                    acceptedType,
+                    arrayValue,
+                    settings
+                ));
             } else if (// Serializable
                 acceptedType !== null &&
                 acceptedType !== void 0 &&
@@ -204,7 +226,7 @@ export class Serializable {
             ) {
                 const TypeConstructor: new () => Serializable = acceptedType as new () => Serializable;
 
-                return new TypeConstructor().fromJSON(jsonValue as object);
+                return new TypeConstructor().fromJSON(jsonValue as object, settings);
             } else if (// instance any other class, not Serializable, for parse from other classes instance
                 acceptedType instanceof Function &&
                 jsonValue instanceof acceptedType
@@ -217,6 +239,31 @@ export class Serializable {
         this.onWrongType(prop, "is invalid", jsonValue);
 
         return Reflect.get(this, prop) as Object | null | void;
+    }
+
+    protected getJsonPropertyName(thisProperty: string, settings?: Partial<SerializationSettings>): string {
+        if (Reflect.hasMetadata("ts-serializable:jsonName", this.constructor.prototype, thisProperty)) {
+            return Reflect.getMetadata("ts-serializable:jsonName", this.constructor.prototype, thisProperty) as string;
+        }
+
+        if (settings?.namingStrategy) {
+            return settings.namingStrategy.toJsonName(thisProperty);
+        }
+
+        if (Reflect.hasMetadata("ts-serializable:jsonObject", this.constructor)) {
+            const objectSettings: Partial<SerializationSettings> = Reflect.getMetadata(
+                "ts-serializable:jsonObject",
+                this.constructor
+            );
+            return objectSettings.namingStrategy?.toJsonName(thisProperty) ?? thisProperty;
+        }
+
+        if (Serializable.defaultSettings.namingStrategy) {
+            const { namingStrategy } = Serializable.defaultSettings;
+            return namingStrategy?.toJsonName(thisProperty) ?? thisProperty;
+        }
+
+        return thisProperty;
     }
 
 }

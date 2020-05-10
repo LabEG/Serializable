@@ -3,7 +3,7 @@
     "compilerOptions": {
         "declaration": true,
         "diagnostics": true,
-        "outDir": "bin/"
+        "outDir": "dist/"
     },
     "include": [
         "./node_modules/reflect-metadata/Reflect.d.ts",

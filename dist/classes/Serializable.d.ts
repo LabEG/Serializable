@@ -1,3 +1,5 @@
+import { AcceptedTypes } from "../models/AcceptedType";
+import { SerializationSettings } from "../models/SerializationSettings";
 /**
  * Class how help you deserialize object to classes.
  *
@@ -5,6 +7,14 @@
  * @class Serializable
  */
 export declare class Serializable {
+    /**
+     * Global setting for serialization and deserialization
+     *
+     * @static
+     * @type {SerializationSettings}
+     * @memberof Serializable
+     */
+    static defaultSettings: SerializationSettings;
     /**
      * Deserialize object from static method.
      *
@@ -16,7 +26,7 @@ export declare class Serializable {
      * @returns {object}
      * @memberof Serializable
      */
-    static fromJSON<T extends Serializable>(this: new () => T, json: object): T;
+    static fromJSON<T extends Serializable>(this: new () => T, json: object, settings?: Partial<SerializationSettings>): T;
     /**
      * Fill property of current model by data from json.
      *
@@ -27,9 +37,9 @@ export declare class Serializable {
      * @returns {this}
      * @memberof Serializable
      */
-    fromJSON(json: object): this;
+    fromJSON(json: object, settings?: Partial<SerializationSettings>): this;
     /**
-     * Process serelization for @jsonIgnore decorator
+     * Process serialization for @jsonIgnore decorator
      *
      * @returns {object}
      * @memberof Serializable
@@ -57,5 +67,6 @@ export declare class Serializable {
      * @returns {(Object | null | void)}
      * @memberof Serializable
      */
-    private deserializeProperty;
+    protected deserializeProperty(prop: string, acceptedTypes: AcceptedTypes[], jsonValue: unknown, settings?: Partial<SerializationSettings>): Object | null | void;
+    protected getJsonPropertyName(thisProperty: string, settings?: Partial<SerializationSettings>): string;
 }
