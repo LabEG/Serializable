@@ -219,7 +219,10 @@ export class Serializable {
                 acceptedType !== null &&
                 acceptedType !== void 0 &&
                 !Array.isArray(acceptedType) &&
-                acceptedType.prototype instanceof Serializable &&
+                (
+                    acceptedType.prototype instanceof Serializable ||
+                    Reflect.getMetadata("ts-serializable:jsonObjectExtended", acceptedType)
+                ) &&
                 jsonValue !== null &&
                 jsonValue !== void 0 &&
                 typeof jsonValue === "object" && !Array.isArray(jsonValue)

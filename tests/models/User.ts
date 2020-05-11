@@ -15,7 +15,7 @@ export class Friend extends Serializable {
 export class User extends Serializable {
 
     @jsonProperty(String)
-    public _id?: string = "";
+    public id?: string = "";
 
     @jsonProperty(Number)
     public index: number = 0;
