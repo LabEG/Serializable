@@ -82,7 +82,7 @@ export class Serializable {
                     this.constructor.prototype,
                     thisProp
                 ) as [];
-                const jsonValue: unknown = Reflect.get(unknownJson, jsonProp);
+                const jsonValue: unknown = Reflect.get(unknownJson, jsonProp) as unknown;
                 const extractedValue = this.deserializeProperty(thisProp, acceptedTypes, jsonValue, settings);
                 Reflect.set(this, thisProp, extractedValue);
             }
@@ -257,7 +257,7 @@ export class Serializable {
             const objectSettings: Partial<SerializationSettings> = Reflect.getMetadata(
                 "ts-serializable:jsonObject",
                 this.constructor
-            );
+            ) as Partial<SerializationSettings>;
             return objectSettings.namingStrategy?.toJsonName(thisProperty) ?? thisProperty;
         }
 
