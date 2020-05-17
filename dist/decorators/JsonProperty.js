@@ -1,6 +1,7 @@
 "use strict";
 /* eslint-disable arrow-body-style */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.jsonProperty = void 0;
 exports.jsonProperty = function () {
     var args = [];
     for (var _i = 0; _i < arguments.length; _i++) {

@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.PascalCaseNamingStrategy = void 0;
 var PascalCaseNamingStrategy = /** @class */ (function () {
     function PascalCaseNamingStrategy() {
     }

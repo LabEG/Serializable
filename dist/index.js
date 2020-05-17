@@ -2,35 +2,35 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 // decoratore
 var JsonIgnore_1 = require("./decorators/JsonIgnore");
-exports.jsonIgnore = JsonIgnore_1.jsonIgnore;
+Object.defineProperty(exports, "jsonIgnore", { enumerable: true, get: function () { return JsonIgnore_1.jsonIgnore; } });
 var JsonName_1 = require("./decorators/JsonName");
-exports.jsonName = JsonName_1.jsonName;
+Object.defineProperty(exports, "jsonName", { enumerable: true, get: function () { return JsonName_1.jsonName; } });
 var JsonObject_1 = require("./decorators/JsonObject");
-exports.jsonObject = JsonObject_1.jsonObject;
+Object.defineProperty(exports, "jsonObject", { enumerable: true, get: function () { return JsonObject_1.jsonObject; } });
 var JsonProperty_1 = require("./decorators/JsonProperty");
-exports.jsonProperty = JsonProperty_1.jsonProperty;
+Object.defineProperty(exports, "jsonProperty", { enumerable: true, get: function () { return JsonProperty_1.jsonProperty; } });
 // base class
 var Serializable_1 = require("./classes/Serializable");
-exports.Serializable = Serializable_1.Serializable;
+Object.defineProperty(exports, "Serializable", { enumerable: true, get: function () { return Serializable_1.Serializable; } });
 // enums
 var DateFormatHandling_1 = require("./enums/DateFormatHandling");
-exports.DateFormatHandling = DateFormatHandling_1.DateFormatHandling;
+Object.defineProperty(exports, "DateFormatHandling", { enumerable: true, get: function () { return DateFormatHandling_1.DateFormatHandling; } });
 var DefaultValueHandling_1 = require("./enums/DefaultValueHandling");
-exports.DefaultValueHandling = DefaultValueHandling_1.DefaultValueHandling;
+Object.defineProperty(exports, "DefaultValueHandling", { enumerable: true, get: function () { return DefaultValueHandling_1.DefaultValueHandling; } });
 var MissingMemberHandling_1 = require("./enums/MissingMemberHandling");
-exports.MissingMemberHandling = MissingMemberHandling_1.MissingMemberHandling;
+Object.defineProperty(exports, "MissingMemberHandling", { enumerable: true, get: function () { return MissingMemberHandling_1.MissingMemberHandling; } });
 var NullValueHandling_1 = require("./enums/NullValueHandling");
-exports.NullValueHandling = NullValueHandling_1.NullValueHandling;
+Object.defineProperty(exports, "NullValueHandling", { enumerable: true, get: function () { return NullValueHandling_1.NullValueHandling; } });
 var ReferenceLoopHandling_1 = require("./enums/ReferenceLoopHandling");
-exports.ReferenceLoopHandling = ReferenceLoopHandling_1.ReferenceLoopHandling;
+Object.defineProperty(exports, "ReferenceLoopHandling", { enumerable: true, get: function () { return ReferenceLoopHandling_1.ReferenceLoopHandling; } });
 var LogLevels_1 = require("./enums/LogLevels");
-exports.LogLevels = LogLevels_1.LogLevels;
+Object.defineProperty(exports, "LogLevels", { enumerable: true, get: function () { return LogLevels_1.LogLevels; } });
 // settings
 var SerializationSettings_1 = require("./models/SerializationSettings");
-exports.SerializationSettings = SerializationSettings_1.SerializationSettings;
+Object.defineProperty(exports, "SerializationSettings", { enumerable: true, get: function () { return SerializationSettings_1.SerializationSettings; } });
 var SnackCaseNamingStrategy_1 = require("./naming-strategies/SnackCaseNamingStrategy");
-exports.SnackCaseNamingStrategy = SnackCaseNamingStrategy_1.SnackCaseNamingStrategy;
+Object.defineProperty(exports, "SnackCaseNamingStrategy", { enumerable: true, get: function () { return SnackCaseNamingStrategy_1.SnackCaseNamingStrategy; } });
 var PascalCaseNamingStrategy_1 = require("./naming-strategies/PascalCaseNamingStrategy");
-exports.PascalCaseNamingStrategy = PascalCaseNamingStrategy_1.PascalCaseNamingStrategy;
+Object.defineProperty(exports, "PascalCaseNamingStrategy", { enumerable: true, get: function () { return PascalCaseNamingStrategy_1.PascalCaseNamingStrategy; } });
 var KebabCaseNamingStrategy_1 = require("./naming-strategies/KebabCaseNamingStrategy");
-exports.KebabCaseNamingStrategy = KebabCaseNamingStrategy_1.KebabCaseNamingStrategy;
+Object.defineProperty(exports, "KebabCaseNamingStrategy", { enumerable: true, get: function () { return KebabCaseNamingStrategy_1.KebabCaseNamingStrategy; } });

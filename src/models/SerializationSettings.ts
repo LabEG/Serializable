@@ -11,11 +11,17 @@ import { INamingStrategy } from "../naming-strategies/INamingStrategy";
 export class SerializationSettings {
 
     public dateFormatHandling: DateFormatHandling = DateFormatHandling.IsoDateFormat;
+
     public missingMemberHandling: MissingMemberHandling = MissingMemberHandling.Ignore;
+
     public referenceLoopHandling: ReferenceLoopHandling = ReferenceLoopHandling.Serialize;
+
     public nullValueHandling: NullValueHandling = NullValueHandling.Include;
+
     public defaultValueHandling: DefaultValueHandling = DefaultValueHandling.Ignore;
+
     public namingStrategy: INamingStrategy | null = null;
+
     public logLevel: LogLevels = LogLevels.Warning;
 
 }

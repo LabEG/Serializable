@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.LogLevels = void 0;
 var LogLevels;
 (function (LogLevels) {
     LogLevels[LogLevels["Trace"] = 0] = "Trace";

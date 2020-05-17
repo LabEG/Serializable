@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SerializationSettings = void 0;
 var LogLevels_1 = require("../enums/LogLevels");
 var DefaultValueHandling_1 = require("../enums/DefaultValueHandling");
 var NullValueHandling_1 = require("../enums/NullValueHandling");

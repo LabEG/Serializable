@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.KebabCaseNamingStrategy = void 0;
 var KebabCaseNamingStrategy = /** @class */ (function () {
     function KebabCaseNamingStrategy() {
     }

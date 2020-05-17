@@ -12,6 +12,7 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Serializable = void 0;
 var SerializationSettings_1 = require("../models/SerializationSettings");
 /**
  * Class how help you deserialize object to classes.
@@ -130,7 +131,7 @@ var Serializable = /** @class */ (function () {
                 jsonValue === null) {
                 return { value: null };
             }
-            else if ( // void, for classes deep copy only, json don't have void type
+            else if ( // void, for deep copy classes only, json don't have void type
             acceptedType === void 0 &&
                 jsonValue === void 0) {
                 return { value: void 0 };
@@ -187,7 +188,8 @@ var Serializable = /** @class */ (function () {
             acceptedType !== null &&
                 acceptedType !== void 0 &&
                 !Array.isArray(acceptedType) &&
-                acceptedType.prototype instanceof Serializable &&
+                (acceptedType.prototype instanceof Serializable ||
+                    Reflect.getMetadata("ts-serializable:jsonObjectExtended", acceptedType)) &&
                 jsonValue !== null &&
                 jsonValue !== void 0 &&
                 typeof jsonValue === "object" && !Array.isArray(jsonValue)) {

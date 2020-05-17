@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SnackCaseNamingStrategy = void 0;
 var SnackCaseNamingStrategy = /** @class */ (function () {
     function SnackCaseNamingStrategy() {
     }
