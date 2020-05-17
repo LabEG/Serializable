@@ -150,14 +150,14 @@ export class Serializable {
         acceptedTypes: AcceptedTypes[],
         jsonValue: unknown,
         settings?: Partial<SerializationSettings>
-    ): Object | null | void {
+    ): unknown {
         for (const acceptedType of acceptedTypes) { // type Symbol is not a property
             if (// null
                 acceptedType === null &&
                 jsonValue === null
             ) {
                 return null;
-            } else if (// void, for classes deep copy only, json don't have void type
+            } else if (// void, for deep copy classes only, json don't have void type
                 acceptedType === void 0 &&
                 jsonValue === void 0
             ) {
@@ -209,7 +209,7 @@ export class Serializable {
                     this.onWrongType(prop, "invalid type", jsonValue);
                 }
 
-                return jsonValue.map((arrayValue: Object | void | null) => this.deserializeProperty(
+                return jsonValue.map((arrayValue: unknown) => this.deserializeProperty(
                     prop,
                     acceptedType,
                     arrayValue,
@@ -219,7 +219,10 @@ export class Serializable {
                 acceptedType !== null &&
                 acceptedType !== void 0 &&
                 !Array.isArray(acceptedType) &&
-                acceptedType.prototype instanceof Serializable &&
+                (
+                    acceptedType.prototype instanceof Serializable ||
+                    Reflect.getMetadata("ts-serializable:jsonObjectExtended", acceptedType)
+                ) &&
                 jsonValue !== null &&
                 jsonValue !== void 0 &&
                 typeof jsonValue === "object" && !Array.isArray(jsonValue)
