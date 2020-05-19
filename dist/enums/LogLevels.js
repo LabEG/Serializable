@@ -1,6 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var LogLevels;
+export var LogLevels;
 (function (LogLevels) {
     LogLevels[LogLevels["Trace"] = 0] = "Trace";
     LogLevels[LogLevels["Debug"] = 1] = "Debug";
@@ -9,4 +7,4 @@ var LogLevels;
     LogLevels[LogLevels["Error"] = 4] = "Error";
     LogLevels[LogLevels["Critical"] = 5] = "Critical";
     LogLevels[LogLevels["None"] = 6] = "None";
-})(LogLevels = exports.LogLevels || (exports.LogLevels = {}));
+})(LogLevels || (LogLevels = {}));

@@ -67,6 +67,6 @@ export declare class Serializable {
      * @returns {(Object | null | void)}
      * @memberof Serializable
      */
-    protected deserializeProperty(prop: string, acceptedTypes: AcceptedTypes[], jsonValue: unknown, settings?: Partial<SerializationSettings>): Object | null | void;
+    protected deserializeProperty(prop: string, acceptedTypes: AcceptedTypes[], jsonValue: unknown, settings?: Partial<SerializationSettings>): unknown;
     protected getJsonPropertyName(thisProperty: string, settings?: Partial<SerializationSettings>): string;
 }

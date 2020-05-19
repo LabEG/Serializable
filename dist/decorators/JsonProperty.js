@@ -1,12 +1,6 @@
-"use strict";
 /* eslint-disable arrow-body-style */
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.jsonProperty = function () {
-    var args = [];
-    for (var _i = 0; _i < arguments.length; _i++) {
-        args[_i] = arguments[_i];
-    }
-    return function (target, propertyKey) {
+export const jsonProperty = (...args) => {
+    return (target, propertyKey) => {
         Reflect.defineMetadata("ts-serializable:jsonTypes", args, target, propertyKey);
     };
 };
