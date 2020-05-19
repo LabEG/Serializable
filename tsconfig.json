@@ -13,6 +13,7 @@
         "noUnusedParameters": true,
         "pretty": true,
         "strict": true,
+        "moduleResolution": "node",
         "resolveJsonModule": true
     },
     "include": [
