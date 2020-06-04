@@ -21,5 +21,6 @@ export { SerializationSettings } from "./models/SerializationSettings";
 // naming strategies
 export { INamingStrategy } from "./naming-strategies/INamingStrategy";
 export { SnackCaseNamingStrategy } from "./naming-strategies/SnackCaseNamingStrategy";
+export { SnakeCaseNamingStrategy } from "./naming-strategies/SnakeCaseNamingStrategy";
 export { PascalCaseNamingStrategy } from "./naming-strategies/PascalCaseNamingStrategy";
 export { KebabCaseNamingStrategy } from "./naming-strategies/KebabCaseNamingStrategy";
