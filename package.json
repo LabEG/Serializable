@@ -1,12 +1,12 @@
 {
     "name": "ts-serializable",
-    "version": "2.0.5",
+    "version": "2.0.6",
     "description": "Serialization and deserializtion for classes",
     "main": "./dist/index.js",
     "typings": "./dist/index.d.ts",
     "dependencies": {},
     "devDependencies": {
-        "@labeg/code-style": "^1.0.53",
+        "@labeg/code-style": "^1.0.54",
         "@types/chai": "^4.2.11",
         "@types/mocha": "^7.0.2",
         "chai": "^4.2.0",
