@@ -88,7 +88,7 @@ const json = {
     "very::strange::json:name": "I love jewelry"
 };
 
-@jsonObject({ namingStrategy: new SnackCaseNamingStrategy() })
+@jsonObject({ namingStrategy: new SnakeCaseNamingStrategy() })
 class User extends Serializable {
 
     @jsonProperty(String, null)

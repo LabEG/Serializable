@@ -3,7 +3,7 @@
 import("reflect-metadata"); // polyfill
 import { assert } from "chai";
 import { FriendSnake } from "./models/UserSnake";
-import { SnackCaseNamingStrategy } from "../src";
+import { SnakeCaseNamingStrategy } from "../src";
 
 describe("Serializable", () => {
     describe("naming strategies", () => {
@@ -14,7 +14,7 @@ describe("Serializable", () => {
 
             const user = new UserSnake().fromJSON(
                 object,
-                { namingStrategy: new SnackCaseNamingStrategy() }
+                { namingStrategy: new SnakeCaseNamingStrategy() }
             );
 
             assert.isTrue(user instanceof UserSnake);

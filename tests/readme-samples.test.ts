@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 import("reflect-metadata"); // polyfill
 import { assert } from "chai";
-import { Serializable, SnackCaseNamingStrategy, jsonObject, jsonProperty, jsonName } from "../src";
+import { Serializable, SnakeCaseNamingStrategy, jsonObject, jsonProperty, jsonName } from "../src";
 
 describe("Serializable", () => {
     describe("readme samples", () => {
@@ -14,7 +14,7 @@ describe("Serializable", () => {
                 "very::strange::json:name": "I love jewelry"
             };
 
-            @jsonObject({ namingStrategy: new SnackCaseNamingStrategy() })
+            @jsonObject({ namingStrategy: new SnakeCaseNamingStrategy() })
             class User extends Serializable {
 
                 @jsonProperty(String, null)

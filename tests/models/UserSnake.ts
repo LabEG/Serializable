@@ -1,4 +1,4 @@
-import { jsonObject, SnackCaseNamingStrategy, Serializable, jsonProperty, jsonIgnore } from "../../src";
+import { jsonObject, SnakeCaseNamingStrategy, Serializable, jsonProperty, jsonIgnore } from "../../src";
 
 export class FriendSnake extends Serializable {
 
@@ -83,10 +83,10 @@ export class UserSnake extends Serializable {
 
 }
 
-@jsonObject({ namingStrategy: new SnackCaseNamingStrategy() })
+@jsonObject({ namingStrategy: new SnakeCaseNamingStrategy() })
 export class FriendSnakeObject extends FriendSnake {}
 
-@jsonObject({ namingStrategy: new SnackCaseNamingStrategy() })
+@jsonObject({ namingStrategy: new SnakeCaseNamingStrategy() })
 export class UserSnakeObject extends UserSnake {
 
     @jsonProperty([FriendSnakeObject])
