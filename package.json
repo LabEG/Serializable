@@ -6,14 +6,14 @@
     "typings": "./dist/index.d.ts",
     "dependencies": {},
     "devDependencies": {
-        "@labeg/code-style": "^1.0.73",
+        "@labeg/code-style": "^1.0.75",
         "@types/chai": "^4.2.11",
         "@types/mocha": "^7.0.2",
         "chai": "^4.2.0",
-        "mocha": "^7.2.0",
+        "mocha": "^8.0.1",
         "reflect-metadata": "^0.1.13",
         "ts-node": "^8.10.2",
-        "typescript": "^3.9.5"
+        "typescript": "^3.9.6"
     },
     "scripts": {
         "packages:manupdate": "rm -rf node_modules && npm install",

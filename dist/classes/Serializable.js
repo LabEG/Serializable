@@ -19,7 +19,6 @@ export class Serializable {
      * @memberof Serializable
      */
     static fromJSON(json, settings) {
-        // tslint:disable-next-line:static-this
         return new this().fromJSON(json, settings);
     }
     /**
@@ -144,7 +143,6 @@ export class Serializable {
                 (typeof jsonValue === "string" || jsonValue instanceof String || jsonValue instanceof Date)) {
                 // 0 year, 0 month, 0 days, 0 hours, 0 minutes, 0 seconds
                 let unicodeTime = new Date("0000-01-01T00:00:00.000").getTime();
-                // tslint:disable-next-line:strict-type-predicates
                 if (typeof jsonValue === "string") {
                     unicodeTime = Date.parse(jsonValue);
                 }
