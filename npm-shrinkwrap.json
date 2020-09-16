@@ -270,9 +270,9 @@
             }
         },
         "@labeg/code-style": {
-            "version": "1.0.81",
-            "resolved": "https://registry.npmjs.org/@labeg/code-style/-/code-style-1.0.81.tgz",
-            "integrity": "sha512-fwOGAU7zw2bn/A5uH23SgzbVFUdpq0y8urj7ZL45q93c3mzSVhTXvwUDzF3IgGqMVWeF1y9lH3wlYjrHIZvElQ==",
+            "version": "1.0.82",
+            "resolved": "https://registry.npmjs.org/@labeg/code-style/-/code-style-1.0.82.tgz",
+            "integrity": "sha512-OQuIOUzvz5jNkJXm51IemFr08S7XEIrrKXCF+s4fXfIL4GK2gy1DSrmVK/IECMbD1DehlHwwgaIiTd3Ar0lHhA==",
             "dev": true,
             "requires": {
                 "@typescript-eslint/eslint-plugin": "^4.1.1",

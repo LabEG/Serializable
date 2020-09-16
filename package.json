@@ -6,7 +6,7 @@
     "typings": "./dist/index.d.ts",
     "dependencies": {},
     "devDependencies": {
-        "@labeg/code-style": "^1.0.81",
+        "@labeg/code-style": "^1.0.82",
         "@types/chai": "^4.2.12",
         "@types/mocha": "^8.0.3",
         "chai": "^4.2.0",
