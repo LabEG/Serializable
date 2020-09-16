@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call, no-prototype-builtins */
 
-import { AcceptedTypes } from "../models/AcceptedType";
+import type { AcceptedTypes } from "../models/AcceptedType";
 import { SerializationSettings } from "../models/SerializationSettings";
 
 /**

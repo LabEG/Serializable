@@ -1,10 +1,8 @@
-/* eslint-disable no-shadow */
-/* eslint-disable no-undef */
 import("reflect-metadata"); // polyfill
 import { assert } from "chai";
 
-import { User, Friend } from "./models/User";
-import { FriendExt } from "./models/UserExt";
+import type { User as IUser, Friend as IFriend } from "./models/User";
+import type { FriendExt } from "./models/UserExt";
 
 describe("Serializable", () => {
     describe("json-generator", () => {
@@ -36,7 +34,7 @@ describe("Serializable", () => {
             assert.strictEqual(user.greeting, object.greeting, "greeting is not equal");
             assert.strictEqual(user.favoriteFruit, object.favoriteFruit, "favoriteFruit is not equal");
 
-            user.friends.forEach((friend: Friend, index: number) => {
+            user.friends.forEach((friend: IFriend, index: number) => {
                 assert.strictEqual(friend.id, object.friends[index].id, `friend ${index} id is not equal`);
                 assert.strictEqual(friend.name, object.friends[index].name, `friend ${index} name is not equal`);
             });
@@ -47,7 +45,7 @@ describe("Serializable", () => {
             const json = await import("./jsons/json-generator.json");
             const [object] = json;
 
-            const user: User = User.fromJSON(object);
+            const user: IUser = User.fromJSON(object);
 
             assert.isTrue(user instanceof User);
             assert.strictEqual(user.id, object.id, "id is not equal");
@@ -70,7 +68,7 @@ describe("Serializable", () => {
             assert.strictEqual(user.greeting, object.greeting, "greeting is not equal");
             assert.strictEqual(user.favoriteFruit, object.favoriteFruit, "favoriteFruit is not equal");
 
-            user.friends.forEach((friend: Friend, index: number) => {
+            user.friends.forEach((friend: IFriend, index: number) => {
                 assert.strictEqual(friend.id, object.friends[index].id, `friend ${index} id is not equal`);
                 assert.strictEqual(friend.name, object.friends[index].name, `friend ${index} name is not equal`);
             });
@@ -92,7 +90,7 @@ describe("Serializable", () => {
 
             const user = new User().fromJSON(json[0]);
             user.isExpanded = true;
-            const obj = JSON.parse(JSON.stringify(user)) as User;
+            const obj = JSON.parse(JSON.stringify(user)) as IUser;
 
             assert.isUndefined(obj.isExpanded);
         });

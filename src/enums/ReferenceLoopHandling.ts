@@ -1,5 +1,5 @@
 export enum ReferenceLoopHandling {
-    Error,
-    Ignore,
-    Serialize
+    Error = 0,
+    Ignore = 1,
+    Serialize = 2
 }

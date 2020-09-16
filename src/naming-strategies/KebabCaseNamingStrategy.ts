@@ -1,4 +1,4 @@
-import { INamingStrategy } from "./INamingStrategy";
+import type { INamingStrategy } from "./INamingStrategy";
 
 export class KebabCaseNamingStrategy implements INamingStrategy {
 

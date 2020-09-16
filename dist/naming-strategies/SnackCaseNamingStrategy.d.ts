@@ -1,4 +1,4 @@
-import { INamingStrategy } from "./INamingStrategy";
+import type { INamingStrategy } from "./INamingStrategy";
 export declare class SnackCaseNamingStrategy implements INamingStrategy {
     constructor();
     fromJsonName(name: string): string;

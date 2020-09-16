@@ -1,4 +1,4 @@
 export enum DateFormatHandling {
-    IsoDateFormat,
-    MicrosoftDateFormat // not supported yet
+    IsoDateFormat = 0,
+    MicrosoftDateFormat = 1 // not supported yet
 }

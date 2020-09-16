@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 import("reflect-metadata"); // polyfill
 import { assert } from "chai";
-import { FriendSnake } from "./models/UserSnake";
+import type { FriendSnake } from "./models/UserSnake";
 import { SnakeCaseNamingStrategy } from "../src";
 
 describe("Serializable", () => {
