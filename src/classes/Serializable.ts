@@ -228,7 +228,8 @@ export class Serializable {
             ) {
                 const TypeConstructor: new () => Serializable = acceptedType as new () => Serializable;
 
-                return new TypeConstructor().fromJSON(jsonValue as object, settings);
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                return new TypeConstructor().fromJSON(jsonValue!, settings);
             } else if (// instance any other class, not Serializable, for parse from other classes instance
                 acceptedType instanceof Function &&
                 jsonValue instanceof acceptedType
@@ -240,7 +241,7 @@ export class Serializable {
         // process wrong type and return default value
         this.onWrongType(prop, "is invalid", jsonValue);
 
-        return Reflect.get(this, prop) as Object | null | void;
+        return Reflect.get(this, prop) as Object | void | null;
     }
 
     protected getJsonPropertyName(thisProperty: string, settings?: Partial<SerializationSettings>): string {

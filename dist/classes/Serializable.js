@@ -175,6 +175,7 @@ export class Serializable {
                 jsonValue !== void 0 &&
                 typeof jsonValue === "object" && !Array.isArray(jsonValue)) {
                 const TypeConstructor = acceptedType;
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 return new TypeConstructor().fromJSON(jsonValue, settings);
             }
             else if ( // instance any other class, not Serializable, for parse from other classes instance
