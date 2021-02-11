@@ -7,7 +7,7 @@ BooleanConstructor |
 NumberConstructor |
 StringConstructor |
 ObjectConstructor |
-(new (...args: (Object | void | null)[]) => object) |
+(new (...args: (Object | null | void)[]) => object) |
 // extended deserialization
 DateConstructor |
 SymbolConstructor; // add ArrayBufferConstructor, MapConstructor, RegExpConstructor and many others...

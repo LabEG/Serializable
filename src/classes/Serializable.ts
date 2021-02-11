@@ -241,7 +241,7 @@ export class Serializable {
         // process wrong type and return default value
         this.onWrongType(prop, "is invalid", jsonValue);
 
-        return Reflect.get(this, prop) as Object | void | null;
+        return Reflect.get(this, prop) as Object | null | void;
     }
 
     protected getJsonPropertyName(thisProperty: string, settings?: Partial<SerializationSettings>): string {
