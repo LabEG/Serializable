@@ -1,6 +1,6 @@
 /* eslint-disable arrow-body-style */
 
-import { AcceptedTypes } from "./../models/AcceptedType";
+import type { AcceptedTypes } from "./../models/AcceptedType";
 
 export const jsonProperty = (...args: AcceptedTypes[]): PropertyDecorator => {
     return (target: object, propertyKey: string | symbol): void => {

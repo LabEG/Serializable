@@ -2,7 +2,7 @@
 /* eslint-disable no-undef */
 import("reflect-metadata"); // polyfill
 import { assert } from "chai";
-import { FriendSnake } from "./models/UserSnake";
+import type { FriendSnake } from "./models/UserSnake";
 import { SnakeCaseNamingStrategy } from "../src";
 
 describe("Serializable", () => {
@@ -84,7 +84,7 @@ describe("Serializable", () => {
             const [object] = json;
 
             const user = new UserSnakeObject().fromJSON(object);
-            const serialized = JSON.parse(JSON.stringify(user)) as {[key: string]: Object};
+            const serialized = JSON.parse(JSON.stringify(user)) as Record<string, Object>;
 
             assert.strictEqual(serialized.id_snake, object.id_snake, "id_snake is not equal");
             assert.strictEqual(serialized.index_snake, object.index_snake, "index_snake is not equal");
@@ -106,7 +106,7 @@ describe("Serializable", () => {
             assert.strictEqual(serialized.greeting_snake, object.greeting_snake, "greeting_snake is not equal");
             assert.strictEqual(serialized.favorite_fruit_snake, object.favorite_fruit_snake, "favorite_fruit_snake is not equal");
 
-            (serialized.friends_snake as []).forEach((friend: {[key: string]: Object}, index: number) => {
+            (serialized.friends_snake as []).forEach((friend: Record<string, Object>, index: number) => {
                 assert.strictEqual(friend.id_snake, object.friends_snake[index].id_snake, `friend ${index} id_snake is not equal`);
                 assert.strictEqual(friend.name_snake, object.friends_snake[index].name_snake, `friend ${index} name_snake is not equal`);
             });

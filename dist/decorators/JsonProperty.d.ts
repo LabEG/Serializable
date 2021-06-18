@@ -1,2 +1,2 @@
-import { AcceptedTypes } from "./../models/AcceptedType";
+import type { AcceptedTypes } from "./../models/AcceptedType";
 export declare const jsonProperty: (...args: AcceptedTypes[]) => PropertyDecorator;

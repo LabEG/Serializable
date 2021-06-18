@@ -1,4 +1,4 @@
-import { AcceptedTypes } from "../models/AcceptedType";
+import type { AcceptedTypes } from "../models/AcceptedType";
 import { SerializationSettings } from "../models/SerializationSettings";
 /**
  * Class how help you deserialize object to classes.

@@ -15,5 +15,6 @@ export { LogLevels } from "./enums/LogLevels";
 // settings
 export { SerializationSettings } from "./models/SerializationSettings";
 export { SnackCaseNamingStrategy } from "./naming-strategies/SnackCaseNamingStrategy";
+export { SnakeCaseNamingStrategy } from "./naming-strategies/SnakeCaseNamingStrategy";
 export { PascalCaseNamingStrategy } from "./naming-strategies/PascalCaseNamingStrategy";
 export { KebabCaseNamingStrategy } from "./naming-strategies/KebabCaseNamingStrategy";

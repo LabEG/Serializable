@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 
-import { SerializationSettings } from "../models/SerializationSettings";
+import type { SerializationSettings } from "../models/SerializationSettings";
 import { Serializable } from "../classes/Serializable";
 
 export const jsonObject = (settings?: Partial<SerializationSettings>, extend?: boolean): ClassDecorator => (target: object): void => {

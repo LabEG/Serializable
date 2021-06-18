@@ -1,4 +1,4 @@
 export enum MissingMemberHandling {
-    Ignore,
-    Error // not supported yet
+    Ignore = 0,
+    Error = 1 // not supported yet
 }

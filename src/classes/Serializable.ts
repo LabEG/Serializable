@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call, no-prototype-builtins */
 
-import { AcceptedTypes } from "../models/AcceptedType";
+import type { AcceptedTypes } from "../models/AcceptedType";
 import { SerializationSettings } from "../models/SerializationSettings";
 
 /**
@@ -36,7 +36,6 @@ export class Serializable {
         json: object,
         settings?: Partial<SerializationSettings>
     ): T {
-        // tslint:disable-next-line:static-this
         return new this().fromJSON(json, settings);
     }
 
@@ -188,7 +187,7 @@ export class Serializable {
             ) {
                 // 0 year, 0 month, 0 days, 0 hours, 0 minutes, 0 seconds
                 let unicodeTime: number = new Date("0000-01-01T00:00:00.000").getTime();
-                // tslint:disable-next-line:strict-type-predicates
+
                 if (typeof jsonValue === "string") {
                     unicodeTime = Date.parse(jsonValue);
                 } else if (jsonValue instanceof String) {
@@ -229,7 +228,8 @@ export class Serializable {
             ) {
                 const TypeConstructor: new () => Serializable = acceptedType as new () => Serializable;
 
-                return new TypeConstructor().fromJSON(jsonValue as object, settings);
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                return new TypeConstructor().fromJSON(jsonValue!, settings);
             } else if (// instance any other class, not Serializable, for parse from other classes instance
                 acceptedType instanceof Function &&
                 jsonValue instanceof acceptedType

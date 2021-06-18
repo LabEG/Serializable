@@ -5,7 +5,7 @@ import { NullValueHandling } from "../enums/NullValueHandling";
 import { ReferenceLoopHandling } from "../enums/ReferenceLoopHandling";
 import { MissingMemberHandling } from "../enums/MissingMemberHandling";
 import { DateFormatHandling } from "../enums/DateFormatHandling";
-import { INamingStrategy } from "../naming-strategies/INamingStrategy";
+import type { INamingStrategy } from "../naming-strategies/INamingStrategy";
 
 // from newtonsoft https://www.newtonsoft.com/json/help/html/SerializationSettings.htm
 export class SerializationSettings {
