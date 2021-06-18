@@ -1,6 +1,4 @@
-/* eslint-disable init-declarations */
-
-declare module "*.json" { // fix for ts-node
-    const value: object;
+declare module "*.json" {
+    const value: Record<string, unknown>;
     export default value;
 }

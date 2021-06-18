@@ -4,7 +4,7 @@ import { NullValueHandling } from "../enums/NullValueHandling";
 import { ReferenceLoopHandling } from "../enums/ReferenceLoopHandling";
 import { MissingMemberHandling } from "../enums/MissingMemberHandling";
 import { DateFormatHandling } from "../enums/DateFormatHandling";
-// from newtonsoft https://www.newtonsoft.com/json/help/html/SerializationSettings.htm
+// From newtonsoft https://www.newtonsoft.com/json/help/html/SerializationSettings.htm
 export class SerializationSettings {
     constructor() {
         this.dateFormatHandling = DateFormatHandling.IsoDateFormat;

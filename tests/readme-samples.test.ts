@@ -1,8 +1,7 @@
-/* eslint-disable no-shadow */
-/* eslint-disable no-undef */
-import("reflect-metadata"); // polyfill
-import { assert } from "chai";
-import { Serializable, SnakeCaseNamingStrategy, jsonObject, jsonProperty, jsonName } from "../src";
+/* eslint-disable camelcase */
+import("reflect-metadata"); // Polyfill
+import {assert} from "chai";
+import {Serializable, SnakeCaseNamingStrategy, jsonObject, jsonProperty, jsonName} from "../src";
 
 describe("Serializable", () => {
     describe("readme samples", () => {
@@ -14,7 +13,7 @@ describe("Serializable", () => {
                 "very::strange::json:name": "I love jewelry"
             };
 
-            @jsonObject({ namingStrategy: new SnakeCaseNamingStrategy() })
+            @jsonObject({namingStrategy: new SnakeCaseNamingStrategy()})
             class User extends Serializable {
 
                 @jsonProperty(String, null)
@@ -34,10 +33,10 @@ describe("Serializable", () => {
 
             const user = new User().fromJSON(json);
 
-            assert.strictEqual(user.firstName, json.first_name); // true
-            assert.strictEqual(user.lastName, json.last_name); // true
-            assert.strictEqual(user.dateOfBirth?.toISOString(), json.date_of_birth); // true
-            assert.strictEqual(user.veryStrangePropertyName, json["very::strange::json:name"]); // true
+            assert.strictEqual(user.firstName, json.first_name); // True
+            assert.strictEqual(user.lastName, json.last_name); // True
+            assert.strictEqual(user.dateOfBirth?.toISOString(), json.date_of_birth); // True
+            assert.strictEqual(user.veryStrangePropertyName, json["very::strange::json:name"]); // True
         });
     });
 });

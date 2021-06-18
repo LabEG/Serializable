@@ -1,11 +1,12 @@
-import { jsonProperty } from "../../src/decorators/JsonProperty";
-import { jsonIgnore } from "../../src/decorators/JsonIgnore";
-import { jsonObject } from "../../src/decorators/JsonObject";
+/* eslint-disable max-classes-per-file */
+import {jsonProperty} from "../../src/decorators/JsonProperty";
+import {jsonIgnore} from "../../src/decorators/JsonIgnore";
+import {jsonObject} from "../../src/decorators/JsonObject";
 
 @jsonObject(void 0, true)
 export class FriendExt {
 
-    public fromJSON!: (json: object) => this;
+    public fromJSON!: (json: Record<string, unknown>) => this;
 
     @jsonProperty(Number)
     public id: number = 0;
@@ -18,7 +19,7 @@ export class FriendExt {
 @jsonObject(void 0, true)
 export class UserExt {
 
-    public fromJSON!: (json: object) => this;
+    public fromJSON!: (json: Record<string, unknown>) => this;
 
     @jsonProperty(String)
     public id?: string = "";

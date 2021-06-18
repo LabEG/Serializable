@@ -1,6 +1,4 @@
-/* eslint-disable arrow-body-style */
-export const jsonIgnore = () => {
-    return (target, propertyKey) => {
-        Reflect.defineMetadata("ts-serializable:jsonIgnore", true, target, propertyKey);
-    };
+/* eslint-disable @typescript-eslint/ban-types */
+export const jsonIgnore = () => (target, propertyKey) => {
+    Reflect.defineMetadata("ts-serializable:jsonIgnore", true, target, propertyKey);
 };

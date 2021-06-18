@@ -1,4 +1,4 @@
-import { Serializable, jsonProperty, jsonName } from "../../src";
+import {Serializable, jsonProperty, jsonName} from "../../src";
 
 export class UserNaming extends Serializable {
 

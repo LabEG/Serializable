@@ -1,13 +1,15 @@
-import("reflect-metadata"); // polyfill
-import { assert } from "chai";
+/* eslint-disable max-statements */
+/* eslint-disable max-lines-per-function */
+import("reflect-metadata"); // Polyfill
+import {assert} from "chai";
 
-import type { User as IUser, Friend as IFriend } from "./models/User";
-import type { FriendExt } from "./models/UserExt";
+import type {User as IUser, Friend as IFriend} from "./models/User";
+import type {FriendExt} from "./models/UserExt";
 
 describe("Serializable", () => {
     describe("json-generator", () => {
-        it("user from method fromJSON must be instance of User", async() => {
-            const { User } = await import("./models/User");
+        it("user from method fromJSON must be instance of User", async () => {
+            const {User} = await import("./models/User");
             const json = await import("./jsons/json-generator.json");
             const [object] = json;
 
@@ -40,8 +42,8 @@ describe("Serializable", () => {
             });
         });
 
-        it("user from static method fromJSON must be instance of User", async() => {
-            const { User } = await import("./models/User");
+        it("user from static method fromJSON must be instance of User", async () => {
+            const {User} = await import("./models/User");
             const json = await import("./jsons/json-generator.json");
             const [object] = json;
 
@@ -74,9 +76,9 @@ describe("Serializable", () => {
             });
         });
 
-        it("serializable must support deep copy", async() => {
-            const { User } = await import("./models/User");
-            const json: object[] = await import("./jsons/json-generator.json");
+        it("serializable must support deep copy", async () => {
+            const {User} = await import("./models/User");
+            const json: Record<string, unknown>[] = await import("./jsons/json-generator.json");
 
             const user1 = new User().fromJSON(json[0]);
             const user2 = new User().fromJSON(user1);
@@ -84,9 +86,9 @@ describe("Serializable", () => {
             assert.deepEqual(user1, user2);
         });
 
-        it("user property marked as jsonIgnore must by dropped", async() => {
-            const { User } = await import("./models/User");
-            const json: object[] = await import("./jsons/json-generator.json");
+        it("user property marked as jsonIgnore must by dropped", async () => {
+            const {User} = await import("./models/User");
+            const json: Record<string, unknown>[] = await import("./jsons/json-generator.json");
 
             const user = new User().fromJSON(json[0]);
             user.isExpanded = true;
@@ -95,8 +97,8 @@ describe("Serializable", () => {
             assert.isUndefined(obj.isExpanded);
         });
 
-        it("class can be extended by decorator jsonObject", async() => {
-            const { UserExt } = await import("./models/UserExt");
+        it("class can be extended by decorator jsonObject", async () => {
+            const {UserExt} = await import("./models/UserExt");
             const json = await import("./jsons/json-generator.json");
             const [object] = json;
 

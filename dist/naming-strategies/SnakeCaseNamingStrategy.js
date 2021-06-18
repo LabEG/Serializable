@@ -1,11 +1,11 @@
-export class KebabCaseNamingStrategy {
+export class SnakeCaseNamingStrategy {
     fromJsonName(name) {
-        return name.replace(/-\w/gu, (group) => group[1].toUpperCase());
+        return name.replace(/_\w/gu, (group) => group[1].toUpperCase());
     }
     toJsonName(name) {
         return name
             .split(/(?=[A-Z])/u)
-            .join("-")
+            .join("_")
             .toLowerCase();
     }
 }

@@ -1,3 +1,11 @@
+/* eslint-disable @typescript-eslint/no-invalid-void-type */
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
+/* eslint-disable complexity */
+/* eslint-disable max-lines-per-function */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
+/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable max-statements */
 /* eslint-disable @typescript-eslint/no-unsafe-call, no-prototype-builtins */
 import { SerializationSettings } from "../models/SerializationSettings";
 /**
@@ -41,9 +49,9 @@ export class Serializable {
         }
         // eslint-disable-next-line guard-for-in
         for (const thisProp in this) {
-            // naming strategy and jsonName decorator
+            // Naming strategy and jsonName decorator
             let jsonProp = this.getJsonPropertyName(thisProp, settings);
-            // for deep copy
+            // For deep copy
             if (!(unknownJson === null || unknownJson === void 0 ? void 0 : unknownJson.hasOwnProperty(jsonProp)) && (unknownJson === null || unknownJson === void 0 ? void 0 : unknownJson.hasOwnProperty(thisProp))) {
                 jsonProp = thisProp;
             }
@@ -68,7 +76,7 @@ export class Serializable {
         const fromJson = Object.assign({}, this);
         const toJson = {};
         for (const prop in fromJson) {
-            // json.hasOwnProperty(prop) - preserve for deserialization for other classes with methods
+            // Json.hasOwnProperty(prop) - preserve for deserialization for other classes with methods
             if (fromJson.hasOwnProperty(prop) && this.hasOwnProperty(prop)) {
                 if (Reflect.getMetadata("ts-serializable:jsonIgnore", this.constructor.prototype, prop) || false) {
                     // eslint-disable-next-line no-continue
@@ -105,35 +113,34 @@ export class Serializable {
      * @returns {(Object | null | void)}
      * @memberof Serializable
      */
-    // eslint-disable-next-line complexity
     deserializeProperty(prop, acceptedTypes, jsonValue, settings) {
-        for (const acceptedType of acceptedTypes) { // type Symbol is not a property
-            if ( // null
+        for (const acceptedType of acceptedTypes) { // Type Symbol is not a property
+            if ( // Null
             acceptedType === null &&
                 jsonValue === null) {
                 return null;
             }
-            else if ( // void, for deep copy classes only, json don't have void type
+            else if ( // Void, for deep copy classes only, json don't have void type
             acceptedType === void 0 &&
                 jsonValue === void 0) {
                 return void 0;
             }
-            else if ( // boolean, Boolean
+            else if ( // Boolean, Boolean
             acceptedType === Boolean &&
                 (typeof jsonValue === "boolean" || jsonValue instanceof Boolean)) {
                 return Boolean(jsonValue);
             }
-            else if ( // number, Number
+            else if ( // Number, Number
             acceptedType === Number &&
                 (typeof jsonValue === "number" || jsonValue instanceof Number)) {
                 return Number(jsonValue);
             }
-            else if ( // string, String
+            else if ( // String, String
             acceptedType === String &&
                 (typeof jsonValue === "string" || jsonValue instanceof String)) {
                 return String(jsonValue);
             }
-            else if ( // object, Object
+            else if ( // Object, Object
             acceptedType === Object &&
                 (typeof jsonValue === "object")) {
                 return Object(jsonValue);
@@ -152,7 +159,7 @@ export class Serializable {
                 else if (jsonValue instanceof Date) {
                     unicodeTime = jsonValue.getTime();
                 }
-                if (isNaN(unicodeTime)) { // preserve invalid time
+                if (isNaN(unicodeTime)) { // Preserve invalid time
                     this.onWrongType(prop, "is invalid date", jsonValue);
                 }
                 return new Date(unicodeTime);
@@ -178,13 +185,13 @@ export class Serializable {
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 return new TypeConstructor().fromJSON(jsonValue, settings);
             }
-            else if ( // instance any other class, not Serializable, for parse from other classes instance
+            else if ( // Instance any other class, not Serializable, for parse from other classes instance
             acceptedType instanceof Function &&
                 jsonValue instanceof acceptedType) {
                 return jsonValue;
             }
         }
-        // process wrong type and return default value
+        // Process wrong type and return default value
         this.onWrongType(prop, "is invalid", jsonValue);
         return Reflect.get(this, prop);
     }
@@ -202,7 +209,7 @@ export class Serializable {
         }
         if (Serializable.defaultSettings.namingStrategy) {
             const { namingStrategy } = Serializable.defaultSettings;
-            return (_c = namingStrategy === null || namingStrategy === void 0 ? void 0 : namingStrategy.toJsonName(thisProperty)) !== null && _c !== void 0 ? _c : thisProperty;
+            return (_c = namingStrategy.toJsonName(thisProperty)) !== null && _c !== void 0 ? _c : thisProperty;
         }
         return thisProperty;
     }

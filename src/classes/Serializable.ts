@@ -1,7 +1,15 @@
+/* eslint-disable @typescript-eslint/no-invalid-void-type */
+/* eslint-disable @typescript-eslint/no-unnecessary-condition */
+/* eslint-disable complexity */
+/* eslint-disable max-lines-per-function */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/strict-boolean-expressions */
+/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable max-statements */
 /* eslint-disable @typescript-eslint/no-unsafe-call, no-prototype-builtins */
 
-import type { AcceptedTypes } from "../models/AcceptedType";
-import { SerializationSettings } from "../models/SerializationSettings";
+import type {AcceptedTypes} from "../models/AcceptedType";
+import {SerializationSettings} from "../models/SerializationSettings";
 
 /**
  * Class how help you deserialize object to classes.
@@ -49,7 +57,7 @@ export class Serializable {
      * @returns {this}
      * @memberof Serializable
      */
-    public fromJSON(json: object, settings?: Partial<SerializationSettings>): this {
+    public fromJSON (json: object, settings?: Partial<SerializationSettings>): this {
         const unknownJson: unknown = json;
 
         if (
@@ -63,10 +71,10 @@ export class Serializable {
 
         // eslint-disable-next-line guard-for-in
         for (const thisProp in this) {
-            // naming strategy and jsonName decorator
+            // Naming strategy and jsonName decorator
             let jsonProp: string = this.getJsonPropertyName(thisProp, settings);
 
-            // for deep copy
+            // For deep copy
             if (!unknownJson?.hasOwnProperty(jsonProp) && unknownJson?.hasOwnProperty(thisProp)) {
                 jsonProp = thisProp;
             }
@@ -96,12 +104,12 @@ export class Serializable {
      * @returns {object}
      * @memberof Serializable
      */
-    public toJSON(): object {
-        const fromJson: object = { ...this };
+    public toJSON (): object {
+        const fromJson: object = {...this};
         const toJson: object = {};
 
         for (const prop in fromJson) {
-            // json.hasOwnProperty(prop) - preserve for deserialization for other classes with methods
+            // Json.hasOwnProperty(prop) - preserve for deserialization for other classes with methods
             if (fromJson.hasOwnProperty(prop) && this.hasOwnProperty(prop)) {
                 if (Reflect.getMetadata("ts-serializable:jsonIgnore", this.constructor.prototype, prop) || false) {
                     // eslint-disable-next-line no-continue
@@ -127,7 +135,7 @@ export class Serializable {
      * @param {(unknown)} jsonValue
      * @memberof Serializable
      */
-    protected onWrongType(prop: string, message: string, jsonValue: unknown): void {
+    protected onWrongType (prop: string, message: string, jsonValue: unknown): void {
         // eslint-disable-next-line no-console
         console.error(`${this.constructor.name}.fromJSON: json.${prop} ${message}:`, jsonValue);
     }
@@ -143,40 +151,39 @@ export class Serializable {
      * @returns {(Object | null | void)}
      * @memberof Serializable
      */
-    // eslint-disable-next-line complexity
-    protected deserializeProperty(
+    protected deserializeProperty (
         prop: string,
         acceptedTypes: AcceptedTypes[],
         jsonValue: unknown,
         settings?: Partial<SerializationSettings>
     ): unknown {
-        for (const acceptedType of acceptedTypes) { // type Symbol is not a property
-            if (// null
+        for (const acceptedType of acceptedTypes) { // Type Symbol is not a property
+            if (// Null
                 acceptedType === null &&
                 jsonValue === null
             ) {
                 return null;
-            } else if (// void, for deep copy classes only, json don't have void type
+            } else if (// Void, for deep copy classes only, json don't have void type
                 acceptedType === void 0 &&
                 jsonValue === void 0
             ) {
                 return void 0;
-            } else if (// boolean, Boolean
+            } else if (// Boolean, Boolean
                 acceptedType === Boolean &&
                 (typeof jsonValue === "boolean" || jsonValue instanceof Boolean)
             ) {
                 return Boolean(jsonValue);
-            } else if (// number, Number
+            } else if (// Number, Number
                 acceptedType === Number &&
                 (typeof jsonValue === "number" || jsonValue instanceof Number)
             ) {
                 return Number(jsonValue);
-            } else if (// string, String
+            } else if (// String, String
                 acceptedType === String &&
                 (typeof jsonValue === "string" || jsonValue instanceof String)
             ) {
                 return String(jsonValue);
-            } else if (// object, Object
+            } else if (// Object, Object
                 acceptedType === Object &&
                 (typeof jsonValue === "object")
             ) {
@@ -195,7 +202,7 @@ export class Serializable {
                 } else if (jsonValue instanceof Date) {
                     unicodeTime = jsonValue.getTime();
                 }
-                if (isNaN(unicodeTime)) { // preserve invalid time
+                if (isNaN(unicodeTime)) { // Preserve invalid time
                     this.onWrongType(prop, "is invalid date", jsonValue);
                 }
 
@@ -230,7 +237,7 @@ export class Serializable {
 
                 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 return new TypeConstructor().fromJSON(jsonValue!, settings);
-            } else if (// instance any other class, not Serializable, for parse from other classes instance
+            } else if (// Instance any other class, not Serializable, for parse from other classes instance
                 acceptedType instanceof Function &&
                 jsonValue instanceof acceptedType
             ) {
@@ -238,13 +245,13 @@ export class Serializable {
             }
         }
 
-        // process wrong type and return default value
+        // Process wrong type and return default value
         this.onWrongType(prop, "is invalid", jsonValue);
 
         return Reflect.get(this, prop) as Object | null | void;
     }
 
-    protected getJsonPropertyName(thisProperty: string, settings?: Partial<SerializationSettings>): string {
+    protected getJsonPropertyName (thisProperty: string, settings?: Partial<SerializationSettings>): string {
         if (Reflect.hasMetadata("ts-serializable:jsonName", this.constructor.prototype, thisProperty)) {
             return Reflect.getMetadata("ts-serializable:jsonName", this.constructor.prototype, thisProperty) as string;
         }
@@ -262,8 +269,8 @@ export class Serializable {
         }
 
         if (Serializable.defaultSettings.namingStrategy) {
-            const { namingStrategy } = Serializable.defaultSettings;
-            return namingStrategy?.toJsonName(thisProperty) ?? thisProperty;
+            const {namingStrategy} = Serializable.defaultSettings;
+            return namingStrategy.toJsonName(thisProperty) ?? thisProperty;
         }
 
         return thisProperty;
