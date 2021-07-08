@@ -1,8 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.DateFormatHandling = void 0;
-var DateFormatHandling;
+export var DateFormatHandling;
 (function (DateFormatHandling) {
     DateFormatHandling[DateFormatHandling["IsoDateFormat"] = 0] = "IsoDateFormat";
     DateFormatHandling[DateFormatHandling["MicrosoftDateFormat"] = 1] = "MicrosoftDateFormat"; // Not supported yet
-})(DateFormatHandling = exports.DateFormatHandling || (exports.DateFormatHandling = {}));
+})(DateFormatHandling || (DateFormatHandling = {}));

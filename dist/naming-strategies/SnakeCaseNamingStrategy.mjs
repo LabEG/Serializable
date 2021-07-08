@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.SnakeCaseNamingStrategy = void 0;
-class SnakeCaseNamingStrategy {
+export class SnakeCaseNamingStrategy {
     fromJsonName(name) {
         return name.replace(/_\w/gu, (group) => group[1].toUpperCase());
     }
@@ -12,4 +9,3 @@ class SnakeCaseNamingStrategy {
             .toLowerCase();
     }
 }
-exports.SnakeCaseNamingStrategy = SnakeCaseNamingStrategy;

@@ -3,6 +3,7 @@
     "version": "2.0.36",
     "description": "Serialization and deserializtion for classes",
     "main": "./dist/index.js",
+    "module": "./dist/index.mjs",
     "typings": "./dist/index.d.ts",
     "dependencies": {},
     "devDependencies": {
@@ -18,7 +19,10 @@
     "scripts": {
         "cs:eslint": "eslint --fix -c .eslintrc.js --ext .tsx,.ts,.jsx,.js ./src/ ./tests/",
         "test": "mocha --reporter spec --require ts-node/register tests/*.test.ts",
-        "build": "rm -rf dist/ && tsc --project tsconfigbuild.json",
+        "build:esnext": "tsc --project tsconfigbuild.json",
+        "build:commonjs": "tsc --project tsconfigbuild.es5.json",
+        "build:rename": "find ./dist/ -name \"*.js\" -exec rename .js .mjs {} +",
+        "build": "rm -rf dist/ && npm run build:esnext && npm run build:rename && npm run build:commonjs",
         "prepublishOnly": "npm run cs:eslint && npm run build && npm run test && npm version patch"
     },
     "repository": {

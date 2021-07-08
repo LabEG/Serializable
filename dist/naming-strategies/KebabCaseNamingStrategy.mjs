@@ -1,7 +1,4 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.KebabCaseNamingStrategy = void 0;
-class KebabCaseNamingStrategy {
+export class KebabCaseNamingStrategy {
     fromJsonName(name) {
         return name.replace(/-\w/gu, (group) => group[1].toUpperCase());
     }
@@ -12,4 +9,3 @@ class KebabCaseNamingStrategy {
             .toLowerCase();
     }
 }
-exports.KebabCaseNamingStrategy = KebabCaseNamingStrategy;
