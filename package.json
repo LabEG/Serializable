@@ -7,13 +7,13 @@
     "typings": "./dist/index.d.ts",
     "dependencies": {},
     "devDependencies": {
-        "@labeg/code-style": "^2.0.16",
+        "@labeg/code-style": "^2.0.17",
         "@types/chai": "^4.2.21",
         "@types/mocha": "^8.2.3",
         "chai": "^4.3.4",
         "mocha": "^9.0.2",
         "reflect-metadata": "^0.1.13",
-        "ts-node": "^10.0.0",
+        "ts-node": "^10.1.0",
         "typescript": "^4.3.5"
     },
     "scripts": {
