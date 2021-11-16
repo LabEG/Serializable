@@ -10,7 +10,7 @@ export { NullValueHandling } from "./enums/NullValueHandling";
 export { ReferenceLoopHandling } from "./enums/ReferenceLoopHandling";
 export { LogLevels } from "./enums/LogLevels";
 export { SerializationSettings } from "./models/SerializationSettings";
-export { INamingStrategy } from "./naming-strategies/INamingStrategy";
+export type { INamingStrategy } from "./naming-strategies/INamingStrategy";
 export { SnakeCaseNamingStrategy } from "./naming-strategies/SnakeCaseNamingStrategy";
 export { PascalCaseNamingStrategy } from "./naming-strategies/PascalCaseNamingStrategy";
 export { KebabCaseNamingStrategy } from "./naming-strategies/KebabCaseNamingStrategy";
