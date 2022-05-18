@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-types */
-
-
 export const jsonName = (jsonPropertyName: string): PropertyDecorator => (
     target: object,
     propertyKey: string | symbol

@@ -1,11 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/ban-types */
-/* eslint-disable max-statements */
-/* eslint-disable @typescript-eslint/unbound-method */
 /* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-
+/* eslint-disable @typescript-eslint/unbound-method */
+/* eslint-disable max-statements */
 import type {SerializationSettings} from "../models/SerializationSettings";
 import {Serializable} from "../classes/Serializable";
 

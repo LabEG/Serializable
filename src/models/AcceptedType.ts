@@ -1,14 +1,14 @@
-/* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable @typescript-eslint/sort-type-union-intersection-members */
 /* eslint-disable @typescript-eslint/no-invalid-void-type */
 /* eslint-disable @typescript-eslint/no-type-alias */
+
 export type AcceptedType = null |
 void |
 BooleanConstructor |
 NumberConstructor |
 StringConstructor |
 ObjectConstructor |
-(new (...args: (Object | null | void)[]) => object) |
+(new (...args: unknown[]) => object) |
 // Extended deserialization
 DateConstructor |
 SymbolConstructor; // Add ArrayBufferConstructor, MapConstructor, RegExpConstructor and many others...

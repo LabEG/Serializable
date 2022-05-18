@@ -1,12 +1,9 @@
-/* eslint-disable @typescript-eslint/no-invalid-void-type */
+/* eslint-disable no-prototype-builtins */
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 /* eslint-disable complexity */
 /* eslint-disable max-lines-per-function */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
-/* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable max-statements */
-/* eslint-disable @typescript-eslint/no-unsafe-call, no-prototype-builtins */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 
 import type {AcceptedTypes} from "../models/AcceptedType";
 import {SerializationSettings} from "../models/SerializationSettings";
@@ -104,21 +101,17 @@ export class Serializable {
      * @returns {object}
      * @memberof Serializable
      */
-    public toJSON (): object {
-        const fromJson: object = {...this};
-        const toJson: object = {};
+    public toJSON (): Record<string, unknown> {
+        const fromJson: this = {...this};
+        const toJson: Record<string, unknown> = {};
 
         for (const prop in fromJson) {
             // Json.hasOwnProperty(prop) - preserve for deserialization for other classes with methods
             if (fromJson.hasOwnProperty(prop) && this.hasOwnProperty(prop)) {
-                if (Reflect.getMetadata("ts-serializable:jsonIgnore", this.constructor.prototype, prop) || false) {
-                    // eslint-disable-next-line no-continue
-                    continue;
+                if (Reflect.getMetadata("ts-serializable:jsonIgnore", this.constructor.prototype, prop) !== true) {
+                    const toProp = this.getJsonPropertyName(prop);
+                    Reflect.set(toJson, toProp, Reflect.get(fromJson, prop));
                 }
-
-                const toProp = this.getJsonPropertyName(prop);
-
-                Reflect.set(toJson, toProp, Reflect.get(fromJson, prop));
             }
         }
 
@@ -187,7 +180,7 @@ export class Serializable {
                 acceptedType === Object &&
                 (typeof jsonValue === "object")
             ) {
-                return Object(jsonValue) as Object;
+                return Object(jsonValue);
             } else if (// Date
                 acceptedType === Date &&
                 (typeof jsonValue === "string" || jsonValue instanceof String || jsonValue instanceof Date)
@@ -227,7 +220,7 @@ export class Serializable {
                 !Array.isArray(acceptedType) &&
                 (
                     acceptedType.prototype instanceof Serializable ||
-                    Reflect.getMetadata("ts-serializable:jsonObjectExtended", acceptedType)
+                    Boolean(Reflect.getMetadata("ts-serializable:jsonObjectExtended", acceptedType))
                 ) &&
                 jsonValue !== null &&
                 jsonValue !== void 0 &&
@@ -235,7 +228,6 @@ export class Serializable {
             ) {
                 const TypeConstructor: new () => Serializable = acceptedType as new () => Serializable;
 
-                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 return new TypeConstructor().fromJSON(jsonValue, settings);
             } else if (// Instance any other class, not Serializable, for parse from other classes instance
                 acceptedType instanceof Function &&
@@ -248,7 +240,7 @@ export class Serializable {
         // Process wrong type and return default value
         this.onWrongType(prop, "is invalid", jsonValue);
 
-        return Reflect.get(this, prop) as Object | null | void;
+        return Reflect.get(this, prop);
     }
 
     protected getJsonPropertyName (thisProperty: string, settings?: Partial<SerializationSettings>): string {
