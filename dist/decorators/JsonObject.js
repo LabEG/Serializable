@@ -1,11 +1,4 @@
 "use strict";
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/ban-types */
-/* eslint-disable max-statements */
-/* eslint-disable @typescript-eslint/unbound-method */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.jsonObject = void 0;
 const Serializable_1 = require("../classes/Serializable");

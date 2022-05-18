@@ -44,7 +44,7 @@ export declare class Serializable {
      * @returns {object}
      * @memberof Serializable
      */
-    toJSON(): object;
+    toJSON(): Record<string, unknown>;
     /**
      * Process exceptions from wrong types.
      * By default just print warning in console, but can by override for drop exception or logging to backend.

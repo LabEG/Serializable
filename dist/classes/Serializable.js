@@ -1,13 +1,10 @@
 "use strict";
-/* eslint-disable @typescript-eslint/no-invalid-void-type */
+/* eslint-disable no-prototype-builtins */
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 /* eslint-disable complexity */
 /* eslint-disable max-lines-per-function */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/strict-boolean-expressions */
-/* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable max-statements */
-/* eslint-disable @typescript-eslint/no-unsafe-call, no-prototype-builtins */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Serializable = void 0;
 const SerializationSettings_1 = require("../models/SerializationSettings");
@@ -81,12 +78,10 @@ class Serializable {
         for (const prop in fromJson) {
             // Json.hasOwnProperty(prop) - preserve for deserialization for other classes with methods
             if (fromJson.hasOwnProperty(prop) && this.hasOwnProperty(prop)) {
-                if (Reflect.getMetadata("ts-serializable:jsonIgnore", this.constructor.prototype, prop) || false) {
-                    // eslint-disable-next-line no-continue
-                    continue;
+                if (Reflect.getMetadata("ts-serializable:jsonIgnore", this.constructor.prototype, prop) !== true) {
+                    const toProp = this.getJsonPropertyName(prop);
+                    Reflect.set(toJson, toProp, Reflect.get(fromJson, prop));
                 }
-                const toProp = this.getJsonPropertyName(prop);
-                Reflect.set(toJson, toProp, Reflect.get(fromJson, prop));
             }
         }
         return toJson;
@@ -180,12 +175,11 @@ class Serializable {
                 acceptedType !== void 0 &&
                 !Array.isArray(acceptedType) &&
                 (acceptedType.prototype instanceof Serializable ||
-                    Reflect.getMetadata("ts-serializable:jsonObjectExtended", acceptedType)) &&
+                    Boolean(Reflect.getMetadata("ts-serializable:jsonObjectExtended", acceptedType))) &&
                 jsonValue !== null &&
                 jsonValue !== void 0 &&
                 typeof jsonValue === "object" && !Array.isArray(jsonValue)) {
                 const TypeConstructor = acceptedType;
-                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                 return new TypeConstructor().fromJSON(jsonValue, settings);
             }
             else if ( // Instance any other class, not Serializable, for parse from other classes instance
