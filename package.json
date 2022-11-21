@@ -7,7 +7,7 @@
     "typings": "./dist/index.d.ts",
     "dependencies": {},
     "devDependencies": {
-        "@labeg/code-style": "^2.0.46",
+        "@labeg/code-style": "^2.0.48",
         "@types/chai": "^4.3.4",
         "@types/mocha": "^10.0.0",
         "chai": "^4.3.7",
@@ -17,7 +17,7 @@
         "typescript": "^4.9.3"
     },
     "scripts": {
-        "cs:eslint": "eslint --fix -c .eslintrc.js --ext .tsx,.ts,.jsx,.js ./src/ ./tests/",
+        "cs:eslint": "eslint --fix -c .eslintrc.cjs --ext .tsx,.ts,.jsx,.js ./src/ ./tests/",
         "test": "mocha --reporter spec --require ts-node/register tests/*.test.ts",
         "build": "rm -rf dist/ && tsc --project tsconfigbuild.json && node ./dist/index.js",
         "prepublishOnly": "npm run cs:eslint && npm run build && npm run test && npm version patch"

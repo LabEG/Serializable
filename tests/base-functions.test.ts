@@ -10,8 +10,8 @@ describe("Serializable", () => {
     describe("json-generator", () => {
         it("user from method fromJSON must be instance of User", async () => {
             const {User} = await import("./models/User");
-            const json = await import("./jsons/json-generator.json");
-            const [object] = json;
+            const json = await import("./jsons/json-generator.json", {assert: {type: "json"}});
+            const [object] = Reflect.get(json, "default") as typeof json;
 
             const user = new User().fromJSON(object);
 
@@ -44,8 +44,8 @@ describe("Serializable", () => {
 
         it("user from static method fromJSON must be instance of User", async () => {
             const {User} = await import("./models/User");
-            const json = await import("./jsons/json-generator.json");
-            const [object] = json;
+            const json = await import("./jsons/json-generator.json", {assert: {type: "json"}});
+            const [object] = Reflect.get(json, "default") as typeof json;
 
             const user: IUser = User.fromJSON(object);
 
@@ -78,7 +78,7 @@ describe("Serializable", () => {
 
         it("serializable must support deep copy", async () => {
             const {User} = await import("./models/User");
-            const json: Record<string, unknown>[] = await import("./jsons/json-generator.json");
+            const json: Record<string, unknown>[] = await import("./jsons/json-generator.json", {assert: {type: "json"}});
 
             const user1 = new User().fromJSON(json[0]);
             const user2 = new User().fromJSON(user1);
@@ -88,7 +88,7 @@ describe("Serializable", () => {
 
         it("user property marked as jsonIgnore must by dropped", async () => {
             const {User} = await import("./models/User");
-            const json: Record<string, unknown>[] = await import("./jsons/json-generator.json");
+            const json: Record<string, unknown>[] = await import("./jsons/json-generator.json", {assert: {type: "json"}});
 
             const user = new User().fromJSON(json[0]);
             user.isExpanded = true;
@@ -99,8 +99,8 @@ describe("Serializable", () => {
 
         it("class can be extended by decorator jsonObject", async () => {
             const {UserExt} = await import("./models/UserExt");
-            const json = await import("./jsons/json-generator.json");
-            const [object] = json;
+            const json = await import("./jsons/json-generator.json", {assert: {type: "json"}});
+            const [object] = Reflect.get(json, "default") as typeof json;
 
             const user = new UserExt().fromJSON(object);
 
