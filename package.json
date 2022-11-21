@@ -6,8 +6,11 @@
     "type": "module",
     "typings": "./dist/index.d.ts",
     "dependencies": {},
+    "peerDependencies": {
+      "reflect-metadata": ">=0.1.0"
+    },
     "devDependencies": {
-        "@labeg/code-style": "^2.0.50",
+        "@labeg/code-style": "^2.0.51",
         "@types/chai": "^4.3.4",
         "@types/mocha": "^10.0.0",
         "chai": "^4.3.7",
