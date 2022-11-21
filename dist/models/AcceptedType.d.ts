@@ -1,4 +1,4 @@
-export type AcceptedType = null | void | BooleanConstructor | NumberConstructor | StringConstructor | ObjectConstructor | (new (...args: unknown[]) => object) | DateConstructor | SymbolConstructor;
+export type AcceptedType = BooleanConstructor | DateConstructor | NumberConstructor | ObjectConstructor | StringConstructor | SymbolConstructor | (new (...args: unknown[]) => object) | null | void;
 interface IRecursiveArray<T> extends Array<IRecursiveArray<T> | T> {
 }
 export type AcceptedTypes = AcceptedType | IRecursiveArray<AcceptedType>;
