@@ -1,28 +1,25 @@
 {
     "name": "ts-serializable",
-    "version": "2.0.68",
+    "version": "3.0.0",
     "description": "Serialization and deserializtion for classes",
     "main": "./dist/index.js",
-    "module": "./dist/index.mjs",
+    "type": "module",
     "typings": "./dist/index.d.ts",
     "dependencies": {},
     "devDependencies": {
-        "@labeg/code-style": "^2.0.42",
-        "@types/chai": "^4.3.1",
-        "@types/mocha": "^9.1.1",
-        "chai": "^4.3.6",
-        "mocha": "^10.0.0",
+        "@labeg/code-style": "^2.0.46",
+        "@types/chai": "^4.3.4",
+        "@types/mocha": "^10.0.0",
+        "chai": "^4.3.7",
+        "mocha": "^10.1.0",
         "reflect-metadata": "^0.1.13",
-        "ts-node": "^10.8.1",
-        "typescript": "^4.7.4"
+        "ts-node": "^10.9.1",
+        "typescript": "^4.9.3"
     },
     "scripts": {
         "cs:eslint": "eslint --fix -c .eslintrc.js --ext .tsx,.ts,.jsx,.js ./src/ ./tests/",
         "test": "mocha --reporter spec --require ts-node/register tests/*.test.ts",
-        "build:esnext": "tsc --project tsconfigbuild.json",
-        "build:commonjs": "tsc --project tsconfigbuild.es5.json",
-        "build:rename": "find ./dist/ -name \"*.js\" -exec rename .js .mjs {} +",
-        "build": "rm -rf dist/ && npm run build:esnext && npm run build:rename && npm run build:commonjs",
+        "build": "rm -rf dist/ && tsc --project tsconfigbuild.json && node ./dist/index.js",
         "prepublishOnly": "npm run cs:eslint && npm run build && npm run test && npm version patch"
     },
     "repository": {

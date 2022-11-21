@@ -1,4 +1,4 @@
-import type {AcceptedTypes} from "./../models/AcceptedType";
+import type {AcceptedTypes} from "./../models/AcceptedType.js";
 
 export const jsonProperty = (...args: AcceptedTypes[]): PropertyDecorator => (
     target: object,

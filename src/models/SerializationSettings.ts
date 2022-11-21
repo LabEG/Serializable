@@ -1,11 +1,11 @@
 
-import {LogLevels} from "../enums/LogLevels";
-import {DefaultValueHandling} from "../enums/DefaultValueHandling";
-import {NullValueHandling} from "../enums/NullValueHandling";
-import {ReferenceLoopHandling} from "../enums/ReferenceLoopHandling";
-import {MissingMemberHandling} from "../enums/MissingMemberHandling";
-import {DateFormatHandling} from "../enums/DateFormatHandling";
-import type {INamingStrategy} from "../naming-strategies/INamingStrategy";
+import {LogLevels} from "../enums/LogLevels.js";
+import {DefaultValueHandling} from "../enums/DefaultValueHandling.js";
+import {NullValueHandling} from "../enums/NullValueHandling.js";
+import {ReferenceLoopHandling} from "../enums/ReferenceLoopHandling.js";
+import {MissingMemberHandling} from "../enums/MissingMemberHandling.js";
+import {DateFormatHandling} from "../enums/DateFormatHandling.js";
+import type {INamingStrategy} from "../naming-strategies/INamingStrategy.js";
 
 // From newtonsoft https://www.newtonsoft.com/json/help/html/SerializationSettings.htm
 export class SerializationSettings {

@@ -1,5 +1,5 @@
-import type { AcceptedTypes } from "../models/AcceptedType";
-import { SerializationSettings } from "../models/SerializationSettings";
+import type { AcceptedTypes } from "../models/AcceptedType.js";
+import { SerializationSettings } from "../models/SerializationSettings.js";
 /**
  * Class how help you deserialize object to classes.
  *

@@ -1,4 +1,4 @@
-import type {INamingStrategy} from "./INamingStrategy";
+import type {INamingStrategy} from "./INamingStrategy.js";
 
 export class SnakeCaseNamingStrategy implements INamingStrategy {
 

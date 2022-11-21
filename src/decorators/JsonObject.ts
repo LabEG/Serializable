@@ -3,8 +3,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/unbound-method */
 /* eslint-disable max-statements */
-import type {SerializationSettings} from "../models/SerializationSettings";
-import {Serializable} from "../classes/Serializable";
+import type {SerializationSettings} from "../models/SerializationSettings.js";
+import {Serializable} from "../classes/Serializable.js";
 
 export const jsonObject = (
     settings?: Partial<SerializationSettings>,
