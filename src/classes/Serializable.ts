@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable no-prototype-builtins */
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 /* eslint-disable complexity */
@@ -45,12 +46,45 @@ export class Serializable {
     }
 
     /**
+     * Deserialize object from static method.
+     *
+     * Example:
+     * const obj: MyObject = MyObject.fromString({...data});
+     *
+     * @static
+     * @param {object} json
+     * @returns {object}
+     * @memberof Serializable
+     */
+    public static fromString<T extends Serializable>(
+        this: new () => T,
+        str: string,
+        settings?: Partial<SerializationSettings>
+    ): T {
+        return new this().fromJSON(JSON.parse(str), settings);
+    }
+
+    /**
+     * Fill property of current model by data from string.
+     *
+     * Example:
+     * const obj: MyObject = new MyObject().fromString("{...data}"");
+     *
+     * @param {string} str
+     * @returns {this}
+     * @memberof Serializable
+     */
+    public fromString (str: string, settings?: Partial<SerializationSettings>): this {
+        return this.fromJSON(JSON.parse(str), settings);
+    }
+
+    /**
      * Fill property of current model by data from json.
      *
      * Example:
      * const obj: MyObject = new MyObject().fromJSON({...data});
      *
-     * @param {object} ujson
+     * @param {object} json
      * @returns {this}
      * @memberof Serializable
      */
@@ -116,6 +150,16 @@ export class Serializable {
         }
 
         return toJson;
+    }
+
+    /**
+     * Process serialization for @jsonIgnore decorator
+     *
+     * @returns {string}
+     * @memberof Serializable
+     */
+    public toString (): string {
+        return JSON.stringify(this.toJSON());
     }
 
     /**
