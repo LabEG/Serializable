@@ -28,12 +28,35 @@ export declare class Serializable {
      */
     static fromJSON<T extends Serializable>(this: new () => T, json: object, settings?: Partial<SerializationSettings>): T;
     /**
+     * Deserialize object from static method.
+     *
+     * Example:
+     * const obj: MyObject = MyObject.fromString({...data});
+     *
+     * @static
+     * @param {object} json
+     * @returns {object}
+     * @memberof Serializable
+     */
+    static fromString<T extends Serializable>(this: new () => T, str: string, settings?: Partial<SerializationSettings>): T;
+    /**
+     * Fill property of current model by data from string.
+     *
+     * Example:
+     * const obj: MyObject = new MyObject().fromString("{...data}"");
+     *
+     * @param {string} str
+     * @returns {this}
+     * @memberof Serializable
+     */
+    fromString(str: string, settings?: Partial<SerializationSettings>): this;
+    /**
      * Fill property of current model by data from json.
      *
      * Example:
      * const obj: MyObject = new MyObject().fromJSON({...data});
      *
-     * @param {object} ujson
+     * @param {object} json
      * @returns {this}
      * @memberof Serializable
      */
@@ -45,6 +68,13 @@ export declare class Serializable {
      * @memberof Serializable
      */
     toJSON(): Record<string, unknown>;
+    /**
+     * Process serialization for @jsonIgnore decorator
+     *
+     * @returns {string}
+     * @memberof Serializable
+     */
+    toString(): string;
     /**
      * Process exceptions from wrong types.
      * By default just print warning in console, but can by override for drop exception or logging to backend.
