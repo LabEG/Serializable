@@ -1,6 +1,6 @@
 {
     "name": "ts-serializable",
-    "version": "3.0.26",
+    "version": "3.0.27",
     "description": "Serialization and deserializtion for classes",
     "main": "./dist/index.js",
     "type": "module",
