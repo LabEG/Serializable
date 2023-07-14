@@ -78,7 +78,7 @@ user.getAge(); // work fine and return number
 
 Naming strategies:
 ------
-Supported conversion between different naming cases, such as SnakeCase, KebabCase, PascalCase. Also you can set custom name for property of json object.
+Supported conversion between different naming cases, such as SnakeCase, KebabCase, PascalCase and CamelCase. Also you can set custom name for property of json object.
 
 ```typescript
 const json = {

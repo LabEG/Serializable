@@ -14,3 +14,4 @@ export type { INamingStrategy } from "./naming-strategies/INamingStrategy.js";
 export { SnakeCaseNamingStrategy } from "./naming-strategies/SnakeCaseNamingStrategy.js";
 export { PascalCaseNamingStrategy } from "./naming-strategies/PascalCaseNamingStrategy.js";
 export { KebabCaseNamingStrategy } from "./naming-strategies/KebabCaseNamingStrategy.js";
+export { CamelCaseNamingStrategy } from "./naming-strategies/CamelCaseNamingStrategy.js";
