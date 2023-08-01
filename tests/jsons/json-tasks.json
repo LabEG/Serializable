@@ -1,0 +1,82 @@
+[
+  {
+    "uuid": "task-1",
+    "title": "Task 1",
+    "description": "This is Task 1 description",
+    "status": {
+      "id": 1,
+      "name": "In Progress"
+    },
+    "createdAt": "2023-07-29T12:00:00.000Z",
+    "subTasks": [
+      {
+        "uuid": "subtask-1",
+        "title": "Subtask 1",
+        "description": "This is Subtask 1 description",
+        "status": {
+          "id": 2,
+          "name": "Done"
+        },
+        "createdAt": "2023-07-29T13:00:00.000Z",
+        "subTasks": [
+          {
+            "uuid": "subsubtask-1",
+            "title": "Subsubtask 1",
+            "description": "This is Subsubtask 1 description",
+            "status": {
+              "id": 3,
+              "name": "Pending"
+            },
+            "createdAt": "2023-07-29T14:00:00.000Z",
+            "subTasks": null
+          }
+        ]
+      },
+      {
+        "uuid": "subtask-2",
+        "title": "Subtask 2",
+        "description": "This is Subtask 2 description",
+        "status": {
+          "id": 3,
+          "name": "Pending"
+        },
+        "createdAt": "2023-07-29T14:30:00.000Z",
+        "subTasks": null
+      }
+    ]
+  },
+  {
+    "uuid": "task-2",
+    "title": "Task 2",
+    "description": "This is Task 2 description",
+    "status": {
+      "id": 3,
+      "name": "Pending"
+    },
+    "createdAt": "2023-07-29T15:00:00.000Z",
+    "subTasks": null
+  },
+  {
+    "uuid": "task-3",
+    "title": "Task 3",
+    "description": "This is Task 3 description",
+    "status": {
+      "id": 2,
+      "name": "Done"
+    },
+    "createdAt": "2023-07-29T16:00:00.000Z",
+    "subTasks": [
+      {
+        "uuid": "subtask-3",
+        "title": "Subtask 3",
+        "description": "This is Subtask 3 description",
+        "status": {
+          "id": 1,
+          "name": "In Progress"
+        },
+        "createdAt": "2023-07-29T17:00:00.000Z",
+        "subTasks": null
+      }
+    ]
+  }
+]

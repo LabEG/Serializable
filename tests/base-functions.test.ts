@@ -1,9 +1,10 @@
 /* eslint-disable max-statements */
 /* eslint-disable max-lines-per-function */
 import("reflect-metadata"); // Polyfill
-import {assert} from "chai";
+import {assert, expect} from "chai";
 
 import type {User as IUser, Friend as IFriend} from "./models/User";
+import type {Task as ITask} from "./models/Task";
 
 describe("Serializable", () => {
     describe("base functions", () => {
@@ -141,6 +142,32 @@ describe("Serializable", () => {
                 assert.strictEqual(friend.id, object.friends[index].id, `friend ${index} id is not equal`);
                 assert.strictEqual(friend.name, object.friends[index].name, `friend ${index} name is not equal`);
             });
+        });
+    });
+
+    it("should parse JSON and create valid Task objects", async () => {
+        const {Task, Status} = await import("./models/Task");
+        const json = await import("./jsons/json-tasks.json", {assert: {type: "json"}});
+        const taskJson = Reflect.get(json, "default") as typeof json;
+        const tasks: ITask[] = taskJson.map((task) => Task.fromString(JSON.stringify(task)));
+
+        expect(tasks).to.be.an("array").and.have.length.greaterThan(0);
+
+        tasks.forEach((task) => {
+            const {uuid, title, description, status, createdAt, subTasks} = task;
+
+            expect(uuid).to.be.a("string");
+            expect(title).to.be.a("string");
+            expect(description).to.be.a("string");
+            expect(status).to.be.an.instanceOf(Status);
+            expect(createdAt).to.be.a("string");
+
+            if (subTasks !== null) {
+                expect(subTasks).to.be.an("array");
+                subTasks.forEach((subTask) => {
+                    expect(subTask).to.be.an.instanceOf(Task);
+                });
+            }
         });
     });
 });

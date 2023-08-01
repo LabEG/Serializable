@@ -6,7 +6,7 @@
 /* eslint-disable max-statements */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 
-import type {AcceptedTypes} from "../models/AcceptedType.js";
+import type {AcceptedType, AcceptedTypes} from "../models/AcceptedType.js";
 import {SerializationSettings} from "../models/SerializationSettings.js";
 
 /**
@@ -249,7 +249,12 @@ export class Serializable {
                 Array.isArray(jsonValue)
             ) {
                 if (acceptedType[0] === void 0) {
-                    this.onWrongType(prop, "invalid type", jsonValue);
+                  try {
+                    const acceptedTypesArray = [this.constructor as AcceptedType, acceptedTypes[1] !== undefined ? acceptedTypes[1] : null];
+                    return jsonValue.map((arrayValue) => this.deserializeProperty(prop, acceptedTypesArray, arrayValue, settings));
+                  } catch (error) {
+                        this.onWrongType(prop, "invalid type", jsonValue);
+                    }
                 }
 
                 return jsonValue.map((arrayValue: unknown) => this.deserializeProperty(
