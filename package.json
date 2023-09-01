@@ -10,7 +10,7 @@
         "reflect-metadata": ">=0.1.0"
     },
     "devDependencies": {
-        "@labeg/code-style": "^3.0.2",
+        "@labeg/code-style": "^3.0.4",
         "@types/chai": "^4.3.5",
         "@types/mocha": "^10.0.1",
         "chai": "^4.3.8",
