@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/class-methods-use-this */
 import type {INamingStrategy} from "./INamingStrategy.js";
 
 export class KebabCaseNamingStrategy implements INamingStrategy {
