@@ -188,6 +188,7 @@ export class Serializable {
      * @returns {(Object | null | void)}
      * @memberof Serializable
      */
+    // eslint-disable-next-line @typescript-eslint/max-params
     protected deserializeProperty (
         prop: string,
         acceptedTypes: AcceptedTypes[],
