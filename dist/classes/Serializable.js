@@ -145,6 +145,7 @@ export class Serializable {
      * @returns {(Object | null | void)}
      * @memberof Serializable
      */
+    // eslint-disable-next-line @typescript-eslint/max-params
     deserializeProperty(prop, acceptedTypes, jsonValue, settings) {
         for (const acceptedType of acceptedTypes) { // Type Symbol is not a property
             if ( // Null
