@@ -4,7 +4,8 @@
         "module": "ES2015",
         "declaration": true,
         "diagnostics": true,
-        "outDir": "dist/"
+        "outDir": "dist/",
+        "noEmit": false
     },
     "include": [
         "./node_modules/reflect-metadata/index.d.ts",
