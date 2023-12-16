@@ -10,7 +10,7 @@
         "reflect-metadata": ">=0.1.0"
     },
     "devDependencies": {
-        "@labeg/code-style": "^4.0.3",
+        "@labeg/code-style": "^4.0.4",
         "@types/chai": "^4.3.11",
         "@types/mocha": "^10.0.6",
         "chai": "^4.3.10",
@@ -22,7 +22,7 @@
     "scripts": {
         "cs:eslint": "eslint --fix -c .eslintrc.cjs --ext .tsx,.ts,.jsx,.js ./src/ ./tests/",
         "test": "mocha --reporter spec --require ts-node/register tests/*.test.ts",
-        "build": "rm -rf dist/ && tsc --project tsconfigbuild.json && node ./dist/index.js",
+        "build": "rm -rf dist/ && tsc --project tsconfig.build.json && node ./dist/index.js",
         "prepublishOnly": "npm run cs:eslint && npm run build && npm run test && npm version patch"
     },
     "repository": {

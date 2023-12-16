@@ -7,7 +7,7 @@
         "outDir": "dist/"
     },
     "include": [
-        "./node_modules/reflect-metadata/Reflect.d.ts",
+        "./node_modules/reflect-metadata/index.d.ts",
         "./src/**/*"
     ]
 }

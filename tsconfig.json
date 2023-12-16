@@ -14,10 +14,11 @@
         "pretty": true,
         "strict": true,
         "moduleResolution": "node",
-        "resolveJsonModule": true
+        "resolveJsonModule": true,
+        "noEmit": true
     },
     "include": [
-        "./node_modules/reflect-metadata/Reflect.d.ts",
+        "./node_modules/reflect-metadata/index.d.ts",
         "./src/**/*",
         "./tests/**/*"
     ]
