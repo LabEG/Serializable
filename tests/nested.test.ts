@@ -3,6 +3,7 @@ import {TestClass as TestClass1} from "./generator/ts/generated1";
 import {TestClass as TestClass2} from "./generator/ts/generated2";
 import {TestClass as TestClass3} from "./generator/ts/generated2";
 import type {Serializable} from "../src";
+import {writeFileSync} from "fs";
 
 // eslint-disable-next-line func-names
 const itTestClass = function <T extends Serializable> (idx: number, TestClass: new () => T): void {
@@ -13,6 +14,7 @@ const itTestClass = function <T extends Serializable> (idx: number, TestClass: n
 
         const testObjectDeserialized = (new TestClass()).fromJSON(testObjectSerialized);
 
+        writeFileSync(`tests/jsons/generated${idx}.json`, JSON.stringify(testObjectSerialized, null, 2));
 
         assert.deepStrictEqual(testObject, testObjectDeserialized);
     });
