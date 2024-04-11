@@ -38,3 +38,12 @@ jobs:
         run: ${{ env.run }} npm run test
       - name: Run tests for nested class
         run: ${{ env.run }} npm run test-nested
+      - name: Publish artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-${{ hashFiles('tests/generator/ts', 'tests/jsons/generated*') }}
+          path: |
+            tests/generator/ts
+            tests/jsons/generated*
+          overwrite: true
