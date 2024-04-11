@@ -15,12 +15,14 @@ import Data.List.NonEmpty
 import Data.String.Interpolate (i, __i'L)
 import Generate
 import Hedgehog.Gen
+import System.Directory (createDirectoryIfMissing)
 
 main :: IO ()
 main = forM_ [1 .. 3] $ \(idx :: Int) -> do
   classes <- sample (genClasses 10 (pure []))
   topClass <- sample $ genTopClass classes
   let topClassName = show $ topClass ^. #_someClass_name
+  createDirectoryIfMissing True "ts"
   writeFile [i|ts/generated#{idx}.ts|] (makeTS classes topClass topClassName)
 
 makeTS :: NonEmpty SomeClass -> SomeClass -> String -> String
