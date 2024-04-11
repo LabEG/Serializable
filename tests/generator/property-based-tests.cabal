@@ -1,0 +1,67 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.36.0.
+--
+-- see: https://github.com/sol/hpack
+
+name:               property-based-tests
+version:            0.1.0.0
+description:        Please see the README on GitHub at <https://github.com/value/property-based-tests#readme>
+homepage:           https://github.com/value/property-based-tests#readme
+bug-reports:        https://github.com/value/property-based-tests/issues
+author:             value
+maintainer:         value
+copyright:          value
+license:            BSD3
+license-file:       LICENSE
+build-type:         Simple
+extra-source-files:
+    README.md
+    CHANGELOG.md
+
+source-repository head
+  type: git
+  location: https://github.com/value/property-based-tests
+
+library
+  exposed-modules:
+      AST
+      Generate
+      Test
+  other-modules:
+      Paths_property_based_tests
+  hs-source-dirs:
+      src
+  default-extensions:
+      ImportQualifiedPost
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      base >=4.7 && <5
+    , breakpoint
+    , data-default
+    , generic-lens
+    , hedgehog
+    , lens
+    , pretty-simple
+    , process
+    , string-interpolate
+    , tasty
+    , tasty-hedgehog
+    , tasty-hunit
+    , text
+    , time
+  default-language: Haskell2010
+
+executable property-based-tests
+  main-is: Main.hs
+  other-modules:
+      Paths_property_based_tests
+  hs-source-dirs:
+      app
+  default-extensions:
+      ImportQualifiedPost
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , property-based-tests
+  default-language: Haskell2010

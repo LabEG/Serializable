@@ -1,0 +1,5 @@
+dist-newstyle
+node_modules
+.direnv
+ts
+result.txt
