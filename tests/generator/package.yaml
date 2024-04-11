@@ -52,6 +52,7 @@ library:
     - breakpoint
     - pretty-simple
     - process
+    - directory
 
 executables:
   property-based-tests:
