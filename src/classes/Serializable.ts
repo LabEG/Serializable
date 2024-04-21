@@ -113,7 +113,7 @@ export class Serializable {
             if (
                 unknownJson?.hasOwnProperty(jsonProp) &&
                 this.hasOwnProperty(thisProp) &&
-                  Reflect.hasMetadata("ts-serializable:jsonTypes", this.constructor.prototype, thisProp)
+                Reflect.hasMetadata("ts-serializable:jsonTypes", this.constructor.prototype, thisProp)
             ) {
                 const acceptedTypes: AcceptedTypes[] = Reflect.getMetadata(
                     "ts-serializable:jsonTypes",

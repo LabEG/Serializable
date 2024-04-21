@@ -10,14 +10,14 @@
         "reflect-metadata": ">=0.1.0"
     },
     "devDependencies": {
-        "@labeg/code-style": "^4.0.5",
-        "@types/chai": "^4.3.11",
+        "@labeg/code-style": "^4.0.6",
+        "@types/chai": "^4.3.14",
         "@types/mocha": "^10.0.6",
-        "chai": "^4.3.10",
-        "mocha": "^10.2.0",
-        "reflect-metadata": "^0.2.1",
+        "chai": "^5.1.0",
+        "mocha": "^10.4.0",
+        "reflect-metadata": "^0.2.2",
         "ts-node": "^10.9.2",
-        "typescript": "^5.3.3"
+        "typescript": "^5.4.5"
     },
     "scripts": {
         "cs:eslint": "eslint --fix -c .eslintrc.cjs --ext .tsx,.ts,.jsx,.js ./src/ ./tests/",
