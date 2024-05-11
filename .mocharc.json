@@ -1,6 +1,8 @@
 {
+    "reporter": "spec",
+    "extension": [ "ts" ],
 	"node-option": [
-		"experimental-specifier-resolution=node",
-		"loader=ts-node/esm"
-	]
+		"import=tsx/esm"
+	],
+    "spec": ["tests/*.spec.ts"]
 }
