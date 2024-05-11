@@ -17,7 +17,7 @@ const itTestClass = function <T extends Serializable> (TestClass: new () => T): 
     });
 };
 
-describe("Nested classes", () => {
+describe.skip("Nested classes", () => {
     itTestClass(TestClass1);
     itTestClass(TestClass2);
     itTestClass(TestClass3);

@@ -5,8 +5,7 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "lib": [
-            "esnext",
-            "dom"
+            "esnext"
         ],
         "noImplicitReturns": true,
         "noUnusedLocals": true,
