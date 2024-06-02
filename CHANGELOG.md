@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.2.3] - 2024-06-02
+
+### ⚙️ Miscellaneous Tasks
+
+- Update dependencies versions
+- Sync package-lock
+
 ## [3.2.2] - 2024-06-02
 
 ### 📚 Documentation
