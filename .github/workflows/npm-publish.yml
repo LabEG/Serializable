@@ -20,6 +20,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Build and publish package
         uses: actions/setup-node@v3
@@ -31,7 +33,6 @@ jobs:
       - run: git config --global user.name "Eugene Labutin"
       - run: npm ci --force # force because conflict typescript-eslint/parser version, check and remove later
       - run: npm run release
-      - run: git add -A && git commit -m 'chore":" generate changelog and bump version'
-      - run: git push --follow-tags origin master && npm publish --access public
+      - run: git push && git push --tags && npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
