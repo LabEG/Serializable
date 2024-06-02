@@ -3,13 +3,16 @@ Serializable
 
 Small library for deserialization and serialization for javascript and typescript
 
-Description:
+Description
 ------
+
 - For working this library needed Metadata Reflection API. If your platform (browser/nodejs) don't support it you must use polifyll. Example: [reflect-metadata](https://www.npmjs.com/package/reflect-metadata)
+
 - By default library don't crash on wrong types in json and return default value on wrong property. If you need more secure behavior you must override method `onWrongType` on `Serializable` object and drop exception in this method, by your logic want.
 
-Usage:
+Usage
 ------
+
 This example writed on typescript, but if remove typing, then him will work and on javascript.
 
 ```typescript
@@ -22,25 +25,25 @@ export class User extends Serializable {
     // will have invalid type, then will return default value
     @jsonProperty(Number, null)
     public id: number | null = null; // default value necessarily
-  
+
     @jsonProperty(String)
     public firstName: string = ''; // default value necessarily
-  
+
     @jsonProperty(String)
     public familyName: string = ''; // default value necessarily
-  
+
     @jsonProperty(String, void 0)
     public lastName?: string = void 0; // default value necessarily
-    
+
     @jsonProperty(Date)
     public birthdate: Date = new Date(); // default value necessarily
-    
+
     @jsonProperty([String])
     public tags: string[] = []; // default value necessarily
-    
+
     @jsonProperty(OtherClassConstructor, null)
     public other: OtherClassConstructor | null = null; // default value necessarily
-    
+
     public getFullName(): string {
         return [
             this.firstName,
@@ -76,8 +79,9 @@ user.getFullName(); // work fine and return string
 user.getAge(); // work fine and return number
 ```
 
-Naming strategies:
+Naming strategies
 ------
+
 Supported conversion between different naming cases, such as SnakeCase, KebabCase, PascalCase and CamelCase. Also you can set custom name for property of json object.
 
 ```typescript
@@ -114,8 +118,9 @@ user.dateOfBirth?.toISOString() === json.date_of_birth; // true
 user.veryStrangePropertyName === json["very::strange::json:name"]; // true
 ```
 
-Settings:
+Settings
 ------
+
 How to specify settings:
 
 ```typescript
@@ -131,16 +136,18 @@ new User().fromJSON(json: object, settings?: Partial<SerializationSettings>);
 ```
 
 Supported settings:
- - **namingStrategy**, INamingStrategy, default null - property name conversion strategies.
- - **dateFormatHandling**, enum, default IsoDateFormat - ...coming soon.
- - **missingMemberHandling**, enum, default Ignore - ...coming soon.
- - **referenceLoopHandling**, enum, default Serialize - ...coming soon.
- - **nullValueHandling**, enum, default Include - ...coming soon.
- - **defaultValueHandling**, enum, default Ignore - ...coming soon.
- - **logLevel**, enum, default Warning - ...coming soon.
 
-View-Models from Backend Models:
+- **namingStrategy**, INamingStrategy, default null - property name conversion strategies.
+- **dateFormatHandling**, enum, default IsoDateFormat - ...coming soon.
+- **missingMemberHandling**, enum, default Ignore - ...coming soon.
+- **referenceLoopHandling**, enum, default Serialize - ...coming soon.
+- **nullValueHandling**, enum, default Include - ...coming soon.
+- **defaultValueHandling**, enum, default Ignore - ...coming soon.
+- **logLevel**, enum, default Warning - ...coming soon.
+
+View-Models from Backend Models
 ------
+
 If you need to create view-model from dto or entities model you can use same model. Just add VM property to dto or entities model and mark this property by @jsonIgnore() decorator and this property will not be serialized to json.
 
 ```typescript
@@ -150,7 +157,7 @@ export class User extends Serializable {
 
     @jsonProperty(String)
     public firstName: string = ''; // default value necessarily
-  
+
     @jsonProperty(String)
     public familyName: string = ''; // default value necessarily
 
@@ -165,9 +172,11 @@ JSON.stringify(user);
 // Result: {"firstName":"","familyName":""}
 ```
 
-Bonus:
+Bonus
 ------
+
 Deep copy
+
 ```typescript
 const newUser: User = new User().fromJSON(oldUser);
 ```
