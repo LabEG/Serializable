@@ -10,6 +10,15 @@ Description
 
 - By default library don't crash on wrong types in json and return default value on wrong property. If you need more secure behavior you must override method `onWrongType` on `Serializable` object and drop exception in this method, by your logic want.
 
+Installation
+------
+
+You can use the following command to install this package:
+
+``` bash
+npm install ts-serializable
+```
+
 Usage
 ------
 
