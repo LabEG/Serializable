@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.2.1] - 2024-06-02
+
+### 🐛 Bug Fixes
+
+- Begin use cliff-jumper for generate changelog and version
+
 ## [3.2.0] - 2024-06-02
 
 ### 🚀 Features
