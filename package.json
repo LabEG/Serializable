@@ -1,6 +1,6 @@
 {
     "name": "ts-serializable",
-    "version": "3.0.59",
+    "version": "3.1.0",
     "author": "Eugene Labutin",
     "license": "MIT",
     "homepage": "https://github.com/LabEG/Serializable#readme",
@@ -25,7 +25,7 @@
         "test": "mocha",
         "build": "tsc --project tsconfig.build.json && node ./dist/index.js",
         "prepublishOnly": "npm run lint && npm run build && npm run test",
-        "release": "git-cliff --bump --output CHANGELOG.md",
+        "release": "cliff-jumper --name 'ts-serializable' --package-path '.'",
         "prepare": "husky install"
     },
     "peerDependencies": {
@@ -34,6 +34,7 @@
     "devDependencies": {
         "@commitlint/cli": "^19.3.0",
         "@commitlint/config-conventional": "^19.2.2",
+        "@favware/cliff-jumper": "^3.0.3",
         "@labeg/code-style": "^4.1.0",
         "@types/chai": "^4.3.16",
         "@types/mocha": "^10.0.6",

@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.1.0] - 2024-06-02
+
+### 🚀 Features
+
+- Replace standart-version by git-cliff for generation changelog
+
+### ⚙️ Miscellaneous Tasks
+
+- Fix got-cliff bump
+- Git-cliff
+
+## [3.1.0] - 2024-06-02
+
+### 🚀 Features
+
+- Replace standart-version by git-cliff for generation changelog
+
+### ⚙️ Miscellaneous Tasks
+
+- Fix got-cliff bump
+- Git-cliff
+
 ## [3.0.59] - 2024-06-02
 
 ### ⚙️ Miscellaneous Tasks
