@@ -1,0 +1,36 @@
+name: NPM Publish
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build and publish package
+        uses: actions/setup-node@v3
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org/
+
+      - run: git config --global user.email "labeg@mail.ru"
+      - run: git config --global user.name "Eugene Labutin"
+      - run: npm ci --force # force because conflict typescript-eslint/parser version, check and remove later
+      - run: npm run release
+      - run: git push --follow-tags origin master && npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}

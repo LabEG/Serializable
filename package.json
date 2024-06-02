@@ -1,38 +1,54 @@
 {
     "name": "ts-serializable",
     "version": "3.0.56",
+    "author": "Eugene Labutin",
+    "license": "MIT",
+    "homepage": "https://github.com/LabEG/Serializable#readme",
     "description": "Serialization and deserializtion for classes",
     "main": "./dist/index.js",
     "type": "module",
     "typings": "./dist/index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": " git@github.com:LabEG/Serializable.git"
+    },
+    "bugs": {
+        "url": "https://github.com/LabEG/Serializable/issues"
+    },
+    "lint-staged": {
+        "./(src|tests)/**/*.(ts|tsx|js|jsx)": [
+            "eslint --fix -c .eslintrc.cjs --ext .tsx,.ts,.jsx,.js"
+        ]
+    },
+    "scripts": {
+        "lint": "eslint --fix -c .eslintrc.cjs --ext .tsx,.ts,.jsx,.js ./src/ ./tests/",
+        "test": "mocha",
+        "build": "tsc --project tsconfig.build.json && node ./dist/index.js",
+        "prepublishOnly": "npm run lint && npm run build && npm run test",
+        "release": "standard-version",
+        "prepare": "husky install"
+    },
     "peerDependencies": {
         "reflect-metadata": ">=0.1.0"
     },
     "devDependencies": {
-        "@labeg/code-style": "^4.0.7",
+        "@labeg/code-style": "^4.1.0",
         "@types/chai": "^4.3.16",
         "@types/mocha": "^10.0.6",
         "chai": "^5.1.1",
         "mocha": "^10.4.0",
         "reflect-metadata": "^0.2.2",
         "ts-node": "^10.9.2",
-        "tsx": "^4.9.4",
-        "typescript": "^5.4.5"
-    },
-    "scripts": {
-        "cs:eslint": "eslint --fix -c .eslintrc.cjs --ext .tsx,.ts,.jsx,.js ./src/ ./tests/",
-        "test": "mocha",
-        "build": "rm -rf dist/ && tsc --project tsconfig.build.json && node ./dist/index.js",
-        "prepublishOnly": "npm run cs:eslint && npm run build && npm run test && npm version patch"
-    },
-    "repository": {
-        "type": "git",
-        "url": " git@github.com:LabEG/Serializable.git"
+        "tsx": "^4.11.0",
+        "typescript": "^5.4.5",
+        "@commitlint/cli": "^19.3.0",
+        "@commitlint/config-conventional": "^19.2.2",
+        "husky": "^9.0.11",
+        "lint-staged": "^15.2.5",
+        "standard-version": "^9.5.0"
     },
     "keywords": [
         "serialization",
         "deserialization"
-    ],
-    "author": "LabEG",
-    "license": "MIT"
+    ]
 }
