@@ -33,6 +33,7 @@ jobs:
       - run: git config --global user.name "Eugene Labutin"
       - run: npm ci --force # force because conflict typescript-eslint/parser version, check and remove later
       - run: npm run release
-      - run: git push && git push --tags && npm publish --access public
+      - run: git push && git push --tags
+      - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
