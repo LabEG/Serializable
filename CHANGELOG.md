@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.2.2] - 2024-06-02
+
+### 📚 Documentation
+
+- Update README
+
 ## [3.2.1] - 2024-06-02
 
 ### 🐛 Bug Fixes
