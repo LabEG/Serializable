@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.2.0] - 2024-06-02
+
+### 🚀 Features
+
+- Replace standart-version by git-cliff for generation changelog
+
+### ⚙️ Miscellaneous Tasks
+
+- Fix got-cliff bump
+- Git-cliff
+- *('ts-serializable')* Release 'ts-serializable'@3.1.0
+- Use cliff-jumper instead of git-cliff
+- Test cliff-jumper
+
 ## [3.1.0] - 2024-06-02
 
 ### 🚀 Features
