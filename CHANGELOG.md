@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.3.0] - 2024-10-05
+
+### 🚀 Features
+
+- Update dependencies versions
+
 ## [3.2.3] - 2024-06-02
 
 ### ⚙️ Miscellaneous Tasks
