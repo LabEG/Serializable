@@ -32,20 +32,20 @@
         "reflect-metadata": ">=0.1.0"
     },
     "devDependencies": {
-        "@commitlint/cli": "^19.3.0",
-        "@commitlint/config-conventional": "^19.2.2",
-        "@favware/cliff-jumper": "^3.0.3",
-        "@labeg/code-style": "^4.2.2",
-        "@types/chai": "^4.3.16",
-        "@types/mocha": "^10.0.6",
+        "@commitlint/cli": "^19.5.0",
+        "@commitlint/config-conventional": "^19.5.0",
+        "@favware/cliff-jumper": "^4.1.0",
+        "@labeg/code-style": "^4.4.0",
+        "@types/chai": "^5.0.0",
+        "@types/mocha": "^10.0.8",
         "chai": "^5.1.1",
-        "husky": "^9.0.11",
-        "lint-staged": "^15.2.5",
-        "mocha": "^10.4.0",
+        "husky": "^9.1.6",
+        "lint-staged": "^15.2.10",
+        "mocha": "^10.7.3",
         "reflect-metadata": "^0.2.2",
         "ts-node": "^10.9.2",
-        "tsx": "^4.11.0",
-        "typescript": "^5.4.5"
+        "tsx": "^4.19.1",
+        "typescript": "^5.6.2"
     },
     "keywords": [
         "serialization",

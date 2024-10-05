@@ -1,4 +1,3 @@
-/* eslint-disable @stylistic/indent-binary-ops */
 /* eslint-disable @typescript-eslint/no-invalid-void-type */
 
 export type AcceptedType =
@@ -12,11 +11,9 @@ export type AcceptedType =
   SymbolConstructor |
   (new (...args: unknown[]) => object) |
   null |
-  void;
+    void;
 // Add ArrayBufferConstructor, MapConstructor, RegExpConstructor and many others...
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface IRecursiveArray<T> extends Array<IRecursiveArray<T> | T> {
-}
+type IRecursiveArray<T> = (IRecursiveArray<T> | T)[];
 
 export type AcceptedTypes = AcceptedType | IRecursiveArray<AcceptedType>;
