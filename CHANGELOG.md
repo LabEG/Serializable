@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.4.0] - 2024-12-26
+
+### 🚀 Features
+
+- Update dependencies versions, new config for eslint 9
+
 ## [3.3.0] - 2024-10-05
 
 ### 🚀 Features
