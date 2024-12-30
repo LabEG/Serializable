@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.5.0] - 2024-12-30
+
+### 🚀 Features
+
+- Update eslintconfig, format code with new config
+
 ## [3.4.0] - 2024-12-26
 
 ### 🚀 Features
