@@ -178,7 +178,7 @@ export class Serializable {
     }
 
     /**
-     * //todo: write jsdoc
+     * Deserialize one property
      *
      * @private
      * @param {object} object
@@ -188,7 +188,7 @@ export class Serializable {
      * @returns {(Object | null | void)}
      * @memberof Serializable
      */
-    // eslint-disable-next-line @typescript-eslint/max-params
+    // eslint-disable-next-line max-params
     protected deserializeProperty (
         prop: string,
         acceptedTypes: AcceptedTypes[],

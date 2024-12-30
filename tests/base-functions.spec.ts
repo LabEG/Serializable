@@ -35,8 +35,8 @@ describe("Base functions", () => {
         assert.strictEqual(user.favoriteFruit, object.favoriteFruit, "favoriteFruit is not equal");
 
         user.friends.forEach((friend: IFriend, index: number) => {
-            assert.strictEqual(friend.id, object.friends[index].id, `friend ${index} id is not equal`);
-            assert.strictEqual(friend.name, object.friends[index].name, `friend ${index} name is not equal`);
+            assert.strictEqual(friend.id, object.friends[index].id, `friend ${String(index)} id is not equal`);
+            assert.strictEqual(friend.name, object.friends[index].name, `friend ${String(index)} name is not equal`);
         });
     });
 
@@ -69,8 +69,8 @@ describe("Base functions", () => {
         assert.strictEqual(user.favoriteFruit, object.favoriteFruit, "favoriteFruit is not equal");
 
         user.friends.forEach((friend: IFriend, index: number) => {
-            assert.strictEqual(friend.id, object.friends[index].id, `friend ${index} id is not equal`);
-            assert.strictEqual(friend.name, object.friends[index].name, `friend ${index} name is not equal`);
+            assert.strictEqual(friend.id, object.friends[index].id, `friend ${String(index)} id is not equal`);
+            assert.strictEqual(friend.name, object.friends[index].name, `friend ${String(index)} name is not equal`);
         });
     });
 
@@ -103,8 +103,8 @@ describe("Base functions", () => {
         assert.strictEqual(user.favoriteFruit, object.favoriteFruit, "favoriteFruit is not equal");
 
         user.friends.forEach((friend: IFriend, index: number) => {
-            assert.strictEqual(friend.id, object.friends[index].id, `friend ${index} id is not equal`);
-            assert.strictEqual(friend.name, object.friends[index].name, `friend ${index} name is not equal`);
+            assert.strictEqual(friend.id, object.friends[index].id, `friend ${String(index)} id is not equal`);
+            assert.strictEqual(friend.name, object.friends[index].name, `friend ${String(index)} name is not equal`);
         });
     });
 
@@ -137,8 +137,8 @@ describe("Base functions", () => {
         assert.strictEqual(user.favoriteFruit, object.favoriteFruit, "favoriteFruit is not equal");
 
         user.friends.forEach((friend: IFriend, index: number) => {
-            assert.strictEqual(friend.id, object.friends[index].id, `friend ${index} id is not equal`);
-            assert.strictEqual(friend.name, object.friends[index].name, `friend ${index} name is not equal`);
+            assert.strictEqual(friend.id, object.friends[index].id, `friend ${String(index)} id is not equal`);
+            assert.strictEqual(friend.name, object.friends[index].name, `friend ${String(index)} name is not equal`);
         });
     });
 });

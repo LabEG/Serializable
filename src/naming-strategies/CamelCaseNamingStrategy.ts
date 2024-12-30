@@ -1,4 +1,5 @@
-/* eslint-disable @typescript-eslint/class-methods-use-this */
+/* eslint-disable class-methods-use-this */
+
 import type {INamingStrategy} from "./INamingStrategy.js";
 
 export class CamelCaseNamingStrategy implements INamingStrategy {

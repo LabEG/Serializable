@@ -1,5 +1,5 @@
+/* eslint-disable class-methods-use-this */
 /* eslint-disable max-lines */
-/* eslint-disable @typescript-eslint/class-methods-use-this */
 /* eslint-disable max-classes-per-file */
 
 import "reflect-metadata";

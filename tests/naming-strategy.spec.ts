@@ -38,8 +38,8 @@ describe("Naming strategies", () => {
         assert.strictEqual(user.favoriteFruitSnake, object.favorite_fruit_snake, "favoriteFruitSnake is not equal");
 
         user.friendsSnake.forEach((friend: FriendSnake, index: number) => {
-            assert.strictEqual(friend.idSnake, object.friends_snake[index].id_snake, `friend ${index} idSnake is not equal`);
-            assert.strictEqual(friend.nameSnake, object.friends_snake[index].name_snake, `friend ${index} nameSnake is not equal`);
+            assert.strictEqual(friend.idSnake, object.friends_snake[index].id_snake, `friend ${String(index)} idSnake is not equal`);
+            assert.strictEqual(friend.nameSnake, object.friends_snake[index].name_snake, `friend ${String(index)} nameSnake is not equal`);
         });
     });
 
@@ -72,8 +72,8 @@ describe("Naming strategies", () => {
         assert.strictEqual(user.favoriteFruitSnake, object.favorite_fruit_snake, "favoriteFruitSnake is not equal");
 
         user.friendsSnake.forEach((friend: FriendSnake, index: number) => {
-            assert.strictEqual(friend.idSnake, object.friends_snake[index].id_snake, `friend ${index} idSnake is not equal`);
-            assert.strictEqual(friend.nameSnake, object.friends_snake[index].name_snake, `friend ${index} nameSnake is not equal`);
+            assert.strictEqual(friend.idSnake, object.friends_snake[index].id_snake, `friend ${String(index)} idSnake is not equal`);
+            assert.strictEqual(friend.nameSnake, object.friends_snake[index].name_snake, `friend ${String(index)} nameSnake is not equal`);
         });
     });
 
@@ -106,8 +106,12 @@ describe("Naming strategies", () => {
         assert.strictEqual(serialized.favorite_fruit_snake, object.favorite_fruit_snake, "favorite_fruit_snake is not equal");
 
         (serialized.friends_snake as []).forEach((friend: Record<string, unknown>, index: number) => {
-            assert.strictEqual(friend.id_snake, object.friends_snake[index].id_snake, `friend ${index} id_snake is not equal`);
-            assert.strictEqual(friend.name_snake, object.friends_snake[index].name_snake, `friend ${index} name_snake is not equal`);
+            assert.strictEqual(friend.id_snake, object.friends_snake[index].id_snake, `friend ${String(index)} id_snake is not equal`);
+            assert.strictEqual(
+                friend.name_snake,
+                object.friends_snake[index].name_snake,
+                `friend ${String(index)} name_snake is not equal`
+            );
         });
     });
 
