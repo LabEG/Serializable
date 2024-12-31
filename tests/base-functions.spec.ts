@@ -2,13 +2,15 @@
 /* eslint-disable max-lines-per-function */
 import("reflect-metadata"); // Polyfill
 import {assert} from "chai";
+import {describe, it} from "node:test";
 
 import type {User as IUser, Friend as IFriend} from "./models/User";
 
 describe("Base functions", () => {
     it("user from method fromJSON must be instance of User", async () => {
         const {User} = await import("./models/User");
-        const json = await import("./jsons/json-generator.json", {assert: {type: "json"}});
+        const json = await import("./jsons/json-generator.json", {with: {type: "json"}});
+
         const [object] = Reflect.get(json, "default") as typeof json;
 
         const user = new User().fromJSON(object);
@@ -42,7 +44,7 @@ describe("Base functions", () => {
 
     it("user from static method fromJSON must be instance of User", async () => {
         const {User} = await import("./models/User");
-        const json = await import("./jsons/json-generator.json", {assert: {type: "json"}});
+        const json = await import("./jsons/json-generator.json", {with: {type: "json"}});
         const [object] = Reflect.get(json, "default") as typeof json;
 
         const user: IUser = User.fromJSON(object);
@@ -76,7 +78,7 @@ describe("Base functions", () => {
 
     it("user from method fromString must be instance of User", async () => {
         const {User} = await import("./models/User");
-        const json = await import("./jsons/json-generator.json", {assert: {type: "json"}});
+        const json = await import("./jsons/json-generator.json", {with: {type: "json"}});
         const [object] = Reflect.get(json, "default") as typeof json;
 
         const user = new User().fromString(JSON.stringify(object));
@@ -110,7 +112,7 @@ describe("Base functions", () => {
 
     it("user from static method fromString must be instance of User", async () => {
         const {User} = await import("./models/User");
-        const json = await import("./jsons/json-generator.json", {assert: {type: "json"}});
+        const json = await import("./jsons/json-generator.json", {with: {type: "json"}});
         const [object] = Reflect.get(json, "default") as typeof json;
 
         const user: IUser = User.fromString(JSON.stringify(object));

@@ -1,8 +1,0 @@
-{
-    "reporter": "spec",
-    "extension": [ "ts" ],
-	"node-option": [
-		"import=tsx/esm"
-	],
-    "spec": ["tests/*.spec.ts"]
-}

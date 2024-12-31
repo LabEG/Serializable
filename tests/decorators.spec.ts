@@ -2,14 +2,14 @@
 
 import("reflect-metadata"); // Polyfill
 import {assert} from "chai";
-
+import {describe, it} from "node:test";
 import type {User as IUser} from "./models/User";
 import type {FriendExt} from "./models/UserExt";
 
 describe("Decorators", () => {
     it("user property marked as jsonIgnore must by dropped", async () => {
         const {User} = await import("./models/User");
-        const json: Record<string, unknown>[] = await import("./jsons/json-generator.json", {assert: {type: "json"}});
+        const json: Record<string, unknown>[] = await import("./jsons/json-generator.json", {with: {type: "json"}});
 
         const user = new User().fromJSON(json[0]);
         user.isExpanded = true;
@@ -20,7 +20,7 @@ describe("Decorators", () => {
 
     it("class can be extended by decorator jsonObject", async () => {
         const {UserExt} = await import("./models/UserExt");
-        const json = await import("./jsons/json-generator.json", {assert: {type: "json"}});
+        const json = await import("./jsons/json-generator.json", {with: {type: "json"}});
         const [object] = Reflect.get(json, "default") as typeof json;
 
         const user = new UserExt().fromJSON(object);

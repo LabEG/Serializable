@@ -2,6 +2,7 @@ import {assert} from "chai";
 import {TestClass as TestClass1} from "./models/generated/generated1.js";
 import {TestClass as TestClass2} from "./models/generated/generated2.js";
 import {TestClass as TestClass3} from "./models/generated/generated3.js";
+import {describe, it} from "node:test";
 
 // Think about guessing complex union types in the future.
 describe.skip("Nested classes", () => {

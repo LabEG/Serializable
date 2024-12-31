@@ -5,7 +5,7 @@ export default [
     ...labegStyle,
     {
         rules: {
-            // Ругается на reflect-metadata, удалить при переходе не нативные декораторы
+            // Drop usage reflect-metadata, use self store for metadata
             "@typescript-eslint/no-unsafe-type-assertion": "off"
         }
     }

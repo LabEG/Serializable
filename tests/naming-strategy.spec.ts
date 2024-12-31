@@ -4,11 +4,12 @@ import("reflect-metadata"); // Polyfill
 import {assert} from "chai";
 import type {FriendSnake} from "./models/UserSnake";
 import {SnakeCaseNamingStrategy} from "../src";
+import {describe, it} from "node:test";
 
 describe("Naming strategies", () => {
     it("deserialize must support snack case naming by fromJson parameters", async () => {
         const {UserSnake} = await import("./models/UserSnake");
-        const json = await import("./jsons/json-generator-snake.json", {assert: {type: "json"}});
+        const json = await import("./jsons/json-generator-snake.json", {with: {type: "json"}});
         const [object] = Reflect.get(json, "default") as typeof json;
 
         const user = new UserSnake().fromJSON(
@@ -45,7 +46,7 @@ describe("Naming strategies", () => {
 
     it("deserialize must support snack case naming by jsonObject decorator", async () => {
         const {UserSnakeObject} = await import("./models/UserSnake");
-        const json = await import("./jsons/json-generator-snake.json", {assert: {type: "json"}});
+        const json = await import("./jsons/json-generator-snake.json", {with: {type: "json"}});
         const [object] = Reflect.get(json, "default") as typeof json;
 
         const user = new UserSnakeObject().fromJSON(object);
@@ -79,7 +80,7 @@ describe("Naming strategies", () => {
 
     it("serializer must support snack case naming by jsonObject decorator", async () => {
         const {UserSnakeObject} = await import("./models/UserSnake");
-        const json = await import("./jsons/json-generator-snake.json", {assert: {type: "json"}});
+        const json = await import("./jsons/json-generator-snake.json", {with: {type: "json"}});
         const [object] = Reflect.get(json, "default") as typeof json;
 
         const user = new UserSnakeObject().fromJSON(object);
@@ -117,7 +118,7 @@ describe("Naming strategies", () => {
 
     it("method fromJSON must support snack case naming by jsonName decorator", async () => {
         const {UserNaming} = await import("./models/UserName");
-        const json = await import("./jsons/user-naming.json", {assert: {type: "json"}});
+        const json = await import("./jsons/user-naming.json", {with: {type: "json"}});
         const pjson = Reflect.get(json, "default") as typeof json;
 
         const user = new UserNaming().fromJSON(pjson);
@@ -130,7 +131,7 @@ describe("Naming strategies", () => {
 
     it("serializable must support deep copy with naming strategy", async () => {
         const {UserSnakeObject} = await import("./models/UserSnake");
-        const json = await import("./jsons/json-generator-snake.json", {assert: {type: "json"}});
+        const json = await import("./jsons/json-generator-snake.json", {with: {type: "json"}});
         const [object] = Reflect.get(json, "default") as typeof json;
 
         const user1 = new UserSnakeObject().fromJSON(object);

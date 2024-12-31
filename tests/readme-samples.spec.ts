@@ -2,6 +2,7 @@
 import("reflect-metadata"); // Polyfill
 import {assert} from "chai";
 import {Serializable, SnakeCaseNamingStrategy, jsonObject, jsonProperty, jsonName} from "../src";
+import {describe, it} from "node:test";
 
 describe("Readme samples", () => {
     it("naming strategies sample", () => {
