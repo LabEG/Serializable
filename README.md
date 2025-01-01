@@ -201,7 +201,7 @@ export class User extends Serializable {
 
 await fetch("api/sendFile", {
     method: "POST",
-    body: user.toFormData()
+    body: user.toFormData() // <- serialization class to FormData
 });
 
 ```
