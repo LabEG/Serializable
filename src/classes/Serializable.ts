@@ -8,6 +8,8 @@
 
 import type {AcceptedTypes} from "../models/AcceptedType.js";
 import {SerializationSettings} from "../models/SerializationSettings.js";
+import {classToFormData} from "../utils/ClassToFormData.js";
+import {getPropertyName} from "../utils/GetProperyName.js";
 
 /**
  * Class how help you deserialize object to classes.
@@ -136,20 +138,41 @@ export class Serializable {
      * @memberof Serializable
      */
     public toJSON (): Record<string, unknown> {
-        const fromJson: this = {...this};
         const toJson: Record<string, unknown> = {};
+        const keys = Reflect.ownKeys(this);
 
-        for (const prop in fromJson) {
-            // Json.hasOwnProperty(prop) - preserve for deserialization for other classes with methods
-            if (fromJson.hasOwnProperty(prop) && this.hasOwnProperty(prop)) {
-                if (Reflect.getMetadata("ts-serializable:jsonIgnore", this.constructor.prototype, prop) !== true) {
-                    const toProp = this.getJsonPropertyName(prop);
-                    Reflect.set(toJson, toProp, Reflect.get(fromJson, prop));
+        for (const key of keys) {
+            if (typeof key === "symbol") {
+                // eslint-disable-next-line no-continue
+                continue;
+            }
+
+            if (this.hasOwnProperty(key)) {
+                if (Reflect.getMetadata("ts-serializable:jsonIgnore", this.constructor.prototype, key) !== true) {
+                    const toProp = this.getJsonPropertyName(key);
+                    Reflect.set(toJson, toProp, Reflect.get(this, key));
                 }
             }
         }
 
         return toJson;
+    }
+
+    /**
+     * Serialize class to FormData.
+     *
+     * Can be used for prepare ajax form with files.
+     * Send files via ajax json its heavy task, because need convert file to base 64 format,
+     * user interface can be freeze on many seconds on this operation if file is too big.
+     * Ajax forms its lightweight alternative.
+     *
+     * @param {string} formPrefix Prefix for form property names
+     * @param {FormData} formData Can be update an existing FormData
+     * @returns {FormData}
+     * @memberof Serializable
+     */
+    public toFormData (formPrefix?: string, formData?: FormData): FormData {
+        return classToFormData(this, formPrefix, formData);
     }
 
     /**
@@ -288,29 +311,16 @@ export class Serializable {
         return Reflect.get(this, prop);
     }
 
-    protected getJsonPropertyName (thisProperty: string, settings?: Partial<SerializationSettings>): string {
-        if (Reflect.hasMetadata("ts-serializable:jsonName", this.constructor.prototype, thisProperty)) {
-            return Reflect.getMetadata("ts-serializable:jsonName", this.constructor.prototype, thisProperty) as string;
-        }
-
-        if (settings?.namingStrategy) {
-            return settings.namingStrategy.toJsonName(thisProperty);
-        }
-
-        if (Reflect.hasMetadata("ts-serializable:jsonObject", this.constructor)) {
-            const objectSettings: Partial<SerializationSettings> = Reflect.getMetadata(
-                "ts-serializable:jsonObject",
-                this.constructor
-            ) as Partial<SerializationSettings>;
-            return objectSettings.namingStrategy?.toJsonName(thisProperty) ?? thisProperty;
-        }
-
-        if (Serializable.defaultSettings.namingStrategy) {
-            const {namingStrategy} = Serializable.defaultSettings;
-            return namingStrategy.toJsonName(thisProperty) ?? thisProperty;
-        }
-
-        return thisProperty;
+    /**
+     * Extract correct name for property.
+     * Considers decorators for transforming the property name.
+     *
+     * @param {string} property Source name of property
+     * @param {Partial<SerializationSettings>} settings Serialization settings
+     * @returns
+     */
+    protected getJsonPropertyName (property: string, settings?: Partial<SerializationSettings>): string {
+        return getPropertyName(this, property, settings);
     }
 
 }

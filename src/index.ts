@@ -24,3 +24,7 @@ export {SnakeCaseNamingStrategy} from "./naming-strategies/SnakeCaseNamingStrate
 export {PascalCaseNamingStrategy} from "./naming-strategies/PascalCaseNamingStrategy.js";
 export {KebabCaseNamingStrategy} from "./naming-strategies/KebabCaseNamingStrategy.js";
 export {CamelCaseNamingStrategy} from "./naming-strategies/CamelCaseNamingStrategy.js";
+
+// Utils
+export {classToFormData} from "./utils/ClassToFormData.js";
+export {getPropertyName} from "./utils/GetProperyName.js";

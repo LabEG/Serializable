@@ -181,6 +181,33 @@ JSON.stringify(user);
 // Result: {"firstName":"","familyName":""}
 ```
 
+Class to FormData
+------
+
+Sometimes classes contain properties with the File type. Sending such classes via json is a heavy task. Converting a file property to json can freeze the interface for a few seconds if the file is large. A much better solution is to send an Ajax form. Example:
+
+```typescript
+import { Serializable } from "ts-serializable";
+
+export class User extends Serializable {
+
+    public firstName: string = '';
+
+    public familyName: File | null = null;
+
+}
+
+// ... send file function ...
+
+await fetch("api/sendFile", {
+    method: "POST",
+    body: user.toFormData()
+});
+
+```
+
+Naming strategies, custom names, ignoring and other decorators are supported during conversion.
+
 Bonus
 ------
 

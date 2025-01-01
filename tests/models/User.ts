@@ -84,4 +84,12 @@ export class User extends Serializable {
     @jsonIgnore()
     public isExpanded: boolean = false;
 
+    public getName (): string {
+        return [
+            this.email,
+            this.company,
+            this.address
+        ].join(" ");
+    }
+
 }
