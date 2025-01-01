@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.6.0] - 2024-12-31
+
+### 🚀 Features
+
+- Replace mocha by native node test runner
+
 ## [3.5.0] - 2024-12-30
 
 ### 🚀 Features
