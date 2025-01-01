@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.7.0] - 2025-01-01
+
+### 🚀 Features
+
+- Add support serialization to FormData
+
 ## [3.6.0] - 2024-12-31
 
 ### 🚀 Features
