@@ -41,11 +41,6 @@ describe("FormData convertation", () => {
         assert.strictEqual(user.greeting, formData.get("greeting"), "greeting is not equal");
         assert.strictEqual(user.favoriteFruit, formData.get("favoriteFruit"), "favoriteFruit is not equal");
 
-        fetch("api/sendFile", {
-            method: "POST",
-            body: user.toFormData()
-        });
-
         /*
          * Nodejs version of FormData don't support arrays of objects, but C# and browser version of FormData support him.
          * Because test run under nodejs env, this next part disabled. Check this code in future versions of nodejs.
