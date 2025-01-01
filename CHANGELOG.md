@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [3.7.1] - 2025-01-01
+
+### 📚 Documentation
+
+- Update readme
+
 ## [3.7.0] - 2025-01-01
 
 ### 🚀 Features
