@@ -26,7 +26,7 @@
         "test-watch": "node --watch --import ./ts-loader.js --test --test-reporter=spec --test-reporter-destination=stdout \"tests/**/*.spec.ts\"",
         "coverage": "node --import ./ts-loader.js --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=coverage/lcov.info \"tests/**/*.spec.ts\"",
         "build": "tsc --project tsconfig.build.json && node ./dist/index.js",
-        "prepublishOnly": "npm run lint && npm run build && npm run test && node ./dist/index.js",
+        "prepublishOnly": "npm run lint && npm run build && npm run test",
         "release": "cliff-jumper --name 'ts-serializable' --package-path '.' --no-skip-changelog --no-skip-tag",
         "prepare": "husky install"
     },
