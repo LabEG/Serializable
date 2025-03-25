@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.0.0] - 2025-03-25
+
+### 🚀 Features
+
+- [**breaking**] Drop support class mutation by jsonObject decorator
+- Update dependencies versions
+
 ## [3.7.3] - 2025-01-03
 
 ### 🐛 Bug Fixes
