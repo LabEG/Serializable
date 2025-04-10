@@ -1,14 +1,14 @@
 Serializable
 =====
 
-Small library for deserialization and serialization for javascript and typescript
+Small library for deserialization and serialization for JavaScript and TypeScript
 
 Description
 ------
 
-- For working this library needed Metadata Reflection API. If your platform (browser/nodejs) don't support it you must use polifyll. Example: [reflect-metadata](https://www.npmjs.com/package/reflect-metadata)
+- For working, this library needs the Metadata Reflection API. If your platform (browser/Node.js) doesn't support it, you must use a polyfill. Example: [reflect-metadata](https://www.npmjs.com/package/reflect-metadata)
 
-- By default library don't crash on wrong types in json and return default value on wrong property. If you need more secure behavior you must override method `onWrongType` on `Serializable` object and drop exception in this method, by your logic want.
+- By default, the library doesn't crash on wrong types in JSON and returns the default value on the wrong property. If you need more secure behavior, you must override the method `onWrongType` on the `Serializable` object and throw an exception in this method, according to your logic.
 
 Installation
 ------
@@ -22,36 +22,36 @@ npm install ts-serializable
 Usage
 ------
 
-This example writed on typescript, but if remove typing, then him will work and on javascript.
+This example is written in TypeScript, but if you remove typing, it will also work in JavaScript.
 
 ```typescript
 import { jsonProperty, Serializable } from "ts-serializable";
 
 export class User extends Serializable {
 
-    // @jsonProperty parrameters is accepted types for json
-    // properties, if property in json will not by found or
-    // will have invalid type, then will return default value
+    // @jsonProperty parameters are accepted types for JSON
+    // properties. If a property in JSON is not found or
+    // has an invalid type, it will return the default value.
     @jsonProperty(Number, null)
-    public id: number | null = null; // default value necessarily
+    public id: number | null = null; // default value is necessary
 
     @jsonProperty(String)
-    public firstName: string = ''; // default value necessarily
+    public firstName: string = ''; // default value is necessary
 
     @jsonProperty(String)
-    public familyName: string = ''; // default value necessarily
+    public familyName: string = ''; // default value is necessary
 
     @jsonProperty(String, void 0)
-    public lastName?: string = void 0; // default value necessarily
+    public lastName?: string = void 0; // default value is necessary
 
     @jsonProperty(Date)
-    public birthdate: Date = new Date(); // default value necessarily
+    public birthdate: Date = new Date(); // default value is necessary
 
     @jsonProperty([String])
-    public tags: string[] = []; // default value necessarily
+    public tags: string[] = []; // default value is necessary
 
     @jsonProperty(OtherClassConstructor, null)
-    public other: OtherClassConstructor | null = null; // default value necessarily
+    public other: OtherClassConstructor | null = null; // default value is necessary
 
     public getFullName(): string {
         return [
@@ -79,19 +79,19 @@ user.getAge();
 * With Serializable
 */
 const user: User = new User().fromJSON(json);
-user.getFullName(); // work fine and return string
-user.getAge(); // work fine and return number
+user.getFullName(); // works fine and returns a string
+user.getAge(); // works fine and returns a number
 
 // or
 const user: User = User.fromJSON(json);
-user.getFullName(); // work fine and return string
-user.getAge(); // work fine and return number
+user.getFullName(); // works fine and returns a string
+user.getAge(); // works fine and returns a number
 ```
 
 Naming strategies
 ------
 
-Supported conversion between different naming cases, such as SnakeCase, KebabCase, PascalCase and CamelCase. Also you can set custom name for property of json object.
+Supported conversion between different naming cases, such as SnakeCase, KebabCase, PascalCase and CamelCase. Also, you can set a custom name for a property of a JSON object.
 
 ```typescript
 const json = {
@@ -157,7 +157,7 @@ Supported settings:
 View-Models from Backend Models
 ------
 
-If you need to create view-model from dto or entities model you can use same model. Just add VM property to dto or entities model and mark this property by @jsonIgnore() decorator and this property will not be serialized to json.
+If you need to create a view-model from a DTO or entities model, you can use the same model. Just add a VM property to the DTO or entities model and mark this property with the @jsonIgnore() decorator, and this property will not be serialized to JSON.
 
 ```typescript
 import { jsonProperty, jsonIgnore, Serializable } from "ts-serializable";
@@ -165,10 +165,10 @@ import { jsonProperty, jsonIgnore, Serializable } from "ts-serializable";
 export class User extends Serializable {
 
     @jsonProperty(String)
-    public firstName: string = ''; // default value necessarily
+    public firstName: string = ''; // default value is necessary
 
     @jsonProperty(String)
-    public familyName: string = ''; // default value necessarily
+    public familyName: string = ''; // default value is necessary
 
     @jsonIgnore()
     public isExpanded: boolean  = false;
@@ -184,7 +184,7 @@ JSON.stringify(user);
 Class to FormData
 ------
 
-Sometimes classes contain properties with the File type. Sending such classes via json is a heavy task. Converting a file property to json can freeze the interface for a few seconds if the file is large. A much better solution is to send an Ajax form. Example:
+Sometimes classes contain properties with the File type. Sending such classes via JSON is a heavy task. Converting a file property to JSON can freeze the interface for a few seconds if the file is large. A much better solution is to send an Ajax form. Example:
 
 ```typescript
 import { Serializable } from "ts-serializable";
