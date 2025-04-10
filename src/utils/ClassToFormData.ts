@@ -1,6 +1,15 @@
+/* eslint-disable max-statements */
+/* eslint-disable max-lines-per-function */
 import {getPropertyName} from "./GetProperyName.js";
 
-// eslint-disable-next-line max-statements, max-lines-per-function
+/**
+ * Converts a class instance to FormData for use in AJAX forms.
+ *
+ * @param {object} obj - The class instance to convert.
+ * @param {string} [formPrefix] - Optional prefix for form property names.
+ * @param {FormData} [formData] - Optional existing FormData to update.
+ * @returns {FormData} - The resulting FormData object.
+ */
 export const classToFormData = (obj: object, formPrefix?: string, formData?: FormData) => {
     const newFormData = formData ?? new FormData();
     const keys = Reflect.ownKeys(obj);

@@ -1,4 +1,4 @@
-// Decoratore
+// Decorators
 export {jsonIgnore} from "./decorators/JsonIgnore.js";
 export {jsonName} from "./decorators/JsonName.js";
 export {jsonObject} from "./decorators/JsonObject.js";

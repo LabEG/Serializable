@@ -1,3 +1,6 @@
+/**
+ * Enum for handling default values during serialization.
+ */
 export enum DefaultValueHandling {
     Include = 0,
     Ignore = 1, // Not supported yet
