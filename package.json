@@ -37,14 +37,14 @@
         "@commitlint/cli": "^19.8.0",
         "@commitlint/config-conventional": "^19.8.0",
         "@favware/cliff-jumper": "^6.0.0",
-        "@labeg/code-style": "^6.2.0",
+        "@labeg/code-style": "^6.3.0",
         "@swc-node/register": "^1.10.10",
         "@types/chai": "^5.2.1",
         "chai": "^5.2.0",
         "husky": "^9.1.7",
         "lint-staged": "^15.5.0",
         "reflect-metadata": "^0.2.2",
-        "typescript": "^5.8.2"
+        "typescript": "^5.8.3"
     },
     "keywords": [
         "serialization",
