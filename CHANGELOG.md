@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.2.0] - 2025-04-10
+
+### 🚀 Features
+
+- Enhance documentation with detailed comments for serialization classes and decorators
+
+### 🐛 Bug Fixes
+
+- Correct typos and improve clarity in README documentation
+
 ## [4.1.0] - 2025-04-10
 
 ### 🚀 Features
