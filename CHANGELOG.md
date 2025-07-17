@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.2.1] - 2025-07-17
+
+### ⚙️ Miscellaneous Tasks
+
+- Update dependencies and improve type definitions
+
 ## [4.2.0] - 2025-04-10
 
 ### 🚀 Features
