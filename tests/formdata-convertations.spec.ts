@@ -1,11 +1,9 @@
-/* eslint-disable max-lines-per-function */
 /* eslint-disable max-statements */
 
 import("reflect-metadata"); // Polyfill
 import {assert} from "chai";
 import {describe, it} from "node:test";
-
-// Import type {Friend as IFriend} from "./models/User";
+import type {Friend as IFriend} from "./models/User";
 
 
 describe("FormData convertation", () => {
@@ -41,22 +39,17 @@ describe("FormData convertation", () => {
         assert.strictEqual(user.greeting, formData.get("greeting"), "greeting is not equal");
         assert.strictEqual(user.favoriteFruit, formData.get("favoriteFruit"), "favoriteFruit is not equal");
 
-        /*
-         * Nodejs version of FormData don't support arrays of objects, but C# and browser version of FormData support him.
-         * Because test run under nodejs env, this next part disabled. Check this code in future versions of nodejs.
-         *
-         * user.friends.forEach((friend: IFriend, index: number) => {
-         *     assert.strictEqual(
-         *         String(friend.id),
-         *         formData.get(`friends[${index.toString()}].id`),
-         *         `friend ${String(index)} id is not equal`
-         *     );
-         *     assert.strictEqual(
-         *         friend.name,
-         *         formData.get(`friends[${index.toString()}].name`),
-         *         `friend ${String(index)} name is not equal`
-         *     );
-         * });
-         */
+        user.friends.forEach((friend: IFriend, index: number) => {
+            assert.strictEqual(
+                String(friend.id),
+                formData.get(`friends[${index.toString()}].id`),
+                `friend ${String(index)} id is not equal`
+            );
+            assert.strictEqual(
+                friend.name,
+                formData.get(`friends[${index.toString()}].name`),
+                `friend ${String(index)} name is not equal`
+            );
+        });
     });
 });

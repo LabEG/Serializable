@@ -51,7 +51,7 @@ export const classToFormData = (obj: object, formPrefix?: string, formData?: For
                             prefix += `[${index.toString()}]`;
                         }
 
-                        classToFormData(value, prefix, formData);
+                        classToFormData(value, prefix, newFormData);
                     } else {
                         // eslint-disable-next-line @typescript-eslint/no-base-to-string
                         newFormData.append(name, String(value));
