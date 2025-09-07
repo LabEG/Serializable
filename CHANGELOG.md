@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.2.2] - 2025-09-07
+
+### 🐛 Bug Fixes
+
+- ClassToFormData to use nested arrays in formdata and enable array assertions in tests
+
 ## [4.2.1] - 2025-07-17
 
 ### ⚙️ Miscellaneous Tasks
