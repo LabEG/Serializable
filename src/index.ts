@@ -25,6 +25,10 @@ export {PascalCaseNamingStrategy} from "./naming-strategies/PascalCaseNamingStra
 export {KebabCaseNamingStrategy} from "./naming-strategies/KebabCaseNamingStrategy.js";
 export {CamelCaseNamingStrategy} from "./naming-strategies/CamelCaseNamingStrategy.js";
 
-// Utils
+// Functions
 export {classToFormData} from "./functions/ClassToFormData.js";
-export {getPropertyName} from "./functions/GetProperyName.js";
+export {deserializeProperty} from "./functions/DeserializeProperty.js";
+export {fromJSON} from "./functions/FromJSON.js";
+export {getPropertyName} from "./functions/GetPropertyName.js";
+export {onWrongType} from "./functions/OnWrongType.js";
+

@@ -7,7 +7,7 @@ import {Serializable} from "../classes/Serializable";
 import {AcceptedTypes} from "../models/AcceptedType";
 import {SerializationSettings} from "../models/SerializationSettings";
 import {deserializeProperty} from "./DeserializeProperty";
-import {getPropertyName} from "./GetProperyName.js";
+import {getPropertyName} from "./GetPropertyName.js";
 import {onWrongType} from "./OnWrongType.js";
 
 // eslint-disable-next-line max-statements

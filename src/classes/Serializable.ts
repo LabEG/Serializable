@@ -5,7 +5,7 @@ import {deserializeProperty} from "../functions/DeserializeProperty.js";
 import type {AcceptedTypes} from "../models/AcceptedType.js";
 import {SerializationSettings} from "../models/SerializationSettings.js";
 import {classToFormData} from "../functions/ClassToFormData.js";
-import {getPropertyName} from "../functions/GetProperyName.js";
+import {getPropertyName} from "../functions/GetPropertyName.js";
 import {fromJSON} from "../functions/FromJSON.js";
 
 /**

@@ -1,6 +1,6 @@
 /* eslint-disable max-statements */
 /* eslint-disable max-lines-per-function */
-import {getPropertyName} from "./GetProperyName.js";
+import {getPropertyName} from "./GetPropertyName.js";
 
 /**
  * Converts a class instance to FormData for use in AJAX forms.
