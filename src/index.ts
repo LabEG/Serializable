@@ -26,5 +26,5 @@ export {KebabCaseNamingStrategy} from "./naming-strategies/KebabCaseNamingStrate
 export {CamelCaseNamingStrategy} from "./naming-strategies/CamelCaseNamingStrategy.js";
 
 // Utils
-export {classToFormData} from "./utils/ClassToFormData.js";
-export {getPropertyName} from "./utils/GetProperyName.js";
+export {classToFormData} from "./functions/ClassToFormData.js";
+export {getPropertyName} from "./functions/GetProperyName.js";
