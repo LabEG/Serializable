@@ -10,6 +10,59 @@ import {deserializeProperty} from "./DeserializeProperty";
 import {getPropertyName} from "./GetPropertyName.js";
 import {onWrongType} from "./OnWrongType.js";
 
+/**
+ * Deserializes JSON data into an existing object instance, populating its properties.
+ * This function reads metadata from @JsonProperty decorators to determine property types
+ * and performs appropriate type conversions. It supports both Serializable and plain object instances.
+ *
+ * @template T - The type of object being deserialized (extends Serializable or plain object)
+ * @param {T} obj - The target object instance to populate with deserialized data
+ * @param {object} json - The JSON object containing source data for deserialization
+ * @param {Partial<SerializationSettings>} [settings] - Optional settings to customize deserialization behavior
+ * @returns {T} The same object instance with properties populated from JSON
+ *
+ * @remarks
+ * The function performs the following steps:
+ * 1. Validates that json is an object (not null, array, or primitive)
+ * 2. Iterates through all properties of the target object
+ * 3. Resolves JSON property names using @JsonName decorators and naming strategies
+ * 4. Falls back to original property names for deep copy operations
+ * 5. Deserializes each property value according to its type metadata
+ * 6. Calls error handlers for invalid or missing data
+ *
+ * Property name resolution priority:
+ * - @JsonName decorator value
+ * - Naming strategy transformation (snake_case, camelCase, etc.)
+ * - Original property name (fallback for deep copy)
+ *
+ * @example
+ * ```typescript
+ * class User extends Serializable {
+ *   @JsonProperty(String)
+ *   name: string;
+ *
+ *   @JsonProperty(Number)
+ *   age: number;
+ * }
+ *
+ * const user = new User();
+ * fromJSON(user, { name: "John", age: 30 });
+ * console.log(user.name); // "John"
+ * console.log(user.age);  // 30
+ * ```
+ *
+ * @example
+ * ```typescript
+ * // Using with plain objects (non-Serializable)
+ * class Product {
+ *   @JsonProperty(String)
+ *   title: string;
+ * }
+ *
+ * const product = new Product();
+ * fromJSON(product, { title: "Laptop" });
+ * ```
+ */
 // eslint-disable-next-line max-statements
 export const fromJSON = <T extends (Serializable | object)>(obj: T, json: object, settings?: Partial<SerializationSettings>): T => {
     const unknownJson: unknown = json;

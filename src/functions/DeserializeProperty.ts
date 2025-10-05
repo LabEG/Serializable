@@ -5,16 +5,39 @@ import {fromJSON} from "./FromJSON";
 import {onWrongType} from "./OnWrongType";
 
 /**
- * Deserializes a property value from JSON based on the accepted types.
- * This function attempts to convert the provided JSON value into one of the specified accepted types,
- * handling primitives, arrays, dates, and serializable objects.
+ * Deserializes a single property value from JSON data based on accepted type definitions.
+ * This function iterates through accepted types and attempts to match and convert the JSON value
+ * to the appropriate TypeScript type. Supports primitives, arrays, dates, and complex object types.
  *
- * @param obj - The object instance to which the property belongs.
- * @param prop - The name of the property being deserialized.
- * @param acceptedTypes - An array of accepted types for the property.
- * @param jsonValue - The JSON value to deserialize.
- * @param settings - Optional serialization settings to customize the deserialization process.
- * @returns The deserialized value matching one of the accepted types, or the original property value if deserialization fails.
+ * @param {object} obj - The object instance to which the property belongs
+ * @param {string} prop - The name of the property being deserialized
+ * @param {AcceptedTypes[]} acceptedTypes - Array of type constructors or type definitions that the property can accept
+ * @param {unknown} jsonValue - The raw JSON value to deserialize and convert
+ * @param {Partial<SerializationSettings>} [settings] - Optional settings to customize deserialization behavior
+ * @returns {unknown} The deserialized and typed value, or the original property value if no type match is found
+ *
+ * @remarks
+ * Supported type conversions:
+ * - `null` - Preserves null values
+ * - `undefined` (void 0) - For deep copy operations
+ * - `Boolean` - Converts boolean values and Boolean objects
+ * - `Number` - Converts numeric values and Number objects
+ * - `String` - Converts string values and String objects
+ * - `Object` - Converts plain objects
+ * - `Date` - Parses ISO strings, Date objects, and validates date values
+ * - `Array` - Recursively deserializes array elements
+ * - `Serializable` subclasses - Creates instances and calls fromJSON
+ * - Custom classes - Creates instances and applies fromJSON for non-Serializable classes
+ * - Instance checks - Validates existing instances of specific classes
+ *
+ * If no type matches, calls `onWrongType` error handler and returns the original property value.
+ *
+ * @example
+ * ```typescript
+ * const acceptedTypes = [String, Number];
+ * const result = deserializeProperty(obj, "age", acceptedTypes, "30");
+ * // Returns the string "30" since String is checked first
+ * ```
  */
 // eslint-disable-next-line max-lines-per-function, max-statements, complexity
 export const deserializeProperty = (

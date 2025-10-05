@@ -3,12 +3,37 @@
 import {getPropertyName} from "./GetPropertyName.js";
 
 /**
- * Converts a class instance to FormData for use in AJAX forms.
+ * Converts a class instance to FormData format for multipart/form-data HTTP requests.
+ * This function recursively processes nested objects, arrays, and handles special types like File and Date.
+ * Properties marked with @JsonIgnore decorator are excluded from the conversion.
  *
- * @param {object} obj - The class instance to convert.
- * @param {string} [formPrefix] - Optional prefix for form property names.
- * @param {FormData} [formData] - Optional existing FormData to update.
- * @returns {FormData} - The resulting FormData object.
+ * @param {object} obj - The class instance or object to convert to FormData
+ * @param {string} [formPrefix] - Optional prefix for form property names (used for nested objects, e.g., "user.address")
+ * @param {FormData} [formData] - Optional existing FormData instance to append to. If not provided, creates a new one
+ * @returns {FormData} The FormData object containing all serialized properties
+ *
+ * @example
+ * ```typescript
+ * const user = {
+ *   name: "John",
+ *   age: 30,
+ *   avatar: fileInput.files[0],
+ *   address: { city: "New York" }
+ * };
+ * const formData = classToFormData(user);
+ * // Results in FormData with entries:
+ * // name: "John"
+ * // age: "30"
+ * // avatar: [File object]
+ * // address.city: "New York"
+ * ```
+ *
+ * @remarks
+ * - File objects are appended directly to FormData
+ * - Date objects are converted to ISO strings
+ * - Null values are skipped
+ * - Arrays are processed recursively with indices for nested objects
+ * - Nested objects use dot notation for property names
  */
 export const classToFormData = (obj: object, formPrefix?: string, formData?: FormData) => {
     const newFormData = formData ?? new FormData();
