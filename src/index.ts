@@ -31,4 +31,5 @@ export {deserializeProperty} from "./functions/DeserializeProperty.js";
 export {fromJSON} from "./functions/FromJSON.js";
 export {getPropertyName} from "./functions/GetPropertyName.js";
 export {onWrongType} from "./functions/OnWrongType.js";
+export {toJSON} from "./functions/ToJSON.js";
 
