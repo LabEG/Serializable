@@ -1,6 +1,7 @@
 import {Serializable} from "../classes/Serializable";
 import {AcceptedTypes} from "../models/AcceptedType";
 import {SerializationSettings} from "../models/SerializationSettings";
+import {fromJSON} from "./FromJSON";
 import {onWrongType} from "./OnWrongType";
 
 /**
@@ -103,15 +104,22 @@ export const deserializeProperty = (
             !Array.isArray(acceptedType) &&
             (
                 acceptedType.prototype instanceof Serializable ||
-                Boolean(Reflect.getMetadata("ts-serializable:jsonObjectExtended", acceptedType))
+                acceptedType instanceof Function
             ) &&
             jsonValue !== null &&
             jsonValue !== void 0 &&
             typeof jsonValue === "object" && !Array.isArray(jsonValue)
         ) {
-            const TypeConstructor: new () => Serializable = acceptedType as new () => Serializable;
+            if (acceptedType.prototype instanceof Serializable) {
+                const TypeConstructor = acceptedType as new () => Serializable;
 
-            return new TypeConstructor().fromJSON(jsonValue, settings);
+                return new TypeConstructor().fromJSON(jsonValue, settings);
+            }
+
+            // Class without Serializable base class
+            const TypeConstructor = acceptedType as new () => object;
+
+            return fromJSON(new TypeConstructor(), jsonValue, settings);
         } else if (// Instance any other class, not Serializable, for parsing from other class instances
             acceptedType instanceof Function &&
             jsonValue instanceof acceptedType

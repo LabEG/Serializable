@@ -1,4 +1,4 @@
-/* eslint-disable no-prototype-builtins */
+
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 
 import {deserializeProperty} from "../functions/DeserializeProperty.js";
@@ -7,6 +7,7 @@ import {SerializationSettings} from "../models/SerializationSettings.js";
 import {classToFormData} from "../functions/ClassToFormData.js";
 import {getPropertyName} from "../functions/GetPropertyName.js";
 import {fromJSON} from "../functions/FromJSON.js";
+import {toJSON} from "../functions/ToJSON.js";
 
 /**
  * Class that helps you deserialize objects to classes.
@@ -98,24 +99,7 @@ export class Serializable {
      * @memberof Serializable
      */
     public toJSON (): Record<string, unknown> {
-        const toJson: Record<string, unknown> = {};
-        const keys = Reflect.ownKeys(this);
-
-        for (const key of keys) {
-            if (typeof key === "symbol") {
-                // eslint-disable-next-line no-continue
-                continue;
-            }
-
-            if (this.hasOwnProperty(key)) {
-                if (Reflect.getMetadata("ts-serializable:jsonIgnore", this.constructor.prototype, key) !== true) {
-                    const toProp = this.getJsonPropertyName(key);
-                    Reflect.set(toJson, toProp, Reflect.get(this, key));
-                }
-            }
-        }
-
-        return toJson;
+        return toJSON(this);
     }
 
     /**
