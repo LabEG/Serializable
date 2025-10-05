@@ -1,28 +1,232 @@
-Serializable
-=====
+# ts-serializable
 
-Small library for deserialization and serialization for JavaScript and TypeScript
+> Powerful and flexible TypeScript/JavaScript library for serialization and deserialization with decorators
 
-Description
-------
+[![npm version](https://img.shields.io/npm/v/ts-serializable.svg)](https://www.npmjs.com/package/ts-serializable)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-- For working, this library needs the Metadata Reflection API. If your platform (browser/Node.js) doesn't support it, you must use a polyfill. Example: [reflect-metadata](https://www.npmjs.com/package/reflect-metadata)
+## ✨ Features
 
-- By default, the library doesn't crash on wrong types in JSON and returns the default value on the wrong property. If you need more secure behavior, you must override the method `onWrongType` on the `Serializable` object and throw an exception in this method, according to your logic.
+- 🎯 **Type-safe** - Convert JSON to strongly-typed class instances
+- 🎨 **Decorator-based** - Clean and intuitive API using TypeScript decorators
+- 🔄 **Bidirectional** - Serialize to JSON and deserialize from JSON
+- 🐍 **Naming Strategies** - Support for snake_case, camelCase, PascalCase, kebab-case
+- 📦 **Nested Objects** - Handle complex object hierarchies and arrays
+- 🔒 **Flexible** - Works with or without class inheritance
+- 📝 **FormData Support** - Built-in conversion to FormData for file uploads
+- ⚡ **Lightweight** - Minimal dependencies and small bundle size
 
-Installation
-------
+## 📋 Table of Contents
 
-You can use the following command to install this package:
+- [Installation](#-installation)
+- [Quick Start](#-quick-start)
+- [Core Concepts](#-core-concepts)
+- [Decorators](#-decorators)
+- [Advanced Usage](#-advanced-usage)
+- [Standalone Functions](#-standalone-functions)
+- [Naming Strategies](#-naming-strategies)
+- [Configuration Settings](#️-configuration-settings)
+- [View Models and DTOs](#-view-models-and-dtos)
+- [FormData Conversion](#-formdata-conversion)
+- [Additional Features](#-additional-features)
+- [API Reference](#-api-reference)
+- [Contributing](#-contributing)
+- [License](#-license)
 
-``` bash
-npm install ts-serializable
+## 🚀 Installation
+
+```bash
+npm install ts-serializable reflect-metadata
 ```
 
-Usage
-------
+**Important:** This library requires the Metadata Reflection API. Import `reflect-metadata` at the entry point of your application:
 
-This example is written in TypeScript, but if you remove typing, it will also work in JavaScript.
+```typescript
+// At the top of your main file (e.g., index.ts or main.ts)
+import "reflect-metadata";
+```
+
+## 🎯 Quick Start
+
+Here's a simple example to get you started:
+
+```typescript
+import { jsonProperty, Serializable } from "ts-serializable";
+
+class User extends Serializable {
+    @jsonProperty(String)
+    public firstName: string = '';
+
+    @jsonProperty(String)
+    public lastName: string = '';
+
+    @jsonProperty(Number)
+    public age: number = 0;
+
+    public getFullName(): string {
+        return `${this.firstName} ${this.lastName}`;
+    }
+}
+
+// Deserialize from JSON
+const json = { firstName: "John", lastName: "Doe", age: 30 };
+const user = User.fromJSON(json);
+
+console.log(user.getFullName()); // "John Doe"
+console.log(user instanceof User); // true
+
+// Serialize back to JSON
+const jsonOutput = user.toJSON();
+console.log(JSON.stringify(jsonOutput)); // {"firstName":"John","lastName":"Doe","age":30}
+```
+
+### Why Use ts-serializable?
+
+**Without ts-serializable:**
+
+```typescript
+const user: object = JSON.parse(jsonString);
+user.getFullName(); // ❌ Runtime Error: user.getFullName is not a function
+```
+
+**With ts-serializable:**
+
+```typescript
+const user: User = User.fromJSON(jsonString);
+user.getFullName(); // ✅ Works perfectly and returns a string
+```
+
+## 🎓 Core Concepts
+
+### Type Safety
+
+The `@jsonProperty` decorator tells the library what types are acceptable for each property. If a JSON value doesn't match the expected type, the property will retain its default value.
+
+```typescript
+class Product extends Serializable {
+    @jsonProperty(String)
+    public name: string = '';
+
+    @jsonProperty(Number)
+    public price: number = 0;
+
+    @jsonProperty(Date)
+    public releaseDate: Date = new Date();
+}
+```
+
+### Default Values
+
+Always provide default values for properties decorated with `@jsonProperty`. This ensures type safety and provides fallback values when deserialization encounters issues.
+
+### Error Handling
+
+By default, the library logs errors to the console but doesn't throw exceptions. For stricter behavior, override the `onWrongType` method:
+
+```typescript
+class StrictUser extends Serializable {
+    @jsonProperty(String)
+    public name: string = '';
+
+    protected onWrongType(prop: string, message: string, value: unknown): void {
+        throw new Error(`Invalid property "${prop}": ${message}`);
+    }
+}
+```
+
+## 🎨 Decorators
+
+### @jsonProperty
+
+Specifies the accepted types for a property during deserialization.
+
+```typescript
+@jsonProperty(...types: AcceptedTypes[])
+```
+
+**Examples:**
+
+```typescript
+// Single type
+@jsonProperty(String)
+public name: string = '';
+
+// Multiple types (union)
+@jsonProperty(Number, null)
+public age: number | null = null;
+
+// Arrays
+@jsonProperty([String])
+public tags: string[] = [];
+
+// Nested objects
+@jsonProperty(Address)
+public address: Address = new Address();
+
+// Optional properties
+@jsonProperty(String, void 0)
+public middleName?: string = void 0;
+```
+
+### @jsonIgnore
+
+Excludes a property from serialization.
+
+```typescript
+@jsonIgnore()
+```
+
+**Example:**
+
+```typescript
+class User extends Serializable {
+    @jsonProperty(String)
+    public username: string = '';
+
+    @jsonIgnore()
+    public password: string = ''; // Won't be included in toJSON()
+}
+```
+
+### @jsonName
+
+Specifies a custom JSON property name.
+
+```typescript
+@jsonName(name: string)
+```
+
+**Example:**
+
+```typescript
+class User extends Serializable {
+    @jsonName("user_id")
+    @jsonProperty(Number)
+    public userId: number = 0; // Maps to "user_id" in JSON
+}
+```
+
+### @jsonObject
+
+Configures serialization settings at the class level.
+
+```typescript
+@jsonObject(settings?: Partial<SerializationSettings>)
+```
+
+**Example:**
+
+```typescript
+@jsonObject({ namingStrategy: new SnakeCaseNamingStrategy() })
+class User extends Serializable {
+    @jsonProperty(String)
+    public firstName: string = ''; // Automatically maps to "first_name"
+}
+```
+
+## 🔧 Advanced Usage
+
+This example is written in TypeScript, but it also works in JavaScript (without type annotations).
 
 ```typescript
 import { jsonProperty, Serializable } from "ts-serializable";
@@ -88,10 +292,145 @@ user.getFullName(); // works fine and returns a string
 user.getAge(); // works fine and returns a number
 ```
 
-Naming strategies
-------
+## 🔧 Standalone Functions
 
-Supported conversion between different naming cases, such as SnakeCase, KebabCase, PascalCase and CamelCase. Also, you can set a custom name for a property of a JSON object.
+The library provides standalone utility functions `fromJSON` and `toJSON` that can be used with any objects, not just classes that extend `Serializable`. This is useful when you want to use the serialization features without inheritance.
+
+fromJSON Function:
+
+The `fromJSON` function populates an existing object instance with data from JSON, using decorator metadata for type conversion.
+
+```typescript
+import { fromJSON, jsonProperty } from "ts-serializable";
+
+class Product {
+    @jsonProperty(String)
+    public name: string = '';
+
+    @jsonProperty(Number)
+    public price: number = 0;
+
+    @jsonProperty(Date)
+    public releaseDate: Date = new Date();
+}
+
+const json = {
+    name: "Laptop",
+    price: 999.99,
+    releaseDate: "2024-01-15T10:00:00.000Z"
+};
+
+const product = new Product();
+fromJSON(product, json);
+
+console.log(product.name); // "Laptop"
+console.log(product.price); // 999.99
+console.log(product.releaseDate instanceof Date); // true
+```
+
+Benefits:
+
+- Works with plain classes (no need to extend `Serializable`)
+- Respects all decorators (`@jsonProperty`, `@jsonName`, `@jsonIgnore`)
+- Supports naming strategies
+- Handles nested objects and arrays
+- Type-safe deserialization
+
+toJSON Function:
+
+The `toJSON` function serializes an object to a plain JavaScript object, respecting decorators and naming strategies.
+
+```typescript
+import { toJSON, jsonProperty, jsonIgnore, jsonName } from "ts-serializable";
+
+class User {
+    @jsonProperty(String)
+    public firstName: string = 'John';
+
+    @jsonProperty(String)
+    @jsonName("family_name")
+    public lastName: string = 'Doe';
+
+    @jsonIgnore()
+    public password: string = 'secret123';
+
+    @jsonProperty(Number)
+    public age: number = 30;
+}
+
+const user = new User();
+const json = toJSON(user);
+
+console.log(json);
+// Output: {
+//   firstName: "John",
+//   family_name: "Doe",
+//   age: 30
+// }
+// Note: password is excluded due to @jsonIgnore
+```
+
+Benefits:
+
+- Works with both `Serializable` instances and plain objects
+- Respects `@jsonIgnore` decorator
+- Applies `@jsonName` transformations
+- Supports naming strategies
+- Returns plain object ready for `JSON.stringify()`
+
+Using Functions Together:
+
+You can use both functions together for complete serialization/deserialization workflows:
+
+```typescript
+import { fromJSON, toJSON, jsonProperty, jsonObject } from "ts-serializable";
+import { SnakeCaseNamingStrategy } from "ts-serializable";
+
+@jsonObject({ namingStrategy: new SnakeCaseNamingStrategy() })
+class ApiRequest {
+    @jsonProperty(String)
+    public requestId: string = '';
+
+    @jsonProperty(String)
+    public userName: string = '';
+
+    @jsonProperty([String])
+    public userTags: string[] = [];
+}
+
+// Deserialize from API response
+const apiData = {
+    request_id: "REQ-12345",
+    user_name: "john_doe",
+    user_tags: ["premium", "verified"]
+};
+
+const request = new ApiRequest();
+fromJSON(request, apiData);
+
+console.log(request.requestId); // "REQ-12345"
+console.log(request.userName); // "john_doe"
+
+// Serialize for sending to API
+const jsonToSend = toJSON(request);
+console.log(jsonToSend);
+// Output: {
+//   request_id: "REQ-12345",
+//   user_name: "john_doe",
+//   user_tags: ["premium", "verified"]
+// }
+```
+
+## 🐍 Naming Strategies
+
+The library supports automatic conversion between different naming conventions, making it easy to work with APIs that use different naming styles. Supported strategies include:
+
+- **SnakeCaseNamingStrategy** - `user_name`
+- **CamelCaseNamingStrategy** - `userName`
+- **PascalCaseNamingStrategy** - `UserName`
+- **KebabCaseNamingStrategy** - `user-name`
+
+You can also use the `@jsonName` decorator for custom property names.
 
 ```typescript
 const json = {
@@ -127,10 +466,9 @@ user.dateOfBirth?.toISOString() === json.date_of_birth; // true
 user.veryStrangePropertyName === json["very::strange::json:name"]; // true
 ```
 
-Settings
-------
+## ⚙️ Configuration Settings
 
-How to specify settings:
+You can customize serialization behavior at three levels:
 
 ```typescript
 // Global settings
@@ -154,10 +492,9 @@ Supported settings:
 - **defaultValueHandling**, enum, default Ignore - ...coming soon.
 - **logLevel**, enum, default Warning - ...coming soon.
 
-View-Models from Backend Models
-------
+## 🎭 View Models and DTOs
 
-If you need to create a view-model from a DTO or entities model, you can use the same model. Just add a VM property to the DTO or entities model and mark this property with the @jsonIgnore() decorator, and this property will not be serialized to JSON.
+If you need to create view-models from DTO or entity models, you can add view-specific properties and mark them with `@jsonIgnore()` to exclude them from serialization.
 
 ```typescript
 import { jsonProperty, jsonIgnore, Serializable } from "ts-serializable";
@@ -181,38 +518,337 @@ JSON.stringify(user);
 // Result: {"firstName":"","familyName":""}
 ```
 
-Class to FormData
-------
+## 📤 FormData Conversion
 
-Sometimes classes contain properties with the File type. Sending such classes via JSON is a heavy task. Converting a file property to JSON can freeze the interface for a few seconds if the file is large. A much better solution is to send an Ajax form. Example:
+When working with file uploads, converting files to JSON (base64) can freeze the UI for large files. The library provides built-in FormData conversion as a more efficient alternative.
+
+### Basic Usage
 
 ```typescript
-import { Serializable } from "ts-serializable";
+import { Serializable, jsonProperty } from "ts-serializable";
 
-export class User extends Serializable {
+class UserProfile extends Serializable {
+    @jsonProperty(String)
+    public name: string = '';
 
-    public firstName: string = '';
+    @jsonProperty(Number)
+    public age: number = 0;
 
-    public familyName: File | null = null;
-
+    @jsonProperty(File, null)
+    public avatar: File | null = null;
 }
 
-// ... send file function ...
+const profile = new UserProfile();
+profile.name = "John Doe";
+profile.age = 30;
+profile.avatar = fileInput.files[0]; // File from <input type="file">
 
-await fetch("api/sendFile", {
+// Convert to FormData
+const formData = profile.toFormData();
+
+// Send via fetch
+await fetch("/api/profile", {
     method: "POST",
-    body: user.toFormData() // <- serialization class to FormData
+    body: formData
 });
-
 ```
 
-Naming strategies, custom names, ignoring and other decorators are supported during conversion.
+**Resulting FormData entries:**
 
-Bonus
-------
+```text
+name: "John Doe"
+age: "30"
+avatar: [File object]
+```
 
-Deep copy
+### Complex Object Graphs
+
+The library handles nested objects and arrays intelligently, using dot notation for nested properties and indices for arrays:
 
 ```typescript
-const newUser: User = new User().fromJSON(oldUser);
+import { Serializable, jsonProperty, jsonIgnore } from "ts-serializable";
+
+class Address extends Serializable {
+    @jsonProperty(String)
+    public street: string = '';
+
+    @jsonProperty(String)
+    public city: string = '';
+
+    @jsonProperty(String)
+    public country: string = '';
+}
+
+class Document extends Serializable {
+    @jsonProperty(String)
+    public title: string = '';
+
+    @jsonProperty(File, null)
+    public file: File | null = null;
+}
+
+class Employee extends Serializable {
+    @jsonProperty(String)
+    public firstName: string = '';
+
+    @jsonProperty(String)
+    public lastName: string = '';
+
+    @jsonProperty(Number)
+    public salary: number = 0;
+
+    @jsonProperty(Address)
+    public homeAddress: Address = new Address();
+
+    @jsonProperty([Document])
+    public documents: Document[] = [];
+
+    @jsonProperty(File, null)
+    public photo: File | null = null;
+
+    @jsonIgnore()
+    public password: string = ''; // Will be excluded
+}
+
+// Create instance with nested data
+const employee = new Employee();
+employee.firstName = "John";
+employee.lastName = "Doe";
+employee.salary = 75000;
+
+employee.homeAddress.street = "123 Main St";
+employee.homeAddress.city = "New York";
+employee.homeAddress.country = "USA";
+
+const doc1 = new Document();
+doc1.title = "Resume";
+doc1.file = resumeFile; // File object
+
+const doc2 = new Document();
+doc2.title = "ID Card";
+doc2.file = idCardFile; // File object
+
+employee.documents = [doc1, doc2];
+employee.photo = photoFile; // File object
+employee.password = "secret123"; // Will be ignored
+
+// Convert to FormData
+const formData = employee.toFormData();
+
+// Inspect the FormData
+for (const [key, value] of formData.entries()) {
+    console.log(key, value);
+}
 ```
+
+**Resulting FormData structure:**
+
+```text
+firstName: "John"
+lastName: "Doe"
+salary: "75000"
+homeAddress.street: "123 Main St"
+homeAddress.city: "New York"
+homeAddress.country: "USA"
+documents[0].title: "Resume"
+documents[0].file: [File object - resume.pdf]
+documents[1].title: "ID Card"
+documents[1].file: [File object - id-card.jpg]
+photo: [File object - photo.jpg]
+```
+
+**Note:** The `password` property is excluded because of `@jsonIgnore()`.
+
+### With Custom Prefix
+
+You can add a prefix to all form field names:
+
+```typescript
+const formData = employee.toFormData("employee");
+
+// Results in:
+// employee.firstName: "John"
+// employee.lastName: "Doe"
+// employee.homeAddress.street: "123 Main St"
+// etc.
+```
+
+### Appending to Existing FormData
+
+You can append to an existing FormData instance:
+
+```typescript
+const existingFormData = new FormData();
+existingFormData.append("companyId", "12345");
+existingFormData.append("department", "Engineering");
+
+// Append employee data
+employee.toFormData("employee", existingFormData);
+
+// existingFormData now contains:
+// companyId: "12345"
+// department: "Engineering"
+// employee.firstName: "John"
+// employee.lastName: "Doe"
+// ... etc.
+```
+
+### Special Type Handling
+
+The FormData conversion handles different types intelligently:
+
+| Type | Conversion |
+|------|------------|
+| `string`, `number`, `boolean` | Converted to string |
+| `File` | Added as-is (native File object) |
+| `Date` | Converted to ISO string |
+| `null` | Skipped (not added to FormData) |
+| `undefined` | Skipped (not added to FormData) |
+| `Array` | Items added with `[index]` notation |
+| `Object` | Properties added with dot notation |
+
+**Note:** All decorators (`@jsonIgnore`, `@jsonName`, naming strategies) are respected during FormData conversion.
+
+## 💡 Additional Features
+
+### Deep Copy
+
+Create a deep copy of an object by deserializing it:
+
+```typescript
+const originalUser = new User();
+originalUser.firstName = "John";
+originalUser.age = 30;
+
+const copiedUser: User = new User().fromJSON(originalUser);
+// copiedUser is a completely separate instance with the same values
+```
+
+### Nested Objects
+
+Handle complex object hierarchies with ease:
+
+```typescript
+class Address extends Serializable {
+    @jsonProperty(String)
+    public street: string = '';
+
+    @jsonProperty(String)
+    public city: string = '';
+}
+
+class User extends Serializable {
+    @jsonProperty(String)
+    public name: string = '';
+
+    @jsonProperty(Address)
+    public address: Address = new Address();
+}
+
+const json = {
+    name: "John",
+    address: {
+        street: "123 Main St",
+        city: "New York"
+    }
+};
+
+const user = User.fromJSON(json);
+console.log(user.address instanceof Address); // true
+```
+
+### Arrays of Objects
+
+```typescript
+class Team extends Serializable {
+    @jsonProperty(String)
+    public name: string = '';
+
+    @jsonProperty([User])
+    public members: User[] = [];
+}
+
+const json = {
+    name: "Dev Team",
+    members: [
+        { firstName: "John", lastName: "Doe", age: 30 },
+        { firstName: "Jane", lastName: "Smith", age: 28 }
+    ]
+};
+
+const team = Team.fromJSON(json);
+console.log(team.members[0] instanceof User); // true
+```
+
+## 📚 API Reference
+
+### Serializable Class Methods
+
+#### Static Methods
+
+- **`fromJSON<T>(json: object, settings?: Partial<SerializationSettings>): T`**
+
+  Creates a new instance and deserializes JSON data into it.
+
+- **`fromString<T>(str: string, settings?: Partial<SerializationSettings>): T`**
+
+  Parses a JSON string and deserializes it into a new instance.
+
+#### Instance Methods
+
+- **`fromJSON(json: object, settings?: Partial<SerializationSettings>): this`**
+
+  Populates the current instance with data from JSON.
+
+- **`fromString(str: string, settings?: Partial<SerializationSettings>): this`**
+
+  Parses a JSON string and populates the current instance.
+
+- **`toJSON(): Record<string, unknown>`**
+
+  Serializes the instance to a plain JavaScript object.
+
+- **`toString(): string`**
+
+  Serializes the instance to a JSON string.
+
+- **`toFormData(formPrefix?: string, formData?: FormData): FormData`**
+
+  Converts the instance to FormData for multipart requests.
+
+- **`onWrongType(prop: string, message: string, value: unknown): void`**
+
+  Error handler for type mismatches. Override to customize error behavior.
+
+### Standalone Functions
+
+- **`fromJSON<T>(obj: T, json: object, settings?: Partial<SerializationSettings>): T`**
+
+  Deserializes JSON into an existing object instance.
+
+- **`toJSON(obj: Serializable | object): Record<string, unknown>`**
+
+  Serializes an object to a plain JavaScript object.
+
+- **`classToFormData(obj: object, formPrefix?: string, formData?: FormData): FormData`**
+
+  Converts an object to FormData format.
+
+### Available Naming Strategies
+
+- `SnakeCaseNamingStrategy` - Converts to snake_case
+- `CamelCaseNamingStrategy` - Converts to camelCase
+- `PascalCaseNamingStrategy` - Converts to PascalCase
+- `KebabCaseNamingStrategy` - Converts to kebab-case
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+Special thanks to all contributors and users of this library.
