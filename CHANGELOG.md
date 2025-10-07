@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.3.0] - 2025-10-07
+
+### 🚀 Features
+
+- Add toJSON function and refactor Serializable class to utilize it
+- Export toJSON function in index.ts
+
+### 🐛 Bug Fixes
+
+- Correct import path for getPropertyName function and add UserSimple model with tests
+
+### 🚜 Refactor
+
+- Reorganize functions and improve serialization methods in Serializable class
+- Enhance documentation for methods in Serializable class and related functions
+
+### 📚 Documentation
+
+- Update README.md to enhance features, installation instructions, and usage examples
+
 ## [4.2.2] - 2025-09-07
 
 ### 🐛 Bug Fixes
