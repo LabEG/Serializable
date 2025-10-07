@@ -34,17 +34,17 @@
         "reflect-metadata": ">=0.1.0"
     },
     "devDependencies": {
-        "@commitlint/cli": "^19.8.1",
-        "@commitlint/config-conventional": "^19.8.1",
+        "@commitlint/cli": "^20.1.0",
+        "@commitlint/config-conventional": "^20.0.0",
         "@favware/cliff-jumper": "^6.0.0",
         "@labeg/code-style": "^6.5.0",
-        "@swc-node/register": "^1.10.10",
+        "@swc-node/register": "^1.11.1",
         "@types/chai": "^5.2.2",
-        "chai": "^5.2.1",
+        "chai": "^6.2.0",
         "husky": "^9.1.7",
-        "lint-staged": "^16.1.2",
+        "lint-staged": "^16.2.3",
         "reflect-metadata": "^0.2.2",
-        "typescript": "^5.8.3"
+        "typescript": "^5.9.3"
     },
     "keywords": [
         "serialization",
