@@ -1,8 +1,8 @@
-import {Serializable} from "../classes/Serializable";
-import {AcceptedTypes} from "../models/AcceptedType";
-import {SerializationSettings} from "../models/SerializationSettings";
-import {fromJSON} from "./FromJSON";
-import {onWrongType} from "./OnWrongType";
+import {Serializable} from "../classes/Serializable.js";
+import {AcceptedTypes} from "../models/AcceptedType.js";
+import {SerializationSettings} from "../models/SerializationSettings.js";
+import {fromJSON} from "./FromJSON.js";
+import {onWrongType} from "./OnWrongType.js";
 
 /**
  * Deserializes a single property value from JSON data based on accepted type definitions.

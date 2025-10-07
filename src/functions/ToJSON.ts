@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable no-prototype-builtins */
 
-import {Serializable} from "../classes/Serializable";
-import {getPropertyName} from "./GetPropertyName";
+import {Serializable} from "../classes/Serializable.js";
+import {getPropertyName} from "./GetPropertyName.js";
 
 /**
  * Serializes an object or Serializable instance to a plain JavaScript object suitable for JSON conversion.

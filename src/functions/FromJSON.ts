@@ -3,10 +3,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable no-prototype-builtins */
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
-import {Serializable} from "../classes/Serializable";
-import {AcceptedTypes} from "../models/AcceptedType";
-import {SerializationSettings} from "../models/SerializationSettings";
-import {deserializeProperty} from "./DeserializeProperty";
+import {Serializable} from "../classes/Serializable.js";
+import {AcceptedTypes} from "../models/AcceptedType.js";
+import {SerializationSettings} from "../models/SerializationSettings.js";
+import {deserializeProperty} from "./DeserializeProperty.js";
 import {getPropertyName} from "./GetPropertyName.js";
 import {onWrongType} from "./OnWrongType.js";
 
