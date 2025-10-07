@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.3.2] - 2025-10-07
+
+### 🐛 Bug Fixes
+
+- Update import paths to include .js extension for compatibility
+
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
 ## [4.3.1] - 2025-10-07
 
 ### ⚙️ Miscellaneous Tasks
