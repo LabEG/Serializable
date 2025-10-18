@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.4.0] - 2025-10-18
+
+### 🚀 Features
+
+- Enhance fromJSON function to accept class constructors for deserialization
+
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
 ## [4.3.2] - 2025-10-07
 
 ### 🐛 Bug Fixes
