@@ -298,7 +298,9 @@ The library provides standalone utility functions `fromJSON` and `toJSON` that c
 
 fromJSON Function:
 
-The `fromJSON` function populates an existing object instance with data from JSON, using decorator metadata for type conversion.
+The `fromJSON` function deserializes JSON data into a class instance. It can accept either an existing object instance or a class constructor.
+
+**Usage with instance:**
 
 ```typescript
 import { fromJSON, jsonProperty } from "ts-serializable";
@@ -320,6 +322,7 @@ const json = {
     releaseDate: "2024-01-15T10:00:00.000Z"
 };
 
+// Pass an existing instance
 const product = new Product();
 fromJSON(product, json);
 
@@ -328,13 +331,26 @@ console.log(product.price); // 999.99
 console.log(product.releaseDate instanceof Date); // true
 ```
 
+**Usage with class constructor:**
+
+```typescript
+// Pass a class constructor - the function will create an instance automatically
+const product = fromJSON(Product, json);
+
+console.log(product instanceof Product); // true
+console.log(product.name); // "Laptop"
+console.log(product.price); // 999.99
+```
+
 Benefits:
 
 - Works with plain classes (no need to extend `Serializable`)
+- Accepts both instance and constructor for flexibility
 - Respects all decorators (`@jsonProperty`, `@jsonName`, `@jsonIgnore`)
 - Supports naming strategies
 - Handles nested objects and arrays
 - Type-safe deserialization
+- Perfect for generic programming patterns
 
 toJSON Function:
 
@@ -398,13 +414,34 @@ class ApiRequest {
     public userTags: string[] = [];
 }
 
-// Deserialize from API response
+// Deserialize from API response using constructor
 const apiData = {
     request_id: "REQ-12345",
     user_name: "john_doe",
     user_tags: ["premium", "verified"]
 };
 
+// Using class constructor - creates new instance automatically
+const request = fromJSON(ApiRequest, apiData);
+
+console.log(request instanceof ApiRequest); // true
+console.log(request.requestId); // "REQ-12345"
+console.log(request.userName); // "john_doe"
+
+// Serialize for sending to API
+const jsonToSend = toJSON(request);
+console.log(jsonToSend);
+// Output: {
+//   request_id: "REQ-12345",
+//   user_name: "john_doe",
+//   user_tags: ["premium", "verified"]
+// }
+```
+
+**Alternative approach using instance:**
+
+```typescript
+// Using instance
 const request = new ApiRequest();
 fromJSON(request, apiData);
 
@@ -822,9 +859,22 @@ console.log(team.members[0] instanceof User); // true
 
 ### Standalone Functions
 
-- **`fromJSON<T>(obj: T, json: object, settings?: Partial<SerializationSettings>): T`**
+- **`fromJSON<T>(obj: T | (new () => T), json: object, settings?: Partial<SerializationSettings>): T`**
 
-  Deserializes JSON into an existing object instance.
+  Deserializes JSON into an object instance. Accepts either:
+  - An existing object instance to populate
+  - A class constructor to create a new instance
+
+  **Examples:**
+
+  ```typescript
+  // With instance
+  const product = new Product();
+  fromJSON(product, jsonData);
+
+  // With constructor
+  const product = fromJSON(Product, jsonData);
+  ```
 
 - **`toJSON(obj: Serializable | object): Record<string, unknown>`**
 

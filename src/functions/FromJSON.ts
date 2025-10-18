@@ -63,9 +63,18 @@ import {onWrongType} from "./OnWrongType.js";
  * fromJSON(product, { title: "Laptop" });
  * ```
  */
-// eslint-disable-next-line max-statements
-export const fromJSON = <T extends (Serializable | object)>(obj: T, json: object, settings?: Partial<SerializationSettings>): T => {
+// eslint-disable-next-line max-statements, max-lines-per-function
+export const fromJSON = <T extends (Serializable | object)>(
+    obj: T | (new () => T),
+    json: object,
+    settings?: Partial<SerializationSettings>
+): T => {
     const unknownJson: unknown = json;
+    if (typeof obj === "function") {
+        const ClassConstructor = obj as new () => T;
+        // eslint-disable-next-line no-param-reassign
+        obj = new ClassConstructor();
+    }
 
     if (
         unknownJson === null ||
