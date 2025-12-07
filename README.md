@@ -1,9 +1,9 @@
 # ts-serializable
 
-> Powerful and flexible TypeScript/JavaScript library for serialization and deserialization with decorators
-
 [![npm version](https://img.shields.io/npm/v/ts-serializable.svg)](https://www.npmjs.com/package/ts-serializable)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+Powerful and flexible TypeScript/JavaScript library for serialization and deserialization with decorators
 
 ## ✨ Features
 
@@ -18,20 +18,45 @@
 
 ## 📋 Table of Contents
 
-- [Installation](#-installation)
-- [Quick Start](#-quick-start)
-- [Core Concepts](#-core-concepts)
-- [Decorators](#-decorators)
-- [Advanced Usage](#-advanced-usage)
-- [Standalone Functions](#-standalone-functions)
-- [Naming Strategies](#-naming-strategies)
-- [Configuration Settings](#️-configuration-settings)
-- [View Models and DTOs](#-view-models-and-dtos)
-- [FormData Conversion](#-formdata-conversion)
-- [Additional Features](#-additional-features)
-- [API Reference](#-api-reference)
-- [Contributing](#-contributing)
-- [License](#-license)
+- [ts-serializable](#ts-serializable)
+  - [✨ Features](#-features)
+  - [📋 Table of Contents](#-table-of-contents)
+  - [🚀 Installation](#-installation)
+  - [🎯 Quick Start](#-quick-start)
+    - [Why Use ts-serializable?](#why-use-ts-serializable)
+  - [🎓 Core Concepts](#-core-concepts)
+    - [Type Safety](#type-safety)
+    - [Default Values](#default-values)
+    - [Error Handling](#error-handling)
+  - [🎨 Decorators](#-decorators)
+    - [@jsonProperty](#jsonproperty)
+    - [@jsonIgnore](#jsonignore)
+    - [@jsonName](#jsonname)
+    - [@jsonObject](#jsonobject)
+  - [🔧 Advanced Usage](#-advanced-usage)
+  - [🔧 Standalone Functions](#-standalone-functions)
+  - [🐍 Naming Strategies](#-naming-strategies)
+  - [⚙️ Configuration Settings](#️-configuration-settings)
+  - [🎭 View Models and DTOs](#-view-models-and-dtos)
+  - [📤 FormData Conversion](#-formdata-conversion)
+    - [Basic Usage](#basic-usage)
+    - [Complex Object Graphs](#complex-object-graphs)
+    - [With Custom Prefix](#with-custom-prefix)
+    - [Appending to Existing FormData](#appending-to-existing-formdata)
+    - [Special Type Handling](#special-type-handling)
+  - [💡 Additional Features](#-additional-features)
+    - [Deep Copy](#deep-copy)
+    - [Nested Objects](#nested-objects)
+    - [Arrays of Objects](#arrays-of-objects)
+  - [📚 API Reference](#-api-reference)
+    - [Serializable Class Methods](#serializable-class-methods)
+      - [Static Methods](#static-methods)
+      - [Instance Methods](#instance-methods)
+    - [Standalone Functions](#standalone-functions)
+    - [Available Naming Strategies](#available-naming-strategies)
+  - [🤝 Contributing](#-contributing)
+  - [📄 License](#-license)
+  - [🙏 Acknowledgments](#-acknowledgments)
 
 ## 🚀 Installation
 

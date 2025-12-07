@@ -8,6 +8,15 @@
     "main": "./dist/index.js",
     "type": "module",
     "typings": "./dist/index.d.ts",
+    "files": [
+        "dist",
+        "README.md",
+        "LICENSE",
+        "CHANGELOG.md",
+        "CODE_OF_CONDUCT.md",
+        "CONTRIBUTING.md",
+        "SECURITY.md"
+    ],
     "repository": {
         "type": "git",
         "url": " git@github.com:LabEG/Serializable.git"
@@ -28,7 +37,7 @@
         "build": "tsc --project tsconfig.build.json && node ./dist/index.js",
         "prepublishOnly": "npm run lint && npm run build && npm run test",
         "release": "cliff-jumper --name 'ts-serializable' --package-path '.' --no-skip-changelog --no-skip-tag",
-        "prepare": "husky install"
+        "prepare": "husky"
     },
     "peerDependencies": {
         "reflect-metadata": ">=0.1.0"
