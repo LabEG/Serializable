@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.5.1] - 2025-12-07
+
+### 🐛 Bug Fixes
+
+- Update README badges for npm downloads, license, and CI workflows
+
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
 ## [4.5.0] - 2025-12-07
 
 ### 🚀 Features
