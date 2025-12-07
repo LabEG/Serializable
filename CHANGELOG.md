@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.5.0] - 2025-12-07
+
+### 🚀 Features
+
+- Add issue templates for bug reports and feature requests, and enhance contribution guidelines
+
+### ⚙️ Miscellaneous Tasks
+
+- Update Dependabot schedule to run on Tuesdays, remove .npmignore, and enhance package.json
+
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
 ## [4.4.1] - 2025-11-15
 
 # Changelog
