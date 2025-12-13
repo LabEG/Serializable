@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.5.3] - 2025-12-13
+
+### 🚜 Refactor
+
+- *(DeserializeProperty)* Update ESLint directives for better readability
+
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
 ## [4.5.2] - 2025-12-09
 
 # Changelog
