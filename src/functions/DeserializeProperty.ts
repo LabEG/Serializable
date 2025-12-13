@@ -39,14 +39,14 @@ import {onWrongType} from "./OnWrongType.js";
  * // Returns the string "30" since String is checked first
  * ```
  */
-// eslint-disable-next-line max-lines-per-function, max-statements, complexity
+// eslint-disable-next-line max-lines-per-function, max-statements
 export const deserializeProperty = (
     obj: object,
     prop: string,
     acceptedTypes: AcceptedTypes[],
     jsonValue: unknown,
     settings?: Partial<SerializationSettings>
-// eslint-disable-next-line max-params
+// eslint-disable-next-line max-params, complexity
 ): unknown => {
     for (const acceptedType of acceptedTypes) { // Type Symbol is not a property
         if (// Null
