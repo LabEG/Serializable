@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.5.4] - 2025-12-14
+
+### 📚 Documentation
+
+- *(README)* Remove emojis from section headers for consistency
+
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
 ## [4.5.3] - 2025-12-13
 
 ### 🚜 Refactor
