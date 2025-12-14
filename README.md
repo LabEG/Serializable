@@ -8,7 +8,7 @@
 
 Powerful and flexible TypeScript/JavaScript library for serialization and deserialization with decorators
 
-## ✨ Features
+## Features
 
 - 🎯 **Type-safe** - Convert JSON to strongly-typed class instances
 - 🎨 **Decorator-based** - Clean and intuitive API using TypeScript decorators
@@ -19,49 +19,49 @@ Powerful and flexible TypeScript/JavaScript library for serialization and deseri
 - 📝 **FormData Support** - Built-in conversion to FormData for file uploads
 - ⚡ **Lightweight** - Minimal dependencies and small bundle size
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [ts-serializable](#ts-serializable)
-  - [✨ Features](#-features)
-  - [📋 Table of Contents](#-table-of-contents)
-  - [🚀 Installation](#-installation)
-  - [🎯 Quick Start](#-quick-start)
+  - [Features](#features)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Quick Start](#quick-start)
     - [Why Use ts-serializable?](#why-use-ts-serializable)
-  - [🎓 Core Concepts](#-core-concepts)
+  - [Core Concepts](#core-concepts)
     - [Type Safety](#type-safety)
     - [Default Values](#default-values)
     - [Error Handling](#error-handling)
-  - [🎨 Decorators](#-decorators)
+  - [Decorators](#decorators)
     - [@jsonProperty](#jsonproperty)
     - [@jsonIgnore](#jsonignore)
     - [@jsonName](#jsonname)
     - [@jsonObject](#jsonobject)
-  - [🔧 Advanced Usage](#-advanced-usage)
-  - [🔧 Standalone Functions](#-standalone-functions)
-  - [🐍 Naming Strategies](#-naming-strategies)
-  - [⚙️ Configuration Settings](#️-configuration-settings)
-  - [🎭 View Models and DTOs](#-view-models-and-dtos)
-  - [📤 FormData Conversion](#-formdata-conversion)
+  - [Advanced Usage](#advanced-usage)
+  - [Standalone Functions](#standalone-functions)
+  - [Naming Strategies](#naming-strategies)
+  - [Configuration Settings](#configuration-settings)
+  - [View Models and DTOs](#view-models-and-dtos)
+  - [FormData Conversion](#formdata-conversion)
     - [Basic Usage](#basic-usage)
     - [Complex Object Graphs](#complex-object-graphs)
     - [With Custom Prefix](#with-custom-prefix)
     - [Appending to Existing FormData](#appending-to-existing-formdata)
     - [Special Type Handling](#special-type-handling)
-  - [💡 Additional Features](#-additional-features)
+  - [Additional Features](#additional-features)
     - [Deep Copy](#deep-copy)
     - [Nested Objects](#nested-objects)
     - [Arrays of Objects](#arrays-of-objects)
-  - [📚 API Reference](#-api-reference)
+  - [API Reference](#api-reference)
     - [Serializable Class Methods](#serializable-class-methods)
       - [Static Methods](#static-methods)
       - [Instance Methods](#instance-methods)
-    - [Standalone Functions](#standalone-functions)
+    - [Standalone Functions](#standalone-functions-1)
     - [Available Naming Strategies](#available-naming-strategies)
-  - [🤝 Contributing](#-contributing)
-  - [📄 License](#-license)
-  - [🙏 Acknowledgments](#-acknowledgments)
+  - [Contributing](#contributing)
+  - [License](#license)
+  - [Acknowledgments](#acknowledgments)
 
-## 🚀 Installation
+## Installation
 
 ```bash
 npm install ts-serializable reflect-metadata
@@ -74,7 +74,7 @@ npm install ts-serializable reflect-metadata
 import "reflect-metadata";
 ```
 
-## 🎯 Quick Start
+## Quick Start
 
 Here's a simple example to get you started:
 
@@ -124,7 +124,7 @@ const user: User = User.fromJSON(jsonString);
 user.getFullName(); // ✅ Works perfectly and returns a string
 ```
 
-## 🎓 Core Concepts
+## Core Concepts
 
 ### Type Safety
 
@@ -162,7 +162,7 @@ class StrictUser extends Serializable {
 }
 ```
 
-## 🎨 Decorators
+## Decorators
 
 ### @jsonProperty
 
@@ -252,7 +252,7 @@ class User extends Serializable {
 }
 ```
 
-## 🔧 Advanced Usage
+## Advanced Usage
 
 This example is written in TypeScript, but it also works in JavaScript (without type annotations).
 
@@ -320,7 +320,7 @@ user.getFullName(); // works fine and returns a string
 user.getAge(); // works fine and returns a number
 ```
 
-## 🔧 Standalone Functions
+## Standalone Functions
 
 The library provides standalone utility functions `fromJSON` and `toJSON` that can be used with any objects, not just classes that extend `Serializable`. This is useful when you want to use the serialization features without inheritance.
 
@@ -486,7 +486,7 @@ console.log(jsonToSend);
 // }
 ```
 
-## 🐍 Naming Strategies
+## Naming Strategies
 
 The library supports automatic conversion between different naming conventions, making it easy to work with APIs that use different naming styles. Supported strategies include:
 
@@ -531,7 +531,7 @@ user.dateOfBirth?.toISOString() === json.date_of_birth; // true
 user.veryStrangePropertyName === json["very::strange::json:name"]; // true
 ```
 
-## ⚙️ Configuration Settings
+## Configuration Settings
 
 You can customize serialization behavior at three levels:
 
@@ -557,7 +557,7 @@ Supported settings:
 - **defaultValueHandling**, enum, default Ignore - ...coming soon.
 - **logLevel**, enum, default Warning - ...coming soon.
 
-## 🎭 View Models and DTOs
+## View Models and DTOs
 
 If you need to create view-models from DTO or entity models, you can add view-specific properties and mark them with `@jsonIgnore()` to exclude them from serialization.
 
@@ -583,7 +583,7 @@ JSON.stringify(user);
 // Result: {"firstName":"","familyName":""}
 ```
 
-## 📤 FormData Conversion
+## FormData Conversion
 
 When working with file uploads, converting files to JSON (base64) can freeze the UI for large files. The library provides built-in FormData conversion as a more efficient alternative.
 
@@ -774,7 +774,7 @@ The FormData conversion handles different types intelligently:
 
 **Note:** All decorators (`@jsonIgnore`, `@jsonName`, naming strategies) are respected during FormData conversion.
 
-## 💡 Additional Features
+## Additional Features
 
 ### Deep Copy
 
@@ -845,7 +845,7 @@ const team = Team.fromJSON(json);
 console.log(team.members[0] instanceof User); // true
 ```
 
-## 📚 API Reference
+## API Reference
 
 ### Serializable Class Methods
 
@@ -919,14 +919,14 @@ console.log(team.members[0] instanceof User); // true
 - `PascalCaseNamingStrategy` - Converts to PascalCase
 - `KebabCaseNamingStrategy` - Converts to kebab-case
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 Special thanks to all contributors and users of this library.
