@@ -2,6 +2,46 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.5.9] - 2026-01-13
+
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+## [4.5.8] - 2026-01-06
+
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+## [4.5.7] - 2025-12-30
+
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+## [4.5.6] - 2025-12-23
+
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+## [4.5.5] - 2025-12-16
+
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+## [4.5.4] - 2025-12-14
+
+### 📚 Documentation
+
+- *(README)* Remove emojis from section headers for consistency
+
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
 ## [4.5.3] - 2025-12-13
 
 ### 🚜 Refactor
