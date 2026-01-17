@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.5.10] - 2026-01-17
+
+### ⚙️ Miscellaneous Tasks
+
+- *(workflows)* Update cron schedules for CodeQL and npm publish workflows
+
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
 ## [4.5.9] - 2026-01-13
 
 # Changelog
