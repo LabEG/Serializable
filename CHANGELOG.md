@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.5.12] - 2026-02-23
+
+### ⚙️ Miscellaneous Tasks
+
+- Update README and CHANGELOG formatting
+
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
 ## [4.5.11] - 2026-02-23
 
 ### ⚙️ Miscellaneous Tasks
