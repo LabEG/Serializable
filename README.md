@@ -2,7 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/ts-serializable.svg)](https://www.npmjs.com/package/ts-serializable)
 [![npm downloads](https://img.shields.io/npm/dm/ts-serializable.svg)](https://www.npmjs.com/package/ts-serializable)
-[![License: MIT](https://img.shields.io/github/license/LabEG/Serializable.svg)](https://github.com/LabEG/Serializable/blob/master/LICENSE)
+[![License: MIT](https://img.shields.io/npm/l/ts-serializable.svg)](https://github.com/LabEG/Serializable/blob/master/LICENSE)
 [![Test PR](https://github.com/LabEG/Serializable/workflows/Test%20Pull%20Request/badge.svg)](https://github.com/LabEG/Serializable/actions)
 [![CodeQL](https://github.com/LabEG/Serializable/workflows/CodeQL%20Advanced/badge.svg)](https://github.com/LabEG/Serializable/security/code-scanning)
 

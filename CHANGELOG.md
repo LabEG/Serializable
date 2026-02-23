@@ -8,10 +8,6 @@ All notable changes to this project will be documented in this file.
 
 - Update test configuration and dependencies
 
-# Changelog
-
-All notable changes to this project will be documented in this file.
-
 ## [4.5.10] - 2026-01-17
 
 ### ⚙️ Miscellaneous Tasks
