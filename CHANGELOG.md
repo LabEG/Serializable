@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.5.11] - 2026-02-23
+
+### ⚙️ Miscellaneous Tasks
+
+- Update test configuration and dependencies
+
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
 ## [4.5.10] - 2026-01-17
 
 ### ⚙️ Miscellaneous Tasks
