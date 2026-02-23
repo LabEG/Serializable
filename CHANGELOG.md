@@ -6,41 +6,42 @@ All notable changes to this project will be documented in this file.
 
 ### ⚙️ Miscellaneous Tasks
 
-- *(workflows)* Update cron schedules for CodeQL and npm publish workflows
-
-# Changelog
-
-All notable changes to this project will be documented in this file.
+- *(ts-serializable)* Release ts-serializable@4.5.10
 
 ## [4.5.9] - 2026-01-13
 
-# Changelog
+### ⚙️ Miscellaneous Tasks
 
-All notable changes to this project will be documented in this file.
+- *(deps-dev)* Bump the development-dependencies group with 3 updates (#24)
+- *(ts-serializable)* Release ts-serializable@4.5.9
 
 ## [4.5.8] - 2026-01-06
 
-# Changelog
+### ⚙️ Miscellaneous Tasks
 
-All notable changes to this project will be documented in this file.
+- *(deps-dev)* Bump the development-dependencies group with 3 updates (#23)
+- *(ts-serializable)* Release ts-serializable@4.5.8
 
 ## [4.5.7] - 2025-12-30
 
-# Changelog
+### ⚙️ Miscellaneous Tasks
 
-All notable changes to this project will be documented in this file.
+- *(deps-dev)* Bump @labeg/code-style (#22)
+- *(ts-serializable)* Release ts-serializable@4.5.7
 
 ## [4.5.6] - 2025-12-23
 
-# Changelog
+### ⚙️ Miscellaneous Tasks
 
-All notable changes to this project will be documented in this file.
+- *(deps-dev)* Bump the development-dependencies group with 2 updates (#21)
+- *(ts-serializable)* Release ts-serializable@4.5.6
 
 ## [4.5.5] - 2025-12-16
 
-# Changelog
+### ⚙️ Miscellaneous Tasks
 
-All notable changes to this project will be documented in this file.
+- *(deps-dev)* Bump @labeg/code-style (#20)
+- *(ts-serializable)* Release ts-serializable@4.5.5
 
 ## [4.5.4] - 2025-12-14
 
@@ -48,9 +49,10 @@ All notable changes to this project will be documented in this file.
 
 - *(README)* Remove emojis from section headers for consistency
 
-# Changelog
+### ⚙️ Miscellaneous Tasks
 
-All notable changes to this project will be documented in this file.
+- *(workflows)* Update cron schedules for CodeQL and npm publish workflows
+- *(ts-serializable)* Release ts-serializable@4.5.4
 
 ## [4.5.3] - 2025-12-13
 
@@ -58,27 +60,42 @@ All notable changes to this project will be documented in this file.
 
 - *(DeserializeProperty)* Update ESLint directives for better readability
 
-# Changelog
+### ⚙️ Miscellaneous Tasks
 
-All notable changes to this project will be documented in this file.
+- *(ts-serializable)* Release ts-serializable@4.5.3
 
 ## [4.5.2] - 2025-12-09
 
-# Changelog
+### ⚙️ Miscellaneous Tasks
 
-All notable changes to this project will be documented in this file.
+- *(deps-dev)* Bump the development-dependencies group with 2 updates (#19)
+- *(ts-serializable)* Release ts-serializable@4.5.2
 
 ## [4.5.1] - 2025-12-07
+
+### ⚙️ Miscellaneous Tasks
+
+- *(deps-dev)* Bump the development-dependencies group with 5 updates (#18)
+- *(ts-serializable)* Release ts-serializable@4.5.1
+
+## [4.5.0] - 2025-12-07
 
 ### 🐛 Bug Fixes
 
 - Update README badges for npm downloads, license, and CI workflows
 
-# Changelog
+### ⚙️ Miscellaneous Tasks
 
-All notable changes to this project will be documented in this file.
+- *(ts-serializable)* Release ts-serializable@4.5.0
 
-## [4.5.0] - 2025-12-07
+## [4.4.1] - 2025-11-15
+
+### ⚙️ Miscellaneous Tasks
+
+- *(deps-dev)* Bump js-yaml from 4.1.0 to 4.1.1
+- *(ts-serializable)* Release ts-serializable@4.4.1
+
+## [4.4.0] - 2025-10-18
 
 ### 🚀 Features
 
@@ -87,46 +104,27 @@ All notable changes to this project will be documented in this file.
 ### ⚙️ Miscellaneous Tasks
 
 - Update Dependabot schedule to run on Tuesdays, remove .npmignore, and enhance package.json
+- *(ts-serializable)* Release ts-serializable@4.4.0
 
-# Changelog
-
-All notable changes to this project will be documented in this file.
-
-## [4.4.1] - 2025-11-15
-
-# Changelog
-
-All notable changes to this project will be documented in this file.
-
-## [4.4.0] - 2025-10-18
+## [4.3.2] - 2025-10-07
 
 ### 🚀 Features
 
 - Enhance fromJSON function to accept class constructors for deserialization
 
-# Changelog
+### ⚙️ Miscellaneous Tasks
 
-All notable changes to this project will be documented in this file.
+- *(ts-serializable)* Release ts-serializable@4.3.2
 
-## [4.3.2] - 2025-10-07
+## [4.3.1] - 2025-10-07
 
 ### 🐛 Bug Fixes
 
 - Update import paths to include .js extension for compatibility
 
-# Changelog
-
-All notable changes to this project will be documented in this file.
-
-## [4.3.1] - 2025-10-07
-
 ### ⚙️ Miscellaneous Tasks
 
-- Update devDependencies to latest versions
-
-# Changelog
-
-All notable changes to this project will be documented in this file.
+- *(ts-serializable)* Release ts-serializable@4.3.1
 
 ## [4.3.0] - 2025-10-07
 
@@ -148,33 +146,48 @@ All notable changes to this project will be documented in this file.
 
 - Update README.md to enhance features, installation instructions, and usage examples
 
+### ⚙️ Miscellaneous Tasks
+
+- Update devDependencies to latest versions
+- *(ts-serializable)* Release ts-serializable@4.3.0
+
 ## [4.2.2] - 2025-09-07
+
+### ⚙️ Miscellaneous Tasks
+
+- *(ts-serializable)* Release ts-serializable@4.2.2
+
+## [4.2.1] - 2025-07-17
 
 ### 🐛 Bug Fixes
 
 - ClassToFormData to use nested arrays in formdata and enable array assertions in tests
 
-## [4.2.1] - 2025-07-17
+### ⚙️ Miscellaneous Tasks
+
+- *(ts-serializable)* Release ts-serializable@4.2.1
+
+## [4.2.0] - 2025-04-10
 
 ### ⚙️ Miscellaneous Tasks
 
 - Update dependencies and improve type definitions
-
-## [4.2.0] - 2025-04-10
-
-### 🚀 Features
-
-- Enhance documentation with detailed comments for serialization classes and decorators
-
-### 🐛 Bug Fixes
-
-- Correct typos and improve clarity in README documentation
+- *(ts-serializable)* Release ts-serializable@4.2.0
 
 ## [4.1.0] - 2025-04-10
 
 ### 🚀 Features
 
 - Update dependencies versions
+- Enhance documentation with detailed comments for serialization classes and decorators
+
+### 🐛 Bug Fixes
+
+- Correct typos and improve clarity in README documentation
+
+### ⚙️ Miscellaneous Tasks
+
+- *(ts-serializable)* Release ts-serializable@4.1.0
 
 ## [4.0.0] - 2025-03-25
 
@@ -183,35 +196,53 @@ All notable changes to this project will be documented in this file.
 - [**breaking**] Drop support class mutation by jsonObject decorator
 - Update dependencies versions
 
+### ⚙️ Miscellaneous Tasks
+
+- *(ts-serializable)* Release ts-serializable@4.0.0
+
 ## [3.7.3] - 2025-01-03
 
 ### 🐛 Bug Fixes
 
 - Remove duplicated node module check
 
+### ⚙️ Miscellaneous Tasks
+
+- *(ts-serializable)* Release ts-serializable@3.7.3
+
 ## [3.7.2] - 2025-01-01
 
 ### ⚙️ Miscellaneous Tasks
 
-- Update actions version
+- *(ts-serializable)* Release ts-serializable@3.7.2
 
 ## [3.7.1] - 2025-01-01
+
+### ⚙️ Miscellaneous Tasks
+
+- Update actions version
+- *(ts-serializable)* Release ts-serializable@3.7.1
+
+## [3.7.0] - 2025-01-01
 
 ### 📚 Documentation
 
 - Update readme
 
-## [3.7.0] - 2025-01-01
+### ⚙️ Miscellaneous Tasks
 
-### 🚀 Features
-
-- Add support serialization to FormData
+- *(ts-serializable)* Release ts-serializable@3.7.0
 
 ## [3.6.0] - 2024-12-31
 
 ### 🚀 Features
 
 - Replace mocha by native node test runner
+- Add support serialization to FormData
+
+### ⚙️ Miscellaneous Tasks
+
+- *(ts-serializable)* Release ts-serializable@3.6.0
 
 ## [3.5.0] - 2024-12-30
 
@@ -219,11 +250,19 @@ All notable changes to this project will be documented in this file.
 
 - Update eslintconfig, format code with new config
 
+### ⚙️ Miscellaneous Tasks
+
+- *(ts-serializable)* Release ts-serializable@3.5.0
+
 ## [3.4.0] - 2024-12-26
 
 ### 🚀 Features
 
 - Update dependencies versions, new config for eslint 9
+
+### ⚙️ Miscellaneous Tasks
+
+- *(ts-serializable)* Release ts-serializable@3.4.0
 
 ## [3.3.0] - 2024-10-05
 
@@ -231,12 +270,16 @@ All notable changes to this project will be documented in this file.
 
 - Update dependencies versions
 
+### ⚙️ Miscellaneous Tasks
+
+- *(ts-serializable)* Release ts-serializable@3.3.0
+
 ## [3.2.3] - 2024-06-02
 
 ### ⚙️ Miscellaneous Tasks
 
-- Update dependencies versions
 - Sync package-lock
+- *(ts-serializable)* Release ts-serializable@3.2.3
 
 ## [3.2.2] - 2024-06-02
 
@@ -244,13 +287,30 @@ All notable changes to this project will be documented in this file.
 
 - Update README
 
+### ⚙️ Miscellaneous Tasks
+
+- Update dependencies versions
+- *(ts-serializable)* Release ts-serializable@3.2.2
+
 ## [3.2.1] - 2024-06-02
+
+### ⚙️ Miscellaneous Tasks
+
+- *(ts-serializable)* Release ts-serializable@3.2.1
+
+## [3.2.0] - 2024-06-02
 
 ### 🐛 Bug Fixes
 
 - Begin use cliff-jumper for generate changelog and version
 
-## [3.2.0] - 2024-06-02
+### ⚙️ Miscellaneous Tasks
+
+- Use cliff-jumper instead of git-cliff
+- Test cliff-jumper
+- *(ts-serializable)* Release ts-serializable@3.2.0
+
+## [3.1.0] - 2024-06-02
 
 ### 🚀 Features
 
@@ -261,30 +321,6 @@ All notable changes to this project will be documented in this file.
 - Fix got-cliff bump
 - Git-cliff
 - *('ts-serializable')* Release 'ts-serializable'@3.1.0
-- Use cliff-jumper instead of git-cliff
-- Test cliff-jumper
-
-## [3.1.0] - 2024-06-02
-
-### 🚀 Features
-
-- Replace standart-version by git-cliff for generation changelog
-
-### ⚙️ Miscellaneous Tasks
-
-- Fix got-cliff bump
-- Git-cliff
-
-## [3.1.0] - 2024-06-02
-
-### 🚀 Features
-
-- Replace standart-version by git-cliff for generation changelog
-
-### ⚙️ Miscellaneous Tasks
-
-- Fix got-cliff bump
-- Git-cliff
 
 ## [3.0.59] - 2024-06-02
 
@@ -400,6 +436,7 @@ All notable changes to this project will be documented in this file.
 - Bump version and publish to npm
 - Bump dependencies
 - Bump version and publish to npm
+- *(deps)* Bump stylelint from 15.9.0 to 15.10.1
 - Bump dependencies
 - Bump version and publish to npm
 - Bump dependencies
@@ -559,5 +596,7 @@ All notable changes to this project will be documented in this file.
 ### ⚙️ Miscellaneous Tasks
 
 - Minor eslint rule fixes
+
+## [2.0.49] - 2022-03-16
 
 <!-- generated by git-cliff -->
