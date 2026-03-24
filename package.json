@@ -54,7 +54,7 @@
         "ts-node": "^10.9.2",
         "lint-staged": "^16.2.7",
         "reflect-metadata": "^0.2.2",
-        "typescript": "^5.9.3"
+        "typescript": "^6.0.2"
     },
     "keywords": [
         "serialization",
