@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.5.13] - 2026-04-02
+
+### ⚙️ Miscellaneous Tasks
+
+- *(deps)* Bump minimatch (#28)
+- *(deps-dev)* Bump the development-dependencies group with 2 updates (#29)
+- *(deps-dev)* Bump the development-dependencies group with 3 updates (#30)
+- *(deps-dev)* Bump the development-dependencies group with 3 updates (#31)
+- *(deps-dev)* Bump flatted from 3.3.3 to 3.4.2 (#32)
+- *(deps-dev)* Bump the development-dependencies group with 2 updates (#33)
+- *(deps)* Bump picomatch from 4.0.3 to 4.0.4 (#34)
+- *(deps)* Bump lewagon/wait-on-check-action from 1.4.1 to 1.6.0 (#35)
+
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
 ## [4.5.12] - 2026-02-23
 
 ### ⚙️ Miscellaneous Tasks
