@@ -43,8 +43,8 @@
         "reflect-metadata": ">=0.1.0"
     },
     "devDependencies": {
-        "@commitlint/cli": "^20.4.2",
-        "@commitlint/config-conventional": "^20.4.2",
+        "@commitlint/cli": "^21.0.0",
+        "@commitlint/config-conventional": "^21.0.0",
         "@favware/cliff-jumper": "^6.0.0",
         "@labeg/code-style": "^6.10.20",
         "@swc/core": "^1.15.13",
@@ -52,7 +52,7 @@
         "chai": "^6.2.2",
         "husky": "^9.1.7",
         "ts-node": "^10.9.2",
-        "lint-staged": "^16.2.7",
+        "lint-staged": "^17.0.4",
         "reflect-metadata": "^0.2.2",
         "typescript": "^6.0.2"
     },
