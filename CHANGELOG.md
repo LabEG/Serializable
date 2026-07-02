@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.5.14] - 2026-07-02
+
+### ⚙️ Miscellaneous Tasks
+
+- *(deps-dev)* Bump the development-dependencies group with 2 updates (#36)
+- *(deps)* Bump lewagon/wait-on-check-action from 1.6.0 to 1.6.1 (#37)
+- *(deps-dev)* Bump @favware/cliff-jumper (#38)
+- *(deps)* Bump dependabot/fetch-metadata from 2 to 3 (#39)
+- *(deps-dev)* Bump the development-dependencies group with 2 updates (#40)
+- *(deps)* Bump lewagon/wait-on-check-action from 1.6.1 to 1.7.0 (#41)
+- *(deps-dev)* Bump the development-dependencies group with 2 updates (#42)
+- *(deps-dev)* Bump the development-dependencies group with 3 updates (#43)
+- *(deps-dev)* Bump the development-dependencies group with 4 updates (#44)
+- *(deps-dev)* Bump the development-dependencies group with 3 updates (#45)
+- *(deps-dev)* Bump @swc/core in the development-dependencies group (#46)
+- *(deps-dev)* Bump the development-dependencies group with 3 updates (#47)
+- *(deps-dev)* Bump @swc/core in the development-dependencies group (#48)
+- *(deps-dev)* Bump js-yaml from 4.1.1 to 4.2.0 (#49)
+- *(deps)* Bump lewagon/wait-on-check-action from 1.7.0 to 1.8.0 (#50)
+- *(deps-dev)* Bump the development-dependencies group with 2 updates (#51)
+- *(deps)* Bump actions/checkout from 6 to 7 (#52)
+- *(deps-dev)* Bump the development-dependencies group with 2 updates (#53)
+
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
 ## [4.5.13] - 2026-04-02
 
 ### ⚙️ Miscellaneous Tasks
