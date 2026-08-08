@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.5.16] - 2026-08-08
+
+### ⚙️ Miscellaneous Tasks
+
+- *(deps)* Bump version to 4.5.15 and update dependencies
+
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
 ## [4.5.15] - 2026-08-07
 
 ### ⚙️ Miscellaneous Tasks
