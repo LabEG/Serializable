@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "target": "ES2024",
-        "module": "ESNext",
+        "module": "nodenext",
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "lib": [
@@ -12,10 +12,11 @@
         "noUnusedParameters": true,
         "pretty": true,
         "strict": true,
-        "moduleResolution": "node",
+        "moduleResolution": "nodenext",
         "resolveJsonModule": true,
         "noEmit": true,
-        "allowImportingTsExtensions": true
+        "allowImportingTsExtensions": true,
+        "types": ["node"]
     },
     "include": [
         "./node_modules/reflect-metadata/index.d.ts",

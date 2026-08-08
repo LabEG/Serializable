@@ -1,8 +1,12 @@
 /* eslint-disable camelcase */
 import("reflect-metadata"); // Polyfill
 import {assert} from "chai";
-import {Serializable, SnakeCaseNamingStrategy, jsonObject, jsonProperty, jsonName} from "../src";
 import {describe, it} from "node:test";
+import {jsonObject} from "../src/decorators/JsonObject.js";
+import {SnakeCaseNamingStrategy} from "../src/naming-strategies/SnakeCaseNamingStrategy.js";
+import {Serializable} from "../src/classes/Serializable.js";
+import {jsonProperty} from "../src/decorators/JsonProperty.js";
+import {jsonName} from "../src/decorators/JsonName.js";
 
 describe("Readme samples", () => {
     it("naming strategies sample", () => {

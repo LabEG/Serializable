@@ -4,16 +4,16 @@ import("reflect-metadata"); // Polyfill
 import {assert} from "chai";
 import {describe, it} from "node:test";
 
-import type {User as IUser, Friend as IFriend} from "./models/User";
-import type {UserSimple as IUserSimple, FriendSimple as IFriendSimple} from "./models/UserSimple";
-import {fromJSON} from "../src/functions/FromJSON";
+import type {User as IUser, Friend as IFriend} from "./models/User.js";
+import type {UserSimple as IUserSimple, FriendSimple as IFriendSimple} from "./models/UserSimple.js";
+import {fromJSON} from "../src/functions/FromJSON.js";
 
 describe("Base functions", () => {
     it("should deserialize JSON to User instance using instance method fromJSON()", async () => {
-        const {User} = await import("./models/User");
+        const {User} = await import("./models/User.js");
         const json = await import("./jsons/json-generator.json", {with: {type: "json"}});
 
-        const [object] = Reflect.get(json, "default") as typeof json;
+        const [object] = Reflect.get(json, "default");
 
         const user: IUser = new User().fromJSON(object);
 
@@ -45,9 +45,9 @@ describe("Base functions", () => {
     });
 
     it("should deserialize JSON to User instance using static method fromJSON()", async () => {
-        const {User} = await import("./models/User");
+        const {User} = await import("./models/User.js");
         const json = await import("./jsons/json-generator.json", {with: {type: "json"}});
-        const [object] = Reflect.get(json, "default") as typeof json;
+        const [object] = Reflect.get(json, "default");
 
         const user: IUser = User.fromJSON(object);
 
@@ -79,9 +79,9 @@ describe("Base functions", () => {
     });
 
     it("should deserialize JSON string to User instance using instance method fromString()", async () => {
-        const {User} = await import("./models/User");
+        const {User} = await import("./models/User.js");
         const json = await import("./jsons/json-generator.json", {with: {type: "json"}});
-        const [object] = Reflect.get(json, "default") as typeof json;
+        const [object] = Reflect.get(json, "default");
 
         const user: IUser = new User().fromString(JSON.stringify(object));
 
@@ -113,9 +113,9 @@ describe("Base functions", () => {
     });
 
     it("should deserialize JSON string to User instance using static method fromString()", async () => {
-        const {User} = await import("./models/User");
+        const {User} = await import("./models/User.js");
         const json = await import("./jsons/json-generator.json", {with: {type: "json"}});
-        const [object] = Reflect.get(json, "default") as typeof json;
+        const [object] = Reflect.get(json, "default");
 
         const user: IUser = User.fromString(JSON.stringify(object));
 
@@ -147,10 +147,10 @@ describe("Base functions", () => {
     });
 
     it("should deserialize JSON to plain class instance using standalone fromJSON() function", async () => {
-        const {UserSimple} = await import("./models/UserSimple");
+        const {UserSimple} = await import("./models/UserSimple.js");
         const json = await import("./jsons/json-generator.json", {with: {type: "json"}});
 
-        const [object] = Reflect.get(json, "default") as typeof json;
+        const [object] = Reflect.get(json, "default");
 
         const user: IUserSimple = fromJSON(new UserSimple(), object);
 
@@ -182,10 +182,10 @@ describe("Base functions", () => {
     });
 
     it("should deserialize JSON by passing class constructor to standalone fromJSON() function", async () => {
-        const {UserSimple} = await import("./models/UserSimple");
+        const {UserSimple} = await import("./models/UserSimple.js");
         const json = await import("./jsons/json-generator.json", {with: {type: "json"}});
 
-        const [object] = Reflect.get(json, "default") as typeof json;
+        const [object] = Reflect.get(json, "default");
 
         const user: IUserSimple = fromJSON(UserSimple, object);
 

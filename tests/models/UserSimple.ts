@@ -1,6 +1,6 @@
 /* eslint-disable max-classes-per-file */
-import {jsonProperty} from "../../src/decorators/JsonProperty";
-import {jsonIgnore} from "../../src/decorators/JsonIgnore";
+import {jsonProperty} from "../../src/decorators/JsonProperty.js";
+import {jsonIgnore} from "../../src/decorators/JsonIgnore.js";
 
 export class FriendSimple {
 

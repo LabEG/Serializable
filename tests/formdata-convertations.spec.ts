@@ -3,15 +3,15 @@
 import("reflect-metadata"); // Polyfill
 import {assert} from "chai";
 import {describe, it} from "node:test";
-import type {Friend as IFriend} from "./models/User";
+import type {Friend as IFriend} from "./models/User.js";
 
 
 describe("FormData convertation", () => {
     it("class can be converted to FormData", async () => {
-        const {User} = await import("./models/User");
+        const {User} = await import("./models/User.js");
         const json = await import("./jsons/json-generator.json", {with: {type: "json"}});
 
-        const [object] = Reflect.get(json, "default") as typeof json;
+        const [object] = Reflect.get(json, "default");
 
         const user = new User().fromJSON(object);
 

@@ -1,5 +1,9 @@
 /* eslint-disable max-classes-per-file */
-import {jsonObject, SnakeCaseNamingStrategy, Serializable, jsonProperty, jsonIgnore} from "../../src";
+import {Serializable} from "../../src/classes/Serializable.js";
+import {jsonIgnore} from "../../src/decorators/JsonIgnore.js";
+import {jsonObject} from "../../src/decorators/JsonObject.js";
+import {jsonProperty} from "../../src/decorators/JsonProperty.js";
+import {SnakeCaseNamingStrategy} from "../../src/naming-strategies/SnakeCaseNamingStrategy.js";
 
 export class FriendSnake extends Serializable {
 

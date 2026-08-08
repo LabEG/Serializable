@@ -11,7 +11,7 @@ import {
     SnakeCaseNamingStrategy,
     KebabCaseNamingStrategy,
     PascalCaseNamingStrategy
-} from "../../../src/index";
+} from "../../../src/index.js";
 
 
 @jsonObject({namingStrategy: new KebabCaseNamingStrategy()})

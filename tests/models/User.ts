@@ -1,7 +1,7 @@
 /* eslint-disable max-classes-per-file */
-import {jsonProperty} from "./../../src/decorators/JsonProperty";
-import {Serializable} from "./../../src/classes/Serializable";
-import {jsonIgnore} from "../../src/decorators/JsonIgnore";
+import {jsonProperty} from "./../../src/decorators/JsonProperty.js";
+import {Serializable} from "./../../src/classes/Serializable.js";
+import {jsonIgnore} from "../../src/decorators/JsonIgnore.js";
 
 export class Friend extends Serializable {
 

@@ -1,4 +1,6 @@
-import {Serializable, jsonProperty, jsonName} from "../../src";
+import {Serializable} from "../../src/classes/Serializable.js";
+import {jsonName} from "../../src/decorators/JsonName.js";
+import {jsonProperty} from "../../src/decorators/JsonProperty.js";
 
 export class UserNaming extends Serializable {
 
