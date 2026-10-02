@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.5.17] - 2026-10-02
+
+### ⚙️ Miscellaneous Tasks
+
+- *(deps)* Bump github/codeql-action from 4.37.4 to 4.37.6 (#64)
+- *(deps)* Bump github/codeql-action from 4.37.6 to 4.37.7 (#66)
+- *(deps)* Bump github/codeql-action from 4.37.7 to 4.37.8 (#68)
+- *(deps)* Bump github/codeql-action from 4.37.8 to 4.37.9 (#70)
+- *(deps-dev)* Bump fast-uri from 3.1.5 to 3.1.7 (#71)
+- *(deps)* Bump github/codeql-action from 4.37.9 to 4.38.0 (#72)
+- *(deps)* Bump github/codeql-action from 4.38.0 to 4.38.1 (#73)
+- *(deps)* Bump github/codeql-action from 4.38.1 to 4.38.2 (#74)
+
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
 ## [4.5.16] - 2026-08-08
 
 ### ⚙️ Miscellaneous Tasks
