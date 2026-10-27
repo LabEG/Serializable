@@ -46,7 +46,7 @@
         "@commitlint/cli": "^21.2.1",
         "@commitlint/config-conventional": "^21.2.0",
         "@favware/cliff-jumper": "^6.1.0",
-        "@labeg/code-style": "^6.10.22",
+        "@labeg/code-style": "^7.1.0",
         "@swc/core": "^1.15.47",
         "@types/chai": "^5.2.3",
         "@types/node": "^26.2.0",
@@ -55,7 +55,7 @@
         "ts-node": "^10.9.2",
         "lint-staged": "^17.3.0",
         "reflect-metadata": "^0.2.2",
-        "typescript": "^6.0.3"
+        "typescript": "^7.0.2"
     },
     "keywords": [
         "serialization",
